@@ -186,7 +186,7 @@ document.getElementById('form').addEventListener('submit', async function(e) {
   // 清除所有字段中的换行符，避免腾讯云拒绝URL
   Object.keys(data).forEach(k => { if (typeof data[k] === 'string') data[k] = data[k].replace(/[\r\n]+/g, ' ').trim(); });
   const params = new URLSearchParams(data).toString();
-  const generateUrl = 'https://xhd-pages.netlify.app/xhd-class-contract.html?' + params;
+  const generateUrl = 'https://grace-planner.github.io/xhd-pages/xhd-class-contract.html?' + params;
   try {
     await emailjs.send("service_ox1c2vb", "template_u2f63aa", {
       学员姓名: data.乙方姓名,
