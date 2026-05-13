@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="线索">
+  <title>线索跟进</title>
+  <style>
+    :root {
+      --blue: #2563EB;
+      --blue-light: #EFF6FF;
+      --bg: #F1F5F9;
+      --card: #FFFFFF;
+      --text: #0F172A;
+      --text-2: #475569;
+      --text-3: #94A3B8;
+      --border: #E2E8F0;
+      --red: #EF4444;
+      --red-light: #FEF2F2;
+      --orange: #F97316;
+      --orange-light: #FFF7ED;
+      --green: #22C55E;
+      --green-light: #F0FDF4;
+      --gray-light: #F8FAFC;
+      --radius: 14px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; overscroll-behavior: none; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ── HEADER ── */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: calc(var(--safe-top) + 14px) 16px 0;
+    }
+    .header-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .header-title { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+    .header-count { font-size: 13px; color: var(--text-3); background: var(--bg); padding: 4px 10px; border-radius: 20px; }
+    .tabs { display: flex; gap: 0; }
+    .tab {
+      flex: 1; text-align: center; padding: 9px 0;
+      font-size: 14px; font-weight: 500; color: var(--text-3);
+      border-bottom: 2px solid transparent; cursor: pointer; transition: all .2s;
+    }
+    .tab.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
+
+    /* ── SEARCH ── */
+    .search-wrap { padding: 10px 16px; background: var(--card); border-bottom: 1px solid var(--border); }
+    .search-box {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg); border-radius: 10px; padding: 8px 12px;
+    }
+    .search-icon { color: var(--text-3); font-size: 15px; flex-shrink: 0; }
+    .search-input {
+      border: none; background: transparent; font-size: 15px; color: var(--text);
+      outline: none; width: 100%; font-family: inherit;
+    }
+    .search-input::placeholder { color: var(--text-3); }
+
+    /* ── LIST ── */
+    .list { padding: 12px 16px 80px; display: flex; flex-direction: column; gap: 10px; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card); border-radius: var(--radius);
+      padding: 14px 16px; cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0,0,0,.05), 0 0 0 1px rgba(0,0,0,.03);
+      transition: transform .12s, box-shadow .12s;
+      position: relative; overflow: hidden;
+    }
+    .card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; border-radius: 3px 0 0 3px;
+    }
+    .card.pri-high::before { background: var(--red); }
+    .card.pri-mid::before { background: var(--orange); }
+    .card.pri-low::before { background: var(--green); }
+    .card.pri-none::before { background: var(--border); }
+    .card:active { transform: scale(.98); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+
+    .card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+    .card-name { font-size: 17px; font-weight: 700; }
+    .badge {
+      font-size: 11px; font-weight: 600; padding: 3px 8px;
+      border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-left: 8px;
+    }
+    .badge-red { background: var(--red-light); color: var(--red); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-gray { background: var(--bg); color: var(--text-3); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+
+    .card-phone { font-size: 14px; color: var(--text-2); margin-bottom: 5px; }
+    .card-note {
+      font-size: 13px; color: var(--text-3); margin-bottom: 7px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-bottom { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 12px; color: var(--text-2); background: var(--bg);
+      padding: 2px 8px; border-radius: 6px;
+    }
+    .follow-tag { font-size: 12px; padding: 2px 8px; border-radius: 6px; margin-left: auto; }
+    .follow-tag.ok { background: var(--blue-light); color: var(--blue); }
+    .follow-tag.late { background: var(--red-light); color: var(--red); }
+
+    /* ── STATES ── */
+    .loading { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 0; gap: 14px; color: var(--text-3); }
+    .spinner { width: 30px; height: 30px; border: 3px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .empty { text-align: center; padding: 80px 0; color: var(--text-3); font-size: 15px; }
+
+    /* ── FAB ── */
+    .fab {
+      position: fixed; bottom: calc(24px + var(--safe-bottom)); right: 20px; z-index: 40;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--blue); color: white; border: none;
+      font-size: 22px; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(37,99,235,.45);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .15s;
+    }
+    .fab:active { transform: scale(.9); }
+
+    /* ── OVERLAY & SHEET ── */
+    .overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(15,23,42,.45); z-index: 100;
+    }
+    .overlay.on { display: block; animation: fadein .2s; }
+    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+    .sheet {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 101;
+      background: var(--card); border-radius: 22px 22px 0 0;
+      max-height: 92vh; overflow-y: auto;
+      transform: translateY(100%); transition: transform .3s cubic-bezier(.32,1,.6,1);
+      padding-bottom: calc(24px + var(--safe-bottom));
+    }
+    .sheet.on { transform: translateY(0); }
+    .handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 14px auto 0; }
+
+    /* ── SHEET CONTENT ── */
+    .s-head { padding: 16px 20px 18px; border-bottom: 1px solid var(--border); }
+    .s-name { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .s-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .s-actions { display: flex; gap: 10px; }
+    .btn {
+      flex: 1; padding: 11px 16px; border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      transition: opacity .15s; font-family: inherit; text-align: center;
+      text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .btn:active { opacity: .75; }
+    .btn-call { background: #22C55E; color: white; }
+    .btn-close { background: var(--bg); color: var(--text-2); flex: 0 0 auto; padding: 11px 20px; }
+    .btn-save { background: var(--blue); color: white; }
+
+    .s-body { padding: 20px; display: flex; flex-direction: column; gap: 18px; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .flabel { font-size: 12px; color: var(--text-3); font-weight: 500; letter-spacing: .3px; }
+    .fvalue { font-size: 15px; color: var(--text); line-height: 1.5; }
+    .fvalue.muted { color: var(--text-3); }
+    .finput {
+      width: 100%; padding: 10px 12px; background: var(--bg); border: 1.5px solid transparent;
+      border-radius: 9px; font-size: 15px; color: var(--text); outline: none; font-family: inherit;
+      transition: border-color .2s;
+    }
+    .finput:focus { border-color: var(--blue); background: white; }
+    textarea.finput { resize: none; min-height: 76px; line-height: 1.5; }
+    select.finput { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394A3B8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+    .divider { height: 1px; background: var(--border); }
+    .save-row { padding: 0 20px; }
+
+    /* ── REMINDER BLOCK ── */
+    .reminder-block {
+      background: var(--orange-light); border-radius: 10px; padding: 10px 14px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .reminder-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .reminder-text { font-size: 14px; color: #92400E; line-height: 1.5; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      background: rgba(15,23,42,.85); color: white;
+      padding: 10px 20px; border-radius: 10px; font-size: 14px;
+      z-index: 999; pointer-events: none; display: none; white-space: nowrap;
+    }
+    .toast.on { display: block; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-row">
+    <div class="header-title">线索跟进</div>
+    <div class="header-count" id="countBadge">—</div>
+  </div>
+  <div class="tabs">
+    <div class="tab active" data-tab="pending" onclick="switchTab(this)">待跟进</div>
+    <div class="tab" data-tab="all" onclick="switchTab(this)">全部</div>
+    <div class="tab" data-tab="done" onclick="switchTab(this)">不需跟进</div>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="search" placeholder="搜索姓名、号码..." oninput="onSearch(this.value)" id="searchInput">
+  </div>
+</div>
+
+<div class="list" id="list">
+  <div class="loading"><div class="spinner"></div><span>加载中…</span></div>
+</div>
+
+<button class="fab" onclick="loadData()" title="刷新">↻</button>
+
+<div class="overlay" id="overlay" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet"><div class="handle"></div><div id="sheetBody"></div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════ CONFIG ═══════════════════════════════
+const C = {
+  id:     'cli_a94516bd48b9dcc9',
+  secret: 'E670nfXT7M2ip81Ui79IvdJYiABPc3HU',
+  token:  'GkOUbvKLqaA7NoszFkwcDh3lnTf',
+  table:  'tbl4RL5JzFRLUOQ3',
+};
+
+// ═══════════════════════════════ STATE ════════════════════════════════
+let records = [];
+let fields  = {};
+let tok = '', tokExp = 0;
+let tab = 'pending';
+let q   = '';
+let cur = null;
+
+// ═══════════════════════════════ API ══════════════════════════════════
+async function getToken() {
+  if (tok && Date.now() < tokExp) return tok;
+  const r = await fetch('https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ app_id: C.id, app_secret: C.secret })
+  });
+  const d = await r.json();
+  if (d.code !== 0) throw new Error(d.msg);
+  tok = d.tenant_access_token;
+  tokExp = Date.now() + (d.expire - 120) * 1000;
+  return tok;
+}
+
+async function GET(path) {
+  const t = await getToken();
+  const r = await fetch('https://open.feishu.cn/open-apis' + path, { headers: { Authorization: 'Bearer ' + t } });
+  return r.json();
+}
+
+async function PATCH(path, body) {
+  const t = await getToken();
+  const r = await fetch('https://open.feishu.cn/open-apis' + path, {
+    method: 'PATCH',
+    headers: { Authorization: 'Bearer ' + t, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return r.json();
+}
+
+async function fetchRecords() {
+  let all = [], pt = '';
+  do {
+    const d = await GET(`/bitable/v1/apps/${C.token}/tables/${C.table}/records?page_size=100${pt ? '&page_token='+pt : ''}`);
+    if (d.code !== 0) throw new Error(d.msg);
+    all = all.concat(d.data.items || []);
+    pt = d.data.has_more ? d.data.page_token : '';
+  } while (pt);
+  return all;
+}
+
+async function fetchFields() {
+  const d = await GET(`/bitable/v1/apps/${C.token}/tables/${C.table}/fields?page_size=100`);
+  const m = {};
+  if (d.code === 0) (d.data.items || []).forEach(f => m[f.field_name] = f);
+  return m;
+}
+
+// ═══════════════════════════════ HELPERS ══════════════════════════════
+function fv(rec, name) {
+  const v = rec.fields[name];
+  if (v === null || v === undefined) return '';
+  if (Array.isArray(v)) return v.map(x => x.text || x.name || x).join(', ');
+  if (typeof v === 'object' && v.text !== undefined) return v.text;
+  if (typeof v === 'object' && v.value !== undefined) return v.value;
+  return v;
+}
+
+function fmtDate(ts) {
+  if (!ts) return '';
+  const d = new Date(ts);
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function fmtDateInput(ts) {
+  if (!ts) return '';
+  const d = new Date(ts);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function dateToTs(str) {
+  if (!str) return null;
+  const [y,m,d] = str.split('-').map(Number);
+  return new Date(y, m-1, d).getTime();
+}
+
+function isOverdue(ts) { return ts && ts < Date.now(); }
+
+function statusBadge(s) {
+  if (!s) return '';
+  const t = String(s);
+  if (t.includes('不需') || t.includes('放弃') || t.includes('无需'))
+    return `<span class="badge badge-gray">${t}</span>`;
+  if (t.includes('红') || t.includes('紧急') || t.includes('高'))
+    return `<span class="badge badge-red">${t}</span>`;
+  if (t.includes('橙') || t.includes('黄') || t.includes('中'))
+    return `<span class="badge badge-orange">${t}</span>`;
+  if (t.includes('绿') || t.includes('低'))
+    return `<span class="badge badge-green">${t}</span>`;
+  return `<span class="badge badge-blue">${t}</span>`;
+}
+
+function cardClass(s) {
+  if (!s) return 'pri-none';
+  const t = String(s);
+  if (t.includes('不需') || t.includes('放弃')) return 'pri-none';
+  if (t.includes('红') || t.includes('紧急') || t.includes('高')) return 'pri-high';
+  if (t.includes('橙') || t.includes('黄') || t.includes('中')) return 'pri-mid';
+  if (t.includes('绿') || t.includes('低')) return 'pri-low';
+  return 'pri-mid';
+}
+
+function getOptions(name) {
+  const f = fields[name];
+  if (!f || !f.property || !f.property.options) return [];
+  return f.property.options.map(o => o.name);
+}
+
+function showToast(msg, ms = 1600) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('on');
+  setTimeout(() => el.classList.remove('on'), ms);
+}
+
+// ═══════════════════════════════ LOAD ═════════════════════════════════
+async function loadData() {
+  document.getElementById('list').innerHTML = '<div class="loading"><div class="spinner"></div><span>加载中…</span></div>';
+  try {
+    [records, fields] = await Promise.all([fetchRecords(), fetchFields()]);
+    render();
+  } catch (e) {
+    document.getElementById('list').innerHTML = `<div class="empty">加载失败<br><small style="color:#94A3B8">${e.message}</small></div>`;
+  }
+}
+
+// ═══════════════════════════════ FILTER & SORT ════════════════════════
+function filtered() {
+  let r = records;
+
+  if (tab === 'pending') {
+    r = r.filter(x => {
+      const s = String(fv(x, '红绿灯'));
+      return !s.includes('不需') && !s.includes('放弃') && !s.includes('无需');
+    });
+  } else if (tab === 'done') {
+    r = r.filter(x => {
+      const s = String(fv(x, '红绿灯'));
+      return s.includes('不需') || s.includes('放弃') || s.includes('无需');
+    });
+  }
+
+  if (q) {
+    const lq = q.toLowerCase();
+    r = r.filter(x =>
+      String(fv(x,'姓名')).toLowerCase().includes(lq) ||
+      String(fv(x,'号码/微信')).toLowerCase().includes(lq)
+    );
+  }
+
+  r = [...r].sort((a, b) => {
+    const pa = Number(fv(a,'跟进优先级')) || 0;
+    const pb = Number(fv(b,'跟进优先级')) || 0;
+    if (pb !== pa) return pb - pa;
+    const da = a.fields['下次跟进日期'] || Infinity;
+    const db = b.fields['下次跟进日期'] || Infinity;
+    return da - db;
+  });
+
+  return r;
+}
+
+// ═══════════════════════════════ RENDER LIST ══════════════════════════
+function render() {
+  const list = filtered();
+  document.getElementById('countBadge').textContent = list.length + ' 条';
+  const el = document.getElementById('list');
+
+  if (!list.length) {
+    el.innerHTML = '<div class="empty">暂无数据</div>';
+    return;
+  }
+
+  el.innerHTML = list.map(rec => {
+    const name   = fv(rec,'姓名') || '未知';
+    const phone  = fv(rec,'号码/微信') || '';
+    const status = fv(rec,'红绿灯') || '';
+    const note   = fv(rec,'最新通话记录') || '';
+    const intent = fv(rec,'意向') || '';
+    const group  = fv(rec,'客群') || '';
+    const fd     = rec.fields['下次跟进日期'];
+
+    let followTag = '';
+    if (fd) {
+      const late = isOverdue(fd);
+      followTag = `<span class="follow-tag ${late ? 'late' : 'ok'}">${late ? '⚠ ' : ''}${fmtDate(fd)}</span>`;
+    }
+
+    return `<div class="card ${cardClass(status)}" onclick="openDetail('${rec.record_id}')">
+      <div class="card-top">
+        <span class="card-name">${name}</span>
+        ${statusBadge(status)}
+      </div>
+      <div class="card-phone">${phone || '—'}</div>
+      ${note ? `<div class="card-note">${note}</div>` : ''}
+      <div class="card-bottom">
+        ${intent ? `<span class="tag">${intent}</span>` : ''}
+        ${group  ? `<span class="tag">${group}</span>`  : ''}
+        ${followTag}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════ DETAIL SHEET ═════════════════════════
+function openDetail(id) {
+  cur = records.find(r => r.record_id === id);
+  if (!cur) return;
+  renderSheet(cur);
+  document.getElementById('overlay').classList.add('on');
+  setTimeout(() => document.getElementById('sheet').classList.add('on'), 10);
+}
+
+function closeSheet() {
+  document.getElementById('sheet').classList.remove('on');
+  document.getElementById('overlay').classList.remove('on');
+  cur = null;
+}
+
+function renderSheet(rec) {
+  const name        = fv(rec,'姓名') || '未知';
+  const phone       = fv(rec,'号码/微信') || '';
+  const status      = fv(rec,'红绿灯') || '';
+  const intent      = fv(rec,'意向') || '';
+  const group       = fv(rec,'客群') || '';
+  const info        = fv(rec,'具体信息') || '';
+  const note        = fv(rec,'最新通话记录') || '';
+  const fd          = rec.fields['下次跟进日期'];
+  const purpose     = fv(rec,'下次跟进目的') || '';
+  const allocTime   = rec.fields['分配时间'];
+  const signTime    = rec.fields['报名时间'];
+  const source      = fv(rec,'是否自有/曾哥/他人') || '';
+  const remTime     = rec.fields['特殊提醒时间'];
+  const remNote     = fv(rec,'特殊提醒事项') || '';
+  const priority    = fv(rec,'跟进优先级') || '0';
+
+  const intentOpts  = getOptions('意向');
+  const groupOpts   = getOptions('客群');
+  const sourceOpts  = getOptions('是否自有/曾哥/他人');
+
+  function selectOrInput(id, val, opts, placeholder='') {
+    if (opts.length) {
+      return `<select class="finput" id="${id}">
+        <option value="">—</option>
+        ${opts.map(o => `<option value="${o}" ${o===val?'selected':''}>${o}</option>`).join('')}
+      </select>`;
+    }
+    return `<input class="finput" id="${id}" value="${val}" placeholder="${placeholder}">`;
+  }
+
+  document.getElementById('sheetBody').innerHTML = `
+    <div class="s-head">
+      <div class="s-name">${name}</div>
+      <div class="s-badges">
+        ${statusBadge(status)}
+        ${intent ? `<span class="badge badge-blue">${intent}</span>` : ''}
+        ${group  ? `<span class="badge badge-gray">${group}</span>`  : ''}
+        <span class="badge badge-gray">优先级 ${priority}</span>
+      </div>
+      <div class="s-actions">
+        ${phone ? `<a href="tel:${phone}" class="btn btn-call">📞 拨打 ${phone}</a>` : ''}
+        <button class="btn btn-close" onclick="closeSheet()">✕</button>
+      </div>
+    </div>
+
+    <div class="s-body">
+
+      ${info ? `<div class="field">
+        <div class="flabel">具体信息</div>
+        <div class="fvalue" style="font-size:13px;line-height:1.6;color:var(--text-2)">${info}</div>
+      </div>` : ''}
+
+      <div class="field-row">
+        <div class="field">
+          <div class="flabel">分配时间</div>
+          <div class="fvalue">${allocTime ? fmtDate(allocTime) : '—'}</div>
+        </div>
+        <div class="field">
+          <div class="flabel">报名时间</div>
+          <div class="fvalue">${signTime ? fmtDate(signTime) : '—'}</div>
+        </div>
+      </div>
+
+      ${(remTime || remNote) ? `<div class="reminder-block">
+        <span class="reminder-icon">⏰</span>
+        <span class="reminder-text">${remTime ? fmtDate(remTime) + '　' : ''}${remNote}</span>
+      </div>` : ''}
+
+      <div class="divider"></div>
+
+      <div class="field">
+        <div class="flabel">最新通话记录</div>
+        <textarea class="finput" id="edit_note" placeholder="记录本次通话内容…">${note}</textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <div class="flabel">意向</div>
+          ${selectOrInput('edit_intent', intent, intentOpts)}
+        </div>
+        <div class="field">
+          <div class="flabel">下次跟进日期</div>
+          <input class="finput" type="date" id="edit_fd" value="${fd ? fmtDateInput(fd) : ''}">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="flabel">下次跟进目的</div>
+        <input class="finput" id="edit_purpose" value="${purpose}" placeholder="本次跟进想达成什么…">
+      </div>
+
+      ${sourceOpts.length || source ? `<div class="field">
+        <div class="flabel">是否自有/曾哥/他人</div>
+        ${selectOrInput('edit_source', source, sourceOpts)}
+      </div>` : ''}
+
+    </div>
+
+    <div class="save-row">
+      <button class="btn btn-save" onclick="saveRecord('${rec.record_id}')">保存更新</button>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════ SAVE ═════════════════════════════════
+async function saveRecord(id) {
+  const updates = {};
+
+  const note    = document.getElementById('edit_note');
+  const intent  = document.getElementById('edit_intent');
+  const fd      = document.getElementById('edit_fd');
+  const purpose = document.getElementById('edit_purpose');
+  const source  = document.getElementById('edit_source');
+
+  if (note)    updates['最新通话记录']   = note.value;
+  if (purpose) updates['下次跟进目的']   = purpose.value;
+  if (source && source.value) updates['是否自有/曾哥/他人'] = source.value;
+
+  // Single select fields
+  if (intent) {
+    const f = fields['意向'];
+    updates['意向'] = intent.value ? (f && f.type === 3 ? intent.value : intent.value) : null;
+  }
+
+  // Date field
+  if (fd) {
+    updates['下次跟进日期'] = fd.value ? dateToTs(fd.value) : null;
+  }
+
+  showToast('保存中…');
+  try {
+    const res = await PATCH(`/bitable/v1/apps/${C.token}/tables/${C.table}/records/${id}`, { fields: updates });
+    if (res.code === 0) {
+      // Update local copy
+      const idx = records.findIndex(r => r.record_id === id);
+      if (idx !== -1) Object.assign(records[idx].fields, res.data.record.fields);
+      showToast('✓ 已保存');
+      closeSheet();
+      render();
+    } else {
+      showToast('失败：' + res.msg);
+    }
+  } catch (e) {
+    showToast('网络错误：' + e.message);
+  }
+}
+
+// ═══════════════════════════════ UI EVENTS ════════════════════════════
+function switchTab(el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  tab = el.dataset.tab;
+  render();
+}
+
+function onSearch(v) {
+  q = v.trim();
+  render();
+}
+
+// ═══════════════════════════════ INIT ═════════════════════════════════
+loadData();
+</script>
+</body>
+</html>
