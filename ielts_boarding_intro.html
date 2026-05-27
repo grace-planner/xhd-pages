@@ -479,6 +479,68 @@
     .services-3col { grid-template-columns: 1fr; }
     .env-grid { grid-template-columns: 1fr; }
   }
+
+  .guarantee-section {
+    background: linear-gradient(135deg, #1a4f8b 0%, #0f3260 100%);
+    border-radius: 16px;
+    padding: 28px 24px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  .guarantee-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .guarantee-title::before {
+    content: '🛡';
+    font-size: 20px;
+  }
+  .guarantee-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .guarantee-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .g-score {
+    background: var(--gold);
+    color: white;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 4px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .g-cond {
+    font-size: 13px;
+    line-height: 1.7;
+    opacity: 0.92;
+  }
+  .retake-notice {
+    margin-top: 16px;
+    background: rgba(200,150,62,0.2);
+    border: 1px solid rgba(200,150,62,0.4);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .retake-notice strong {
+    color: #f0d080;
+  }
 </style>
 </head>
 <body>
@@ -583,9 +645,7 @@
           </div>
         </div>
         <div class="pc-right">
-          <div class="pc-guarantee">保分承诺</div>
-          <div class="pc-price">¥<span class="pc-price-small"> </span>16,800</div>
-          <span class="g-badge">✓ 保 5.5 分</span>
+                    <div class="pc-price">¥<span class="pc-price-small"> </span>16,800</div>
         </div>
       </div>
     </div>
@@ -603,9 +663,7 @@
           </div>
         </div>
         <div class="pc-right">
-          <div class="pc-guarantee">保分承诺</div>
-          <div class="pc-price">¥<span class="pc-price-small"> </span>16,800</div>
-          <span class="g-badge">✓ 保 6.0 分</span>
+                    <div class="pc-price">¥<span class="pc-price-small"> </span>16,800</div>
         </div>
       </div>
     </div>
@@ -623,9 +681,7 @@
           </div>
         </div>
         <div class="pc-right">
-          <div class="pc-guarantee">保分承诺</div>
-          <div class="pc-price">¥<span class="pc-price-small"> </span>26,800</div>
-          <span class="g-badge">✓ 保 6.0 分</span>
+                    <div class="pc-price">¥<span class="pc-price-small"> </span>26,800</div>
         </div>
       </div>
     </div>
@@ -643,9 +699,7 @@
           </div>
         </div>
         <div class="pc-right">
-          <div class="pc-guarantee">保分承诺</div>
-          <div class="pc-price">¥<span class="pc-price-small"> </span>7,800</div>
-          <span class="g-badge">✓ 保 6.5 分</span>
+                    <div class="pc-price">¥<span class="pc-price-small"> </span>7,800</div>
         </div>
       </div>
     </div>
@@ -663,9 +717,7 @@
           </div>
         </div>
         <div class="pc-right">
-          <div class="pc-guarantee">保分承诺</div>
-          <div class="pc-price">¥<span class="pc-price-small"> </span>19,800</div>
-          <span class="g-badge">✓ 保 6.5 分</span>
+                    <div class="pc-price">¥<span class="pc-price-small"> </span>19,800</div>
         </div>
       </div>
     </div>
@@ -683,9 +735,7 @@
           </div>
         </div>
         <div class="pc-right">
-          <div class="pc-guarantee">保分承诺</div>
-          <div class="pc-price">¥<span class="pc-price-small"> </span>36,800</div>
-          <span class="g-badge">✓ 保 6.5 分</span>
+                    <div class="pc-price">¥<span class="pc-price-small"> </span>36,800</div>
         </div>
       </div>
     </div>
@@ -693,6 +743,33 @@
   </div>
 
 
+</div>
+
+<div class="divider"></div>
+
+<!-- GUARANTEE -->
+<div class="section">
+  <div class="section-title">保分政策 · 重修制度</div>
+  <div class="guarantee-section">
+    <div class="guarantee-title">保分承诺</div>
+    <div class="guarantee-grid">
+      <div class="guarantee-row">
+        <div class="g-score">保 6.0</div>
+        <div class="g-cond">入学测试达 5.0 分，或半年内雅思官考成绩 5.0 分，或报名 B+C 段课程</div>
+      </div>
+      <div class="guarantee-row">
+        <div class="g-score">保 6.5</div>
+        <div class="g-cond">入学测试达 5.5 分，或半年内官考 5.5 分，或报名 B+C+D 全程</div>
+      </div>
+      <div class="guarantee-row">
+        <div class="g-score">保 7.0</div>
+        <div class="g-cond">入学测试达 6.0 分，或半年内官考 6.0 分，或六级 580 分以上</div>
+      </div>
+    </div>
+    <div class="retake-notice">
+      <strong>📋 重修规则：</strong>结课后 3 个月内参加雅思官考，如未达到对应保分线，可在结课后 <strong>一年内免费重修</strong>。所有保分学员需至少报名 2 个阶段课程方可参与。住宿班重修学费免费，但需按每天 <strong>100 元</strong>补齐住宿费用。
+    </div>
+  </div>
 </div>
 
 <div class="divider"></div>
