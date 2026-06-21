@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>剑桥KET/PET完整指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0D2744;
+  --paper:  #f5f2eb;
+  --white:  #ffffff;
+  --gold:   #c9982a;
+  --gold-lt:#f0d98a;
+  --red:    #b5301f;
+  --muted:  #7a7a8a;
+  --border: #ddd8cc;
+  --K:  #1a6fa8;   /* KET 蓝 */
+  --P:  #6c3483;   /* PET 紫 */
+  --AW: #145a32;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:17px;scroll-behavior:smooth;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--ink);line-height:1.85;}
+
+.hero{background:var(--ink);color:#fff;padding:90px 56px 72px;position:relative;overflow:hidden;}
+.hero::after{content:'KET·PET';position:absolute;right:-20px;top:-10px;font-family:'Noto Serif SC',serif;font-size:min(20vw,210px);font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-8px;pointer-events:none;line-height:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold-lt);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(32px,5.5vw,58px);font-weight:900;line-height:1.18;margin-bottom:20px;letter-spacing:-1px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:560px;margin-bottom:48px;line-height:1.8;}
+.hero-stats{display:flex;gap:48px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(255,255,255,.1);}
+.stat-n{font-family:'Noto Serif SC',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-n sup{font-size:.85rem;}
+.stat-l{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:1.5px;margin-top:6px;}
+.stat-note{font-size:.65rem;color:rgba(255,255,255,.28);margin-top:3px;}
+
+.nav-bar{position:sticky;top:0;z-index:200;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.07);}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-btn{padding:16px 26px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;user-select:none;}
+.nav-btn:hover{color:rgba(255,255,255,.75);}
+.nav-btn.on{color:var(--gold);border-bottom-color:var(--gold);}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+section{padding:80px 0;border-bottom:1px solid var(--border);}
+section:last-of-type{border-bottom:none;}
+.sec-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sec-title{font-family:'Noto Serif SC',serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;margin-bottom:14px;line-height:1.25;}
+.sec-sub{font-size:.95rem;color:var(--muted);max-width:640px;margin-bottom:48px;line-height:1.8;}
+
+/* KET/PET 对比卡 */
+.kp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-bottom:32px;overflow:hidden;}
+.kp-card{padding:36px 36px;background:var(--white);position:relative;}
+.kp-card.K{border-right:1px solid var(--border);}
+.kp-stripe{position:absolute;top:0;left:0;right:0;height:4px;}
+.kp-card.K .kp-stripe{background:var(--K);}
+.kp-card.P .kp-stripe{background:var(--P);}
+.kp-tag{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;margin-bottom:14px;}
+.kp-card.K .kp-tag{background:#e8f0f8;color:var(--K);}
+.kp-card.P .kp-tag{background:#f5eef8;color:var(--P);}
+.kp-name{font-family:'Noto Serif SC',serif;font-size:1.5rem;font-weight:700;margin-bottom:6px;}
+.kp-full{font-size:.82rem;color:var(--muted);margin-bottom:18px;}
+.kp-meta{font-size:.88rem;color:#444;line-height:1.9;}
+.kp-meta b{color:var(--ink);}
+
+.info-box{background:var(--white);border:1px solid var(--border);margin-bottom:28px;}
+.info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.info-cell{padding:26px 28px;border-right:1px solid var(--border);}
+.info-cell:last-child{border-right:none;}
+.info-lbl{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.info-cell p{font-size:.9rem;color:#444;line-height:1.8;}
+
+.alert-bar{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;margin-bottom:28px;font-size:.88rem;color:#555;line-height:1.85;}
+.alert-bar strong{color:#8a6200;}
+
+.subj{margin-bottom:72px;}
+.subj-head{display:flex;align-items:center;gap:20px;padding:20px 28px;margin-bottom:28px;}
+.subj-head.K{background:#e8f0f8;border-left:5px solid var(--K);}
+.subj-head.P{background:#f5eef8;border-left:5px solid var(--P);}
+.subj-icon{font-size:2rem;line-height:1;}
+.subj-title{font-family:'Noto Serif SC',serif;font-size:1.35rem;font-weight:700;}
+.subj-meta{font-size:.82rem;color:var(--muted);margin-top:3px;}
+
+.type-stack{display:flex;flex-direction:column;gap:24px;}
+.tc{background:var(--white);border:1px solid var(--border);}
+.tc-top{display:flex;justify-content:space-between;align-items:flex-start;padding:26px 28px 20px;gap:12px;flex-wrap:wrap;}
+.tc-name{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;}
+.badge{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.b-k{background:#e8f0f8;color:#1a6fa8;}
+.b-p{background:#f5eef8;color:#6c3483;}
+.tc-desc{padding:0 28px 24px;font-size:.92rem;color:#444;line-height:1.85;}
+
+.eg{margin:0 28px 28px;border:1px solid #e8e2d4;background:#faf8f2;}
+.eg-lbl{padding:10px 18px;background:var(--ink);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.eg-body{padding:22px 22px 20px;}
+.eg-passage{font-size:.88rem;color:#333;line-height:1.85;background:white;border:1px solid #e0dbd0;padding:16px 20px;margin-bottom:18px;font-style:italic;}
+.eg-q{font-size:.95rem;font-weight:500;color:var(--ink);margin-bottom:14px;}
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;background:white;border:1px solid #e0dbd0;font-size:.88rem;color:#444;cursor:pointer;transition:background .15s;}
+.opt:hover{background:#f0ede7;}
+.opt.ok{background:#eaf5ee;border-color:var(--AW);color:#145a32;font-weight:500;}
+.opt.ok .ol{background:var(--AW);color:white;}
+.ol{width:24px;height:24px;flex-shrink:0;background:#e8e3da;color:#555;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.eg-ans{font-size:.82rem;color:var(--muted);line-height:1.7;border-top:1px dashed var(--border);padding-top:13px;}
+.eg-ans strong{color:var(--red);}
+.fill-box{font-size:.9rem;color:#333;line-height:2.2;background:white;border:1px solid #e0dbd0;padding:18px 22px;margin-bottom:16px;}
+.blank{display:inline-block;min-width:90px;border-bottom:2.5px solid var(--gold);text-align:center;font-weight:700;color:var(--gold);margin:0 4px;}
+
+.score-banner{background:var(--ink);color:white;padding:40px 44px;margin-bottom:32px;position:relative;overflow:hidden;}
+.score-banner::after{content:'150';position:absolute;right:20px;bottom:-20px;font-family:'Noto Serif SC',serif;font-size:160px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.score-banner h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;margin-bottom:10px;}
+.score-banner p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:600px;}
+
+.score-tbl{width:100%;border-collapse:collapse;background:var(--white);}
+.score-tbl th{background:var(--ink);color:white;padding:14px 20px;text-align:left;font-size:.72rem;letter-spacing:1.5px;font-weight:700;}
+.score-tbl td{padding:18px 20px;border-bottom:1px solid var(--border);vertical-align:top;}
+.score-tbl tr:hover td{background:#faf8f3;}
+.slv{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;}
+.smeta{font-size:.78rem;color:var(--muted);margin-top:4px;}
+.srange{display:inline-block;background:var(--ink);color:var(--gold);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:4px;}
+.stag{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:2px;}
+.st-hi{background:#fdecea;color:#b5301f;}
+.st-ok{background:#eaf5ee;color:#145a32;}
+.st-lo{background:#fff3cd;color:#7a5800;}
+
+.path-box{background:var(--white);border:1px solid var(--border);padding:36px 40px;margin-bottom:32px;}
+.timeline{position:relative;padding-left:32px;}
+.timeline::before{content:'';position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:var(--border);}
+.tl-item{position:relative;margin-bottom:28px;}
+.tl-item:last-child{margin-bottom:0;}
+.tl-dot{position:absolute;left:-28px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--ink);border:3px solid var(--gold);flex-shrink:0;}
+.tl-label{font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.tl-title{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;margin-bottom:6px;}
+.tl-desc{font-size:.88rem;color:#444;line-height:1.8;}
+
+.warn-box{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;font-size:.9rem;color:#555;line-height:1.8;}
+.warn-box strong{color:#8a6200;}
+
+@media(max-width:860px){
+  .hero{padding:60px 24px 48px;}
+  .wrap{padding:0 20px;}
+  .kp-grid{grid-template-columns:1fr;}
+  .kp-card.K{border-right:none;border-bottom:1px solid var(--border);}
+  .info-row{grid-template-columns:1fr;}
+  .info-cell{border-right:none;border-bottom:1px solid var(--border);}
+  .hero-stats{gap:28px;}
+  section{padding:44px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">剑桥通用英语五级 · 现行版</div>
+  <h1>KET / PET <em>完整入门指南</em></h1>
+  <p class="hero-desc">从零了解剑桥少儿英语等级考试 — 考试结构 · 各科题型详解 · 分数等级解读 · KET → PET 学习路径规划</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">A2<sup>/B1</sup></div>
+      <div class="stat-l">对应 CEFR 等级</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2<sup>小时</sup></div>
+      <div class="stat-l">KET 考试总时长</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2.5<sup>小时</sup></div>
+      <div class="stat-l">PET 考试总时长</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">终身</div>
+      <div class="stat-l">证书有效期（无需重考）</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-btn on"  onclick="go('overview')">考试概览</div>
+    <div class="nav-btn"     onclick="go('sections')">各科题型</div>
+    <div class="nav-btn"     onclick="go('scores')">分数等级</div>
+    <div class="nav-btn"     onclick="go('path')">学习路径</div>
+  </div>
+</nav>
+
+<!-- §1 概览 -->
+<section id="overview">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 01</div>
+  <h2 class="sec-title">考试概览</h2>
+  <p class="sec-sub">KET 和 PET 隶属于「剑桥通用英语五级考试」（Main Suite）体系，由剑桥大学英语考评部官方研发，全球超过20,000所机构、企业认可，成绩终身有效，无需重考。</p>
+
+  <div class="kp-grid">
+    <div class="kp-card K">
+      <div class="kp-stripe"></div>
+      <div class="kp-tag">五级体系 · 第一级</div>
+      <div class="kp-name">KET</div>
+      <div class="kp-full">Key English Test（A2 Key）· 对应 CEFR A2 级别</div>
+      <div class="kp-meta">
+        适合<b>小学高年级至初中</b>阶段学生<br>
+        对应<b>初阶英语</b>水平，能读懂分级读物初级内容<br>
+        相当于国际学校<b>3–5年级</b>英语水平<br>
+        北上广深"小升初"常见英语能力证明
+      </div>
+    </div>
+    <div class="kp-card P">
+      <div class="kp-stripe"></div>
+      <div class="kp-tag">五级体系 · 第二级</div>
+      <div class="kp-name">PET</div>
+      <div class="kp-full">Preliminary English Test（B1 Preliminary）· 对应 CEFR B1 级别</div>
+      <div class="kp-meta">
+        适合<b>初中至高中</b>阶段学生<br>
+        对应<b>中级英语</b>水平，难度高于 KET 一个台阶<br>
+        相当于国际学校<b>6–7年级</b>英语水平<br>
+        对应雅思约 4.0–5.0，托福约 31–45 分
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">考试结构</div>
+        <p>两者都考<strong>读、写、听、说</strong>四项技能。KET 阅读与写作合并为一张试卷；<strong>PET 自2020年改革后，阅读与写作拆分为两张独立试卷</strong>，难度和篇幅都明显提升。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">权重分配</div>
+        <p>两个考试都是<strong>四项均等计分</strong>：阅读、写作、听力、口语各占总分 <strong>25%</strong>。最终成绩为四项分数相加除以4。任何一项偏弱都会拉低总分。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">学校版 vs 社会版</div>
+        <p>School 版（for Schools）面向在校生，话题更贴近中小学生认知；Key/Preliminary 版面向社会人士。<strong>题型、难度、证书完全一致</strong>，只是话题场景不同，孩子一般考 School 版。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-bar">
+    📌 <strong>2020年改革要点：</strong>PET 阅读与写作正式拆分为两张独立试卷（此前合并计时），各45分钟；同时各级别题型均有更新，评分方式与剑桥高阶考试（FCE等）的呈现方式对齐，方便看到能力进阶路径。<strong>KET 阅读写作仍为合并试卷</strong>，未受此次拆分影响。
+  </div>
+
+  <div class="alert-bar" style="border-left-color:#b5301f;">
+    📈 <strong>2025年起的真题难度趋势（非官方结构改革）：</strong>考试结构和分数体系并未变化，但近期真题呈现出明显的<strong>内容难度上升</strong>趋势——阅读文章中科普类话题（生态保护、科技应用等）占比明显提升；选项陷阱设计更隐蔽，<strong>从过去的关键词匹配转向需要理解段落隐含逻辑</strong>；写作评分标准也趋严。建议备考时不要只练习"找关键词"的应试技巧，更要注重阅读理解的深度训练。
+  </div>
+</div>
+</section>
+
+<!-- §2 各科题型 -->
+<section id="sections">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 02</div>
+  <h2 class="sec-title">各科题型详解 + 例题</h2>
+  <p class="sec-sub">KET 和 PET 题型逻辑相似，但 PET 篇幅更长、要求更高。每个题型附真实示范题。</p>
+
+  <!-- ════ KET ════ -->
+  <div class="subj">
+    <div class="subj-head K">
+      <span class="subj-icon">🔤</span>
+      <div>
+        <div class="subj-title">KET 题型详解</div>
+        <div class="subj-meta">阅读写作合并1张试卷60分钟 · 听力约30分钟 · 口语8–10分钟（两人一组）</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 阅读（Reading）— Part 1–5</div>
+          <span class="badge b-k">核心题型</span>
+        </div>
+        <div class="tc-desc">共5个部分，32题中阅读占大部分。题型包括：标志/告示理解、长篇匹配、多选填空、语法选择填空等，要求能读懂日常生活中的通知、短信、广告等实用信息。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 1 标志理解</div>
+          <div class="eg-body">
+            <div class="eg-passage" style="font-style:normal;text-align:center;padding:24px;">
+              <strong>NO PHOTOS<br>IN THE MUSEUM</strong>
+            </div>
+            <div class="eg-q">Q：这个标志是什么意思？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>博物馆禁止饮食</div>
+              <div class="opt ok"><div class="ol">B</div>博物馆内不可以拍照 ✓</div>
+              <div class="opt"><div class="ol">C</div>博物馆需要购票才能进入</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — "No Photos" 直接表明禁止拍照，这类题考查日常标志词汇的快速识别</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 写作（Writing）— Part 6–7</div>
+          <span class="badge b-k">核心题型</span>
+        </div>
+        <div class="tc-desc">两部分：Part 6 为单词填空（根据图片或定义写出对应单词）；Part 7 为<strong>写一张便条/邮件</strong>，字数25词以上，内容需回应题目给出的3个要点。考查基础造句和信息传达能力。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 7 便条写作</div>
+          <div class="eg-body">
+            <div class="eg-passage">题目：你的朋友 Tom 邀请你周末一起去公园。请给他写一张便条（25词以上），告诉他：你是否能去、你想几点见面、你想带些什么。</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>参考范例：</strong><br><br>
+              Hi Tom,<br>
+              Yes, I'd love to go to the park this weekend! Can we meet at 10 o'clock? I'll bring some snacks and a football for us to play with.<br>
+              See you soon!
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>是否完整回应了三个要点（能否去/几点见面/带什么）、基础语法是否正确、字数是否达标</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">③ 听力（Listening）— Part 1–5</div>
+          <span class="badge b-k">核心题型</span>
+        </div>
+        <div class="tc-desc">25题，5个部分。内容为日常生活场景的简短对话和通知，语速较慢清晰，每段录音播放两遍。题型包括图片选择、信息填空、对话匹配等。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 信息填空</div>
+          <div class="eg-body">
+            <div class="eg-passage">[录音内容] "The swimming class starts at half past four on Saturdays. Please bring your own towel and arrive ten minutes early."</div>
+            <div class="fill-box">
+              游泳课信息：<br>
+              开始时间：<span class="blank">4:30</span>（周六）<br>
+              需自带：<span class="blank">towel</span>
+            </div>
+            <div class="eg-ans"><strong>解题关键：</strong>抓住具体的时间、物品等关键信息词，录音会播放两遍，第一遍听大意，第二遍核对细节</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">④ 口语（Speaking）— Part 1–2</div>
+          <span class="badge b-k">核心题型</span>
+        </div>
+        <div class="tc-desc">两名考生与两位考官互动，时长8–10分钟。Part 1：考官分别向两位考生提问个人信息（姓名、爱好、家庭等）；Part 2：两位考生根据提示卡互相提问和回答。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 1 个人信息问答</div>
+          <div class="eg-body">
+            <div class="eg-passage">[考官提问] "What do you usually do at the weekend?"</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分回答示范：</strong><br>
+              "At the weekend, I usually play basketball with my friends. Sometimes I also help my mother cook dinner. I like weekends because I don't have to go to school!"
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>能否用完整句子回答（而非单词）、发音是否清晰、内容是否合理展开</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════ PET ════ -->
+  <div class="subj" style="margin-bottom:0;">
+    <div class="subj-head P">
+      <span class="subj-icon">📘</span>
+      <div>
+        <div class="subj-title">PET 题型详解</div>
+        <div class="subj-meta">阅读独立试卷45分钟 · 写作独立试卷45分钟 · 听力约30分钟 · 口语12–17分钟（两人一组）</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 阅读（Reading）— 独立试卷，6个部分</div>
+          <span class="badge b-p">难度提升</span>
+        </div>
+        <div class="tc-desc">32题，文章篇幅明显长于KET，难度对应蓝思值810–1000L。题型包括：多篇短文匹配、长篇阅读单选、语法选择填空、开放式完形填空（无选项）等，要求理解作者意图和文章隐含信息。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 长篇阅读理解</div>
+          <div class="eg-body">
+            <div class="eg-passage">Many people think that learning a musical instrument is only useful if you want to become a professional musician. However, research shows that children who learn music tend to perform better in other subjects too, particularly mathematics. This is because music involves recognising patterns, something that is also essential in maths.</div>
+            <div class="eg-q">Q：根据文章，作者的主要观点是什么？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>只有专业音乐家才需要学习乐器</div>
+              <div class="opt ok"><div class="ol">B</div>学习音乐对其他学科（如数学）也有帮助 ✓</div>
+              <div class="opt"><div class="ol">C</div>数学比音乐更难学习</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — 文章通过"However"转折，提出学音乐对数学等学科有益处，这是核心论点</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 写作（Writing）— 独立试卷，2个部分</div>
+          <span class="badge b-p">难度提升</span>
+        </div>
+        <div class="tc-desc">Part 1：回复一封邮件（约100词），需回应邮件中提出的3个问题；Part 2：从"写文章"或"写故事"中二选一（约100词）。相比 KET 的便条写作，PET 要求更完整的篇章结构和更丰富的语言表达。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 1 邮件回复</div>
+          <div class="eg-body">
+            <div class="eg-passage">题目：你收到朋友 Sam 的邮件，他问你：暑假打算做什么、想不想一起去旅行、希望什么时候出发。请写一封回信（约100词）回答这三个问题。</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>参考范例（节选）：</strong><br><br>
+              Hi Sam,<br><br>
+              Thanks for your email! This summer, I'm planning to take some art classes and maybe do some volunteering. I'd love to travel with you — it sounds like a great idea! As for timing, I think early August would work best for me, since I'll have finished my classes by then. What do you think?<br><br>
+              Looking forward to hearing your plans!
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>是否完整回应三个问题、句式是否有变化（不止简单句）、衔接词使用是否自然</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">③ 听力（Listening）— 4个部分</div>
+          <span class="badge b-p">难度提升</span>
+        </div>
+        <div class="tc-desc">25题，内容包括日常公告、长对话、访谈节目等，语速比 KET 更接近自然语速。题型包括：多选、信息填空、观点态度判断等，需要理解说话者的语气和隐含态度，不只是表面信息。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 态度判断题</div>
+          <div class="eg-body">
+            <div class="eg-passage">[录音内容] "I was really looking forward to the concert, but to be honest, the sound quality was terrible and we could barely hear the singer."</div>
+            <div class="eg-q">Q：说话者对这场音乐会的感受是？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>非常满意</div>
+              <div class="opt ok"><div class="ol">B</div>感到失望 ✓</div>
+              <div class="opt"><div class="ol">C</div>没有明确表态</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — "really looking forward to" 与后面的转折"terrible"形成对比，体现出失望情绪，这是PET听力的典型考点：态度判断而非单纯信息提取</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">④ 口语（Speaking）— 4个部分</div>
+          <span class="badge b-p">难度提升</span>
+        </div>
+        <div class="tc-desc">两名考生，时长12–17分钟，比 KET 更长更深入。Part 1：个人信息问答；Part 2：根据一张图片自由描述（约1分钟）；Part 3：两人讨论考官给出的情境问题，提出并协商解决方案；Part 4：自由讨论相关话题的喜好。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 3 情境讨论</div>
+          <div class="eg-body">
+            <div class="eg-passage">[考官给出情境] "Your school is planning a trip for students. Talk together about different places they could visit, and decide which one would be best."</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分对话示范（节选）：</strong><br>
+              A: "What about a science museum? It would be educational and fun."<br>
+              B: "That's a good idea, but maybe a nature park would be better — students could learn outdoors and get some exercise too."<br>
+              A: "True, but the weather could be a problem if it rains. Maybe we should choose the museum to be safe?"
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>能否主动提出观点、回应对方意见（而非各说各话）、最终能否协商出结论</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KET/PET 听说读写总结对比表 -->
+  <div style="background:var(--white);border:1px solid var(--border);margin-top:48px;overflow:hidden;">
+    <div style="background:var(--ink);color:white;padding:16px 28px;font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;">KET / PET 听说读写一览对比</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:.88rem;">
+        <thead>
+          <tr style="background:#f5f2eb;">
+            <th style="padding:14px 20px;text-align:left;font-size:.72rem;letter-spacing:1px;font-weight:700;border-bottom:1px solid var(--border);width:14%;">技能</th>
+            <th style="padding:14px 20px;text-align:left;font-size:.72rem;letter-spacing:1px;font-weight:700;border-bottom:1px solid var(--border);color:var(--K);">KET（A2）</th>
+            <th style="padding:14px 20px;text-align:left;font-size:.72rem;letter-spacing:1px;font-weight:700;border-bottom:1px solid var(--border);color:var(--P);">PET（B1）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:16px 20px;vertical-align:top;"><strong style="font-family:'Noto Serif SC',serif;">📖 阅读</strong></td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#e8f0f8;color:var(--K);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 60分钟（与写作合并计时）</span><br>
+              5部分 · 标志/告示/广告等生活化短文 · 蓝思值约610–800L
+            </td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#f5eef8;color:var(--P);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 45分钟（独立试卷）</span><br>
+              6部分32题 · 篇幅更长，含科普/人物类文章 · 蓝思值约810–1000L
+            </td>
+          </tr>
+          <tr style="background:#faf8f3;border-bottom:1px solid var(--border);">
+            <td style="padding:16px 20px;vertical-align:top;"><strong style="font-family:'Noto Serif SC',serif;">✍️ 写作</strong></td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#e8f0f8;color:var(--K);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 含在阅读60分钟内</span><br>
+              单词填空 + 便条/邮件 25词以上 · 内容回应3个要点即可
+            </td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#f5eef8;color:var(--P);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 45分钟（独立试卷）</span><br>
+              回复邮件100词 + 文章/故事二选一100词 · 要求篇章结构和句式变化
+            </td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:16px 20px;vertical-align:top;"><strong style="font-family:'Noto Serif SC',serif;">🎧 听力</strong></td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#e8f0f8;color:var(--K);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 约30分钟（含6分钟转涂答题卡）</span><br>
+              5部分25题 · 语速较慢清晰 · 侧重事实信息提取
+            </td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#f5eef8;color:var(--P);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 约30分钟（含6分钟转涂答题卡）</span><br>
+              4部分25题 · 接近自然语速 · 增加态度/意图判断
+            </td>
+          </tr>
+          <tr style="background:#faf8f3;">
+            <td style="padding:16px 20px;vertical-align:top;"><strong style="font-family:'Noto Serif SC',serif;">🎤 口语</strong></td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#e8f0f8;color:var(--K);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 8–10分钟（两人一组）</span><br>
+              2部分 · 个人信息问答 + 看提示卡互问互答
+            </td>
+            <td style="padding:16px 20px;color:#444;line-height:1.8;vertical-align:top;">
+              <span style="display:inline-block;background:#f5eef8;color:var(--P);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:8px;">⏱ 12–17分钟（两人一组）</span><br>
+              4部分 · 增加图片描述、情境协商、自由话题讨论
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr style="background:var(--ink);">
+            <td style="padding:16px 20px;color:white;"><strong style="font-family:'Noto Serif SC',serif;font-size:1rem;">合计总时长</strong></td>
+            <td style="padding:16px 20px;color:var(--gold-lt);font-weight:700;font-size:1.05rem;">约 98–100 分钟</td>
+            <td style="padding:16px 20px;color:var(--gold-lt);font-weight:700;font-size:1.05rem;">约 132–137 分钟</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div style="padding:14px 28px;background:#faf8f3;border-top:1px solid var(--border);font-size:.8rem;color:var(--muted);">
+      💡 <strong style="color:var(--ink);">一句话总结：</strong>PET 相比 KET，每一项技能都不是难度的简单叠加，而是<strong style="color:var(--ink);">从"识别信息"升级为"理解逻辑、组织表达"</strong>——这也是为什么不建议盲目跳级备考。
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- §3 分数等级 -->
+<section id="scores">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 03</div>
+  <h2 class="sec-title">分数等级解读</h2>
+  <p class="sec-sub">KET 和 PET 都采用「剑桥英语量表」（Cambridge English Scale）计分，并非简单的及格/不及格——成绩单会清晰显示孩子当前所处的能力区间。</p>
+
+
+  <div class="score-banner">
+    <h3>如何理解 KET / PET 分数？</h3>
+    <p>两者共用 <strong style="color:var(--gold-lt)">100–170 分</strong>的剑桥英语量表，但<strong style="color:var(--gold-lt)">考查区间不同</strong>：KET 成绩落在 100–150 区间，PET 成绩落在 140–170 区间。这也是为什么部分学生 KET 考到140+ 高分后，会被建议直接冲刺 PET——说明实际能力已经超出 A2 范畴。</p>
+  </div>
+
+  <table class="score-tbl" style="margin-bottom:24px;">
+    <thead>
+      <tr>
+        <th>考试</th>
+        <th>分数区间</th>
+        <th>等级</th>
+        <th>对应 CEFR</th>
+        <th>说明</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="slv">KET</div></td>
+        <td><span class="srange">142–150</span></td>
+        <td><span class="stag st-hi">Distinction</span></td>
+        <td style="font-size:.82rem;">B1（卓越）</td>
+        <td style="font-size:.82rem;color:#444;">能力已达 PET 水平，建议直接备考 PET</td>
+      </tr>
+      <tr>
+        <td><div class="slv">KET</div></td>
+        <td><span class="srange">133–141</span></td>
+        <td><span class="stag st-ok">Merit</span></td>
+        <td style="font-size:.82rem;">A2（优秀）</td>
+        <td style="font-size:.82rem;color:#444;">A2 级别中的优秀表现</td>
+      </tr>
+      <tr>
+        <td><div class="slv">KET</div></td>
+        <td><span class="srange">120–132</span></td>
+        <td><span class="stag st-ok">Pass</span></td>
+        <td style="font-size:.82rem;">A2（合格）</td>
+        <td style="font-size:.82rem;color:#444;">达到 A2 级别，获得 KET 证书</td>
+      </tr>
+      <tr>
+        <td><div class="slv">KET</div></td>
+        <td><span class="srange">100–119</span></td>
+        <td><span class="stag st-lo">未达标</span></td>
+        <td style="font-size:.82rem;">A1</td>
+        <td style="font-size:.82rem;color:#444;">未获得 KET 证书，成绩单标注 A1 水平</td>
+      </tr>
+      <tr>
+        <td><div class="slv">PET</div></td>
+        <td><span class="srange">160–170</span></td>
+        <td><span class="stag st-hi">Distinction</span></td>
+        <td style="font-size:.82rem;">B2（卓越）</td>
+        <td style="font-size:.82rem;color:#444;">能力已接近 B2，可考虑冲刺 FCE</td>
+      </tr>
+      <tr>
+        <td><div class="slv">PET</div></td>
+        <td><span class="srange">153–159</span></td>
+        <td><span class="stag st-ok">Merit</span></td>
+        <td style="font-size:.82rem;">B1（优秀）</td>
+        <td style="font-size:.82rem;color:#444;">B1 级别中的优秀表现</td>
+      </tr>
+      <tr>
+        <td><div class="slv">PET</div></td>
+        <td><span class="srange">140–152</span></td>
+        <td><span class="stag st-ok">Pass</span></td>
+        <td style="font-size:.82rem;">B1（合格）</td>
+        <td style="font-size:.82rem;color:#444;">达到 B1 级别，获得 PET 证书</td>
+      </tr>
+      <tr>
+        <td><div class="slv">PET</div></td>
+        <td><span class="srange">120–139</span></td>
+        <td><span class="stag st-lo">未达标</span></td>
+        <td style="font-size:.82rem;">A2</td>
+        <td style="font-size:.82rem;color:#444;">未获得 PET 证书，成绩单标注 A2 水平</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">计分方式</div>
+        <p>四项技能（读/写/听/说）<strong>等权重</strong>，每项满分相加除以4得出总分。KET 因阅读写作合并为一张试卷，该卷得分会先翻倍再参与计算，确保权重仍为25%。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">不会"挂科退步"</div>
+        <p>即使总分未达到 Pass 线，成绩单仍会显示具体的 CEFR 等级（如 A1 或 A2），<strong>不是简单的不及格</strong>，而是清晰反馈孩子当前的真实能力区间，便于针对性提升。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">证书与升学价值</div>
+        <p>KET/PET 证书<strong>终身有效，无需重考</strong>。在国内常被作为"小升初""初升高"阶段的英语能力证明，部分国际化学校实验班会优先考虑持证学生。</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- §4 学习路径 -->
+<section id="path">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 04</div>
+  <h2 class="sec-title">KET → PET 学习路径规划</h2>
+  <p class="sec-sub">KET 和 PET 并非孤立的两场考试，而是同一能力曲线上的两个阶段，合理规划能让孩子的英语学习更有目标感。</p>
+
+  <div class="path-box">
+    <div class="info-lbl" style="margin-bottom:28px;">典型学习路径时间线（以4年级起步为例）</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">起步阶段（建议3–4年级）</div>
+        <div class="tl-title">词汇与语感打底</div>
+        <div class="tl-desc">不建议过早突击应试，优先通过分级读物、动画、自然拼读积累词汇量和语感。这个阶段的核心是培养英语学习兴趣，而非刷题。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">KET 备考阶段（建议4–5年级）</div>
+        <div class="tl-title">系统学习 + 应试技巧</div>
+        <div class="tl-desc">词汇量达到1500词左右可以开始系统备考 KET。重点训练阅读速度、写作基础句型、听力关键词捕捉，以及口语流利度。备考周期建议3–6个月。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">过渡巩固期（KET合格后）</div>
+        <div class="tl-title">查漏补缺，不要立刻冲刺PET</div>
+        <div class="tl-desc">如果 KET 成绩在 Pass 区间（120–132），建议先巩固1个学期再启动 PET 备考；如果成绩达到 Distinction（142+），说明能力已经溢出，可以直接衔接 PET。</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-label">PET 备考阶段（建议6年级–初一）</div>
+        <div class="tl-title">篇章写作 + 深度阅读</div>
+        <div class="tl-desc">PET 阅读写作独立成卷，难度跳跃明显，需要专门训练长篇阅读理解和100词写作的篇章组织能力。听力和口语也需要适应更快语速和更深入的话题讨论。</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+    <div style="background:var(--white);border:1px solid var(--border);border-left:5px solid var(--K);padding:28px 30px;">
+      <div class="info-lbl" style="margin-bottom:12px;">什么时候不建议跳过 KET 直接考 PET？</div>
+      <p style="font-size:.9rem;color:#444;line-height:1.85;">虽然 KET 和 PET 可以独立报考，但<strong>跳过 KET 直接冲刺 PET</strong> 容易出现"听说读写某一项明显拖后腿"的情况——因为 PET 的篇章写作和长阅读对基础词汇量要求很高。除非孩子已有扎实的分级阅读基础（自然拼读完成+阅读量较大），否则建议按部就班从 KET 起步。</p>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-left:5px solid var(--P);padding:28px 30px;">
+      <div class="info-lbl" style="margin-bottom:12px;">PET 之后的下一步是什么？</div>
+      <p style="font-size:.9rem;color:#444;line-height:1.85;">PET 通过后，下一级是 <strong>FCE（First Certificate in English，对应CEFR B2）</strong>，难度和篇幅进一步提升，更接近真实学术英语场景，是不少国际学校申请和未来雅思/托福备考的良好过渡。一般建议 PET 取得 Merit 及以上成绩后再考虑衔接 FCE。</p>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>重要提醒：</strong>不要单纯为了拿证书而突击刷题。KET/PET 本质是检验真实英语能力的工具，如果孩子的实际水平没有达到，即使通过短期刷题"压线通过"，后续在 FCE 或更高阶英语学习中也会暴露基础不牢的问题。建议以孩子的真实语言能力为锚点来规划备考节奏。
+  </div>
+</div>
+</section>
+
+<footer style="background:var(--ink);color:rgba(255,255,255,.35);text-align:center;padding:36px 24px;font-size:.75rem;letter-spacing:1px;line-height:1.8;">
+  本文档整理自剑桥大学英语考评部（Cambridge English）官方公告及公开资料<br>
+  PET 现行版本（阅读写作分卷）自 <span style="color:var(--gold);">2020年1月</span> 起实施<br>
+  具体考试安排及报名信息以剑桥英语官网及当地授权考点为准
+</footer>
+
+<script>
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+}
+const ids=['overview','sections','scores','path'];
+window.addEventListener('scroll',()=>{
+  let cur=ids[0];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)cur=id;});
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>{b.classList.toggle('on',ids[i]===cur);});
+});
+</script>
+</body>
+</html>
