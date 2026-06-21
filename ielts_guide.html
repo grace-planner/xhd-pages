@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雅思完整指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0D2744;
+  --paper:  #f5f2eb;
+  --white:  #ffffff;
+  --gold:   #c9982a;
+  --gold-lt:#f0d98a;
+  --red:    #b5301f;
+  --muted:  #7a7a8a;
+  --border: #ddd8cc;
+  --L:  #1a6fa8;   /* 听力 蓝 */
+  --R:  #145a32;   /* 阅读 绿 */
+  --W:  #6c3483;   /* 写作 紫 */
+  --S:  #b7950b;   /* 口语 金棕 */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:17px;scroll-behavior:smooth;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--ink);line-height:1.85;}
+
+.hero{background:var(--ink);color:#fff;padding:90px 56px 72px;position:relative;overflow:hidden;}
+.hero::after{content:'IELTS';position:absolute;right:-20px;top:-10px;font-family:'Noto Serif SC',serif;font-size:min(26vw,280px);font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-14px;pointer-events:none;line-height:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold-lt);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(32px,5.5vw,58px);font-weight:900;line-height:1.18;margin-bottom:20px;letter-spacing:-1px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:min(700px,90%);margin-bottom:48px;line-height:1.8;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(255,255,255,.1);}
+.stat-n{font-family:'Noto Serif SC',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-n sup{font-size:.85rem;}
+.stat-l{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:1.5px;margin-top:6px;}
+.stat-note{font-size:.65rem;color:rgba(255,255,255,.28);margin-top:3px;}
+
+.nav-bar{position:sticky;top:0;z-index:200;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.07);}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-btn{padding:16px 26px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;user-select:none;}
+.nav-btn:hover{color:rgba(255,255,255,.75);}
+.nav-btn.on{color:var(--gold);border-bottom-color:var(--gold);}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+section{padding:80px 0;border-bottom:1px solid var(--border);}
+section:last-of-type{border-bottom:none;}
+.sec-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sec-title{font-family:'Noto Serif SC',serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;margin-bottom:14px;line-height:1.25;}
+.sec-sub{font-size:.95rem;color:var(--muted);max-width:640px;margin-bottom:48px;line-height:1.8;}
+
+.ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);margin-bottom:28px;}
+.ov-card{padding:28px 24px;border-right:1px solid var(--border);position:relative;overflow:hidden;background:var(--white);transition:background .2s;}
+.ov-card:last-child{border-right:none;}
+.ov-card:hover{background:#fdfcf8;}
+.ov-stripe{position:absolute;top:0;left:0;right:0;height:4px;}
+.ov-card.L .ov-stripe{background:var(--L);}
+.ov-card.R .ov-stripe{background:var(--R);}
+.ov-card.W .ov-stripe{background:var(--W);}
+.ov-card.S .ov-stripe{background:var(--S);}
+.ov-emoji{font-size:1.8rem;margin-bottom:14px;display:block;}
+.ov-card h3{font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:700;margin-bottom:10px;}
+.ov-meta{font-size:.8rem;color:var(--muted);line-height:1.75;}
+.ov-meta b{color:var(--ink);}
+
+.info-box{background:var(--white);border:1px solid var(--border);margin-bottom:28px;}
+.info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.info-cell{padding:26px 28px;border-right:1px solid var(--border);}
+.info-cell:last-child{border-right:none;}
+.info-lbl{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.info-cell p{font-size:.9rem;color:#444;line-height:1.8;}
+
+.alert-bar{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;margin-bottom:28px;font-size:.88rem;color:#555;line-height:1.85;}
+.alert-bar strong{color:#8a6200;}
+
+.subj{margin-bottom:72px;}
+.subj-head{display:flex;align-items:center;gap:20px;padding:20px 28px;margin-bottom:28px;}
+.subj-head.L{background:#e8f0f8;border-left:5px solid var(--L);}
+.subj-head.R{background:#eaf5ee;border-left:5px solid var(--R);}
+.subj-head.W{background:#f5eef8;border-left:5px solid var(--W);}
+.subj-head.S{background:#fdf6e3;border-left:5px solid var(--S);}
+.subj-icon{font-size:2rem;line-height:1;}
+.subj-title{font-family:'Noto Serif SC',serif;font-size:1.35rem;font-weight:700;}
+.subj-meta{font-size:.82rem;color:var(--muted);margin-top:3px;}
+
+.type-stack{display:flex;flex-direction:column;gap:24px;}
+.tc{background:var(--white);border:1px solid var(--border);}
+.tc-top{display:flex;justify-content:space-between;align-items:flex-start;padding:26px 28px 20px;gap:12px;flex-wrap:wrap;}
+.tc-name{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;}
+.badge{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.b-l{background:#e8f0f8;color:#1a6fa8;}
+.b-r{background:#eaf5ee;color:#145a32;}
+.b-w{background:#f5eef8;color:#6c3483;}
+.b-s{background:#fdf6e3;color:#7a5800;}
+.tc-desc{padding:0 28px 24px;font-size:.92rem;color:#444;line-height:1.85;}
+
+.eg{margin:0 28px 28px;border:1px solid #e8e2d4;background:#faf8f2;}
+.eg-lbl{padding:10px 18px;background:var(--ink);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.eg-body{padding:22px 22px 20px;}
+.eg-passage{font-size:.88rem;color:#333;line-height:1.85;background:white;border:1px solid #e0dbd0;padding:16px 20px;margin-bottom:18px;font-style:italic;}
+.eg-q{font-size:.95rem;font-weight:500;color:var(--ink);margin-bottom:14px;}
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;background:white;border:1px solid #e0dbd0;font-size:.88rem;color:#444;cursor:pointer;transition:background .15s;}
+.opt:hover{background:#f0ede7;}
+.opt.ok{background:#eaf5ee;border-color:var(--R);color:#145a32;font-weight:500;}
+.opt.ok .ol{background:var(--R);color:white;}
+.ol{width:24px;height:24px;flex-shrink:0;background:#e8e3da;color:#555;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.eg-ans{font-size:.82rem;color:var(--muted);line-height:1.7;border-top:1px dashed var(--border);padding-top:13px;}
+.eg-ans strong{color:var(--red);}
+.fill-box{font-size:.9rem;color:#333;line-height:2.2;background:white;border:1px solid #e0dbd0;padding:18px 22px;margin-bottom:16px;}
+.blank{display:inline-block;min-width:90px;border-bottom:2.5px solid var(--gold);text-align:center;font-weight:700;color:var(--gold);margin:0 4px;}
+
+.score-banner{background:var(--ink);color:white;padding:40px 44px;margin-bottom:32px;position:relative;overflow:hidden;}
+.score-banner::after{content:'9';position:absolute;right:30px;bottom:-50px;font-family:'Noto Serif SC',serif;font-size:220px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.score-banner h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;margin-bottom:10px;}
+.score-banner p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:600px;}
+
+.score-tbl{width:100%;border-collapse:collapse;background:var(--white);}
+.score-tbl th{background:var(--ink);color:white;padding:14px 20px;text-align:left;font-size:.72rem;letter-spacing:1.5px;font-weight:700;}
+.score-tbl td{padding:18px 20px;border-bottom:1px solid var(--border);vertical-align:top;}
+.score-tbl tr:hover td{background:#faf8f3;}
+.slv{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;}
+.smeta{font-size:.78rem;color:var(--muted);margin-top:4px;}
+.srange{display:inline-block;background:var(--ink);color:var(--gold);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:4px;}
+.stag{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:2px;}
+.st-hi{background:#fdecea;color:#b5301f;}
+.st-ok{background:#eaf5ee;color:#145a32;}
+.st-lo{background:#fff3cd;color:#7a5800;}
+
+.cmp-wrap{border:1px solid var(--border);overflow:hidden;margin-bottom:32px;}
+.cmp-heads{display:grid;grid-template-columns:1fr 1fr;}
+.cmp-h{padding:24px 32px;text-align:center;}
+.cmp-h.bc{background:var(--ink);color:white;}
+.cmp-h.idp{background:#1c2a3a;color:white;}
+.cmp-h h3{font-family:'Noto Serif SC',serif;font-size:1.4rem;font-weight:700;}
+.cmp-h p{font-size:.78rem;opacity:.55;margin-top:4px;}
+.cmp-row{display:grid;grid-template-columns:1fr 88px 1fr;border-top:1px solid var(--border);background:var(--white);}
+.cmp-row:hover{background:#fdfcf9;}
+.cmp-cell{padding:18px 24px;font-size:.9rem;color:#3a3a3a;line-height:1.8;}
+.cmp-cell:first-child{text-align:right;border-right:1px solid var(--border);}
+.cmp-cell:last-child{border-left:1px solid var(--border);}
+.cmp-dim{display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center;background:#f7f4ed;padding:8px 4px;border-left:1px solid var(--border);border-right:1px solid var(--border);}
+
+.warn-box{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;font-size:.9rem;color:#555;line-height:1.8;}
+.warn-box strong{color:#8a6200;}
+
+@media(max-width:860px){
+  .hero{padding:60px 24px 48px;}
+  .wrap{padding:0 20px;}
+  .ov-grid{grid-template-columns:1fr 1fr;}
+  .ov-card{border-right:none;border-bottom:1px solid var(--border);}
+  .info-row{grid-template-columns:1fr;}
+  .info-cell{border-right:none;border-bottom:1px solid var(--border);}
+  .cmp-heads{grid-template-columns:1fr;}
+  .cmp-row{grid-template-columns:1fr;}
+  .cmp-cell:first-child{text-align:left;border-right:none;border-bottom:1px solid var(--border);}
+  .cmp-cell:last-child{border-left:none;}
+  .cmp-dim{border:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .hero-stats{gap:24px;}
+  section{padding:44px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">2026 全面机考过渡版</div>
+  <h1>雅思 <em>完整入门指南</em></h1>
+  <p class="hero-desc">从零了解雅思考试 — 考试结构 · 各科题型详解 · 目标分数规划 · BC与IDP怎么选</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">9.0</div>
+      <div class="stat-l">总分满分</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">4</div>
+      <div class="stat-l">考试科目</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2h45<sup>min</sup></div>
+      <div class="stat-l">考试总时长</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">1–2<sup>天</sup></div>
+      <div class="stat-l">机考出分速度</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-btn on"  onclick="go('overview')">考试概览</div>
+    <div class="nav-btn"     onclick="go('sections')">各科题型</div>
+    <div class="nav-btn"     onclick="go('scores')">分数规划</div>
+    <div class="nav-btn"     onclick="go('compare')">BC vs IDP</div>
+  </div>
+</nav>
+
+<!-- §1 概览 -->
+<section id="overview">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 01</div>
+  <h2 class="sec-title">考试概览</h2>
+  <p class="sec-sub">雅思（IELTS, International English Language Testing System）由<strong>英国文化协会（British Council）、IDP教育集团、剑桥大学英语考评部</strong>三方联合主办，是全球认可度最高的英语能力测试之一，适用于留学、工作、移民等多种场景。</p>
+
+  <div class="ov-grid">
+    <div class="ov-card L"><div class="ov-stripe"></div>
+      <span class="ov-emoji">🎧</span>
+      <h3>听力</h3>
+      <div class="ov-meta"><b>40题</b> · 约30分钟<br>4个部分<br>生活场景+学术场景</div>
+    </div>
+    <div class="ov-card R"><div class="ov-stripe"></div>
+      <span class="ov-emoji">📖</span>
+      <h3>阅读</h3>
+      <div class="ov-meta"><b>40题</b> · 60分钟<br>3篇文章<br>A类/G类内容不同</div>
+    </div>
+    <div class="ov-card W"><div class="ov-stripe"></div>
+      <span class="ov-emoji">✍️</span>
+      <h3>写作</h3>
+      <div class="ov-meta"><b>2篇</b> · 60分钟<br>Task1+Task2<br>A类/G类题型不同</div>
+    </div>
+    <div class="ov-card S"><div class="ov-stripe"></div>
+      <span class="ov-emoji">🎤</span>
+      <h3>口语</h3>
+      <div class="ov-meta"><b>3部分</b> · 11–14分钟<br>真人考官面谈<br>A类/G类完全相同</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">A类 vs G类，怎么选？</div>
+        <p><strong>Academic（学术类）</strong>用于本科/研究生留学申请；<strong>General Training（培训类）</strong>用于移民、工作签证或英联邦国家中学申请。<strong>听力和口语两类完全相同</strong>，阅读和写作的题材与难度不同。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">评分体系</div>
+        <p>采用<strong>1–9分制</strong>，四项单科独立打分，0.5分递增，总分取四项平均（按四舍五入规则取整或半分）。<strong>听力和阅读为客观题机器评分</strong>，<strong>写作和口语为考官人工评分</strong>。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">机考 vs 纸笔考</div>
+        <p>目前提供<strong>机考（Computer-delivered）</strong>和<strong>纸笔考（Paper-based）</strong>两种形式，听说读写内容完全相同。机考出分更快（1–2天），纸笔考通常需要<strong>10个工作日</strong>左右。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-bar">
+    📢 <strong>2026年最新动态：</strong>雅思官方已宣布自<strong>2026年年中起全球逐步取消纸笔考试</strong>，全面转为机考模式。转型期内，机考保留了"Writing on Paper（纸笔手写写作）"选项，方便习惯手写的考生过渡。中国大陆地区具体实施时间以官方通知为准，建议关注 BC/IDP 官方渠道获取最新安排。
+  </div>
+
+  <div class="info-box" style="margin-bottom:0;">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">成绩有效期</div>
+        <p>雅思成绩<strong>有效期2年</strong>，部分国家移民项目可能要求更短的有效期（如3个月内），具体以申请机构要求为准。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">口语换题季</div>
+        <p>雅思口语题库每年在<strong>1月、5月、9月</strong>更新一次，被称为"换题季"。新题季初期题目相对生疏，可关注最新题库针对性准备。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">单科重考（One Skill Retake）</div>
+        <p>部分考点支持<strong>单科重考</strong>，如果只有一项分数不理想，可以只重考这一项，无需重考全部四科，大幅节省时间和精力。</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- §2 各科题型 -->
+<section id="sections">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 02</div>
+  <h2 class="sec-title">各科题型详解 + 例题</h2>
+  <p class="sec-sub">每个题型附有示范题，帮助零基础考生快速建立直观认知。以下以学术类（A类）为主进行说明。</p>
+
+  <!-- 听力 -->
+  <div class="subj">
+    <div class="subj-head L">
+      <span class="subj-icon">🎧</span>
+      <div>
+        <div class="subj-title">听力（Listening）</div>
+        <div class="subj-meta">40题 · 约30分钟 · 4个部分，难度递增 · A类G类完全相同</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① Section 1–2：生活场景</div>
+          <span class="badge b-l">基础题型</span>
+        </div>
+        <div class="tc-desc">Section 1 为两人日常对话（如订票、咨询），Section 2 为单人独白（如活动介绍、设施说明）。核心考点是数字、拼写、基础单词辨别干扰信息，是四个部分中难度最低的。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Section 1 填空题</div>
+          <div class="eg-body">
+            <div class="eg-passage">[录音内容] "Can I book a table for Saturday evening?" "Of course, for how many people?" "Six people, and could we have it under the name Johnson, J-O-H-N-S-O-N?"</div>
+            <div class="fill-box">
+              预订信息：<br>
+              人数：<span class="blank">6</span> 人<br>
+              姓名：<span class="blank">Johnson</span>
+            </div>
+            <div class="eg-ans"><strong>解题关键：</strong>数字和拼写是Section 1的核心考点，注意听清字母拼读（spelling）以避免拼写错误丢分</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② Section 3–4：学术场景</div>
+          <span class="badge b-l">高难题型</span>
+        </div>
+        <div class="tc-desc">Section 3 为多人学术讨论（如师生对话、小组讨论），Section 4 为单人学术讲座。题型以选择题和配对题为主，需要同义替换识别能力，是拉开分数差距的关键部分。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Section 4 选择题</div>
+          <div class="eg-body">
+            <div class="eg-passage">[讲座内容摘要] 教授介绍了城市绿化对居民心理健康的积极影响，提到多项研究显示公园使用频率与压力水平呈负相关。</div>
+            <div class="eg-q">Q：根据讲座，研究发现了什么？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>城市绿化的建造成本逐年上升</div>
+              <div class="opt ok"><div class="ol">B</div>公园使用频率越高，压力水平越低 ✓</div>
+              <div class="opt"><div class="ol">C</div>居民更偏好室内健身设施</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — "呈负相关"= 使用越多压力越低，这是听力中典型的同义替换考点（"negatively correlated" → "the more...the less..."）</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 阅读 -->
+  <div class="subj">
+    <div class="subj-head R">
+      <span class="subj-icon">📖</span>
+      <div>
+        <div class="subj-title">阅读（Reading）</div>
+        <div class="subj-meta">40题 · 60分钟 · A类3篇学术文章；G类多篇生活/职场类短文，难度递增</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 判断题（True/False/Not Given）</div>
+          <span class="badge b-r">高频题型</span>
+        </div>
+        <div class="tc-desc">判断陈述与原文是否一致，是雅思阅读最具特色的题型。<strong>Not Given（未提及）</strong>是中国考生最容易出错的选项——文章没提到，不代表是错误（False），需要严格区分"矛盾"和"未提及"。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 判断题</div>
+          <div class="eg-body">
+            <div class="eg-passage">The company was founded in 1998 and initially focused on textile manufacturing before expanding into electronics in 2005.</div>
+            <div class="eg-q">Q：陈述 "The company has always specialized in electronics." 是否与原文一致？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>True（一致）</div>
+              <div class="opt ok"><div class="ol">B</div>False（矛盾）✓</div>
+              <div class="opt"><div class="ol">C</div>Not Given（未提及）</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>False</strong> — 原文明确说最初是纺织业，2005年才转向电子行业，与"一直专注于电子行业"矛盾，不是"未提及"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 段落信息匹配（Matching Headings/Information）</div>
+          <span class="badge b-r">高频题型</span>
+        </div>
+        <div class="tc-desc">要求将给定的标题或信息匹配到文章对应段落，考查对段落主旨和结构的整体把握，而非逐句翻译。是阅读中最耗时但也最考验"略读"能力的题型。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 段落标题匹配</div>
+          <div class="eg-body">
+            <div class="eg-passage">[Paragraph B] While early critics dismissed the technology as impractical, subsequent improvements in efficiency and cost dramatically changed public perception within just a few years.</div>
+            <div class="eg-q">Q：为这一段选择最合适的标题：</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>The origins of the technology</div>
+              <div class="opt ok"><div class="ol">B</div>A shift in public opinion ✓</div>
+              <div class="opt"><div class="ol">C</div>Future challenges ahead</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — 段落核心是"从质疑到认可"的态度转变（changed public perception），而非技术起源或未来挑战</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 写作 -->
+  <div class="subj">
+    <div class="subj-head W">
+      <span class="subj-icon">✍️</span>
+      <div>
+        <div class="subj-title">写作（Writing）</div>
+        <div class="subj-meta">2篇 · 60分钟 · Task1（20分钟）+ Task2（40分钟）· A类G类题型不同</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① Task 1：图表描述（A类）</div>
+          <span class="badge b-w">A类专属</span>
+        </div>
+        <div class="tc-desc">给出柱状图、折线图、饼图、表格或流程图等，要求客观描述数据趋势，<strong>至少150词</strong>。G类Task1则是书信写作（投诉信、求助信等），与A类要求完全不同。评分维度：任务完成度、连贯衔接、词汇多样性、语法准确性。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Task 1 折线图描述</div>
+          <div class="eg-body">
+            <div class="eg-passage">[图表内容] 折线图显示某城市2010–2020年间公共交通和私家车使用率的变化趋势：公共交通使用率从30%上升至55%，私家车使用率从65%下降至40%。</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分开头段示范：</strong><br><br>
+              "The line graph illustrates the changes in the usage rates of public transport and private cars in a city between 2010 and 2020. Overall, public transport usage showed a steady upward trend, while private car usage experienced a corresponding decline over the same period."
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>是否准确概括整体趋势（Overall句必不可少）、是否使用恰当的数据描述词汇（steady, dramatic, gradual等）</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② Task 2：议论文写作</div>
+          <span class="badge b-w">A类G类均考</span>
+        </div>
+        <div class="tc-desc">就一个社会议题表达观点并论证，<strong>至少250词</strong>，占写作总分权重的三分之二。常见题型包括：观点对比类、利弊分析类、问题解决类、双重讨论类。逻辑清晰度比华丽辞藻更重要。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Task 2 议论文</div>
+          <div class="eg-body">
+            <div class="eg-passage">"Some people believe that unpaid community service should be a compulsory part of high school education. To what extent do you agree or disagree?"</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分文章结构：</strong><br>
+              <strong>引言段：</strong>改写题目 + 明确立场（不要简单复述题目原句）<br>
+              <strong>主体段1：</strong>支持强制社区服务的理由 + 具体例子<br>
+              <strong>主体段2：</strong>承认potential drawbacks（如挤占学业时间）但说明可以如何平衡<br>
+              <strong>结论段：</strong>总结立场，避免引入新观点
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>是否完整回应题目要求（to what extent），论据是否具体而非空泛，段落间逻辑衔接是否自然</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 口语 -->
+  <div class="subj" style="margin-bottom:0;">
+    <div class="subj-head S">
+      <span class="subj-icon">🎤</span>
+      <div>
+        <div class="subj-title">口语（Speaking）</div>
+        <div class="subj-meta">3部分 · 11–14分钟 · 真人考官面对面 · A类G类完全相同</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① Part 1：个人话题问答</div>
+          <span class="badge b-s">破冰环节</span>
+        </div>
+        <div class="tc-desc">约4–5分钟，考官就个人信息、兴趣爱好、家乡、工作/学习等日常话题提问，相对简单，主要用于让考生进入状态。回答时建议适当展开，避免单句应答。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 1</div>
+          <div class="eg-body">
+            <div class="eg-passage">[考官提问] "Do you prefer reading books or watching movies?"</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分回答示范：</strong><br>
+              "I'd say I lean more towards reading, especially fiction. There's something about imagining the scenes yourself rather than having them shown to you. That said, I do enjoy movies when I want something more relaxing after a long day."
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>是否给出理由而非单纯回答"是/否"，语言是否自然流畅</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② Part 2：话题卡独白</div>
+          <span class="badge b-s">核心环节</span>
+        </div>
+        <div class="tc-desc">考官给出话题卡，1分钟准备后需<strong>连续讲述1–2分钟</strong>，是口语最重要的环节，考查持续表达能力和话题展开逻辑。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 2 话题卡</div>
+          <div class="eg-body">
+            <div class="eg-passage">话题卡：Describe a skill you would like to learn in the future. You should say: what the skill is, why you want to learn it, how you would learn it, and explain how this skill would benefit you.</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分结构（约1.5分钟）：</strong><br>
+              开头点明技能 → 说明动机（结合个人经历更佳）→ 描述学习方式 → 展望该技能带来的长远益处，结尾可以自然收束而非戛然而止
+            </div>
+            <div class="eg-ans"><strong>备考建议：</strong>准备时间只有1分钟，建议练习快速列提纲（4个关键词对应4个要点），而非逐字打草稿</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">③ Part 3：深度讨论</div>
+          <span class="badge b-s">高难环节</span>
+        </div>
+        <div class="tc-desc">约4–5分钟，围绕Part 2话题进行延伸讨论，问题更抽象、更具社会性，要求考生展现批判性思维和深度论证能力，是体现高分段语言运用能力的关键部分。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · Part 3</div>
+          <div class="eg-body">
+            <div class="eg-passage">[考官提问] "Do you think traditional skills are becoming less valued in modern society? Why or why not?"</div>
+            <div class="fill-box" style="font-style:normal;">
+              <strong>高分回答思路：</strong><br>
+              不要简单说"是"或"否"，可以分层论述：哪些传统技能确实在衰落（举例）、哪些反而因为"稀缺性"被重新重视（举例）、最后给出综合判断
+            </div>
+            <div class="eg-ans"><strong>评分关注：</strong>语言的复杂度和论证的层次感，是否能跳出非黑即白的简单判断</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- §3 分数规划 -->
+<section id="scores">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 03</div>
+  <h2 class="sec-title">目标分数规划</h2>
+  <p class="sec-sub">雅思满分9.0分，四项各占25%权重，取平均分作为总分。不同申请目标对分数的要求差异较大。</p>
+
+  <div class="score-banner">
+    <h3>如何理解雅思分数？</h3>
+    <p>四项单科均为 <strong style="color:var(--gold-lt)">0–9分</strong>，0.5分递增，总分取四项平均。<strong style="color:var(--gold-lt)">7.0+ 是冲刺英美名校的常见门槛</strong>，多数院校除总分外，还会对单科设置最低要求（如写作不低于6.0），需要同时满足。</p>
+  </div>
+
+  <table class="score-tbl" style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th>申请目标</th>
+        <th>建议总分</th>
+        <th>单科要求参考</th>
+        <th>对应托福</th>
+        <th>标签</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="slv">英美顶尖名校</div><div class="smeta">牛津、剑桥、藤校研究生项目等</div></td>
+        <td><span class="srange">7.5–8.0</span></td>
+        <td style="font-size:.82rem;">单科不低于7.0</td>
+        <td style="font-size:.82rem;">110+</td>
+        <td><span class="stag st-hi">顶尖竞争</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">英国 Top 20 / 美国 Top 30</div><div class="smeta">UCL、爱丁堡、NYU等</div></td>
+        <td><span class="srange">7.0–7.5</span></td>
+        <td style="font-size:.82rem;">单科不低于6.5</td>
+        <td style="font-size:.82rem;">100–110</td>
+        <td><span class="stag st-hi">强竞争</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">主流英美院校</div><div class="smeta">大多数Top 100院校本科/硕士</div></td>
+        <td><span class="srange">6.5–7.0</span></td>
+        <td style="font-size:.82rem;">单科不低于6.0</td>
+        <td style="font-size:.82rem;">85–100</td>
+        <td><span class="stag st-ok">主流目标</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">澳加院校</div><div class="smeta">悉尼大学、多伦多大学等</div></td>
+        <td><span class="srange">6.5–7.0</span></td>
+        <td style="font-size:.82rem;">单科不低于6.0</td>
+        <td style="font-size:.82rem;">85–100</td>
+        <td><span class="stag st-ok">主流目标</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">基础语言班 / 双录取</div><div class="smeta">需配语言课程的院校</div></td>
+        <td><span class="srange">5.5–6.0</span></td>
+        <td style="font-size:.82rem;">单科不低于5.0</td>
+        <td style="font-size:.82rem;">60–80</td>
+        <td><span class="stag st-lo">基础门槛</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    ⚠️ <strong>单科短板提醒：</strong>很多申请失败案例不是总分不够，而是<strong>单科低于学校最低要求</strong>（最常见是写作）。建议查询目标院校官网的具体单科要求，而不只是盯着总分备考——四项均衡发展比单科冲高更稳妥。
+  </div>
+</div>
+</section>
+
+<!-- §4 BC vs IDP -->
+<section id="compare">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 04</div>
+  <h2 class="sec-title">BC vs IDP，怎么选？</h2>
+  <p class="sec-sub">雅思由 British Council（BC）、IDP教育集团、剑桥英语考评部三方共同持有，BC和IDP是负责执行考试的两大机构。</p>
+
+  <div class="info-box">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">核心结论先说</div>
+        <p>BC和IDP的<strong>考题来源、评分标准、证书效力完全一致</strong>，都使用剑桥英语考评部出的题目，认可度没有区别。选哪个主要看<strong>考点距离、考位时间、个人偏好</strong>，而非难度或通过率。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">2024年起的重要变化</div>
+        <p>此前中国大陆只能报考BC，<strong>2024年11月IDP正式进入中国大陆市场</strong>，目前已在北京、上海、江苏、浙江等9省13城开设考点，结束了大陆"只能选BC"的局面。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">港台地区情况</div>
+        <p>中国<strong>香港、台湾地区可同时报考BC和IDP</strong>。大陆和澳门此前仅有BC考场，IDP开放后大陆部分城市已可选择；海外大多数国家两者都设有考点。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cmp-wrap">
+    <div class="cmp-heads">
+      <div class="cmp-h bc"><h3>British Council（BC）</h3><p>英国文化协会 · 大陆地区原有唯一选项</p></div>
+      <div class="cmp-h idp"><h3>IDP教育集团</h3><p>1969年成立于澳大利亚 · 2024年11月进入大陆</p></div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cmp-cell">报考需提前约2个月，考位相对紧张</div>
+      <div class="cmp-dim">报考<br>周期</div>
+      <div class="cmp-cell">报考时间相对灵活，无需提前太久</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">考前7天通过准考证通知具体考场地点</div>
+      <div class="cmp-dim">地点<br>通知</div>
+      <div class="cmp-cell">考前4–5天通知考场地点</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">口语可能与笔试不在同一天，需另行预约</div>
+      <div class="cmp-dim">口语<br>安排</div>
+      <div class="cmp-cell">口语通常与笔试同一天上午进行，当天考完</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">口语机考采用线上屏幕（on-screen）与考官交流</div>
+      <div class="cmp-dim">口语<br>形式</div>
+      <div class="cmp-cell">目前仍以真人面对面方式进行口语考试</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">转考/退考需在报名截止日前完成，手续费420元</div>
+      <div class="cmp-dim">转考<br>政策</div>
+      <div class="cmp-cell">考前30天可免费转考，之后手续费420元，另有一次免费转考机会</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">大陆地区考点分布更广泛，城市覆盖更全面</div>
+      <div class="cmp-dim">考点<br>覆盖</div>
+      <div class="cmp-cell">大陆地区目前9省13城，每城通常仅1个考点</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">可寄送成绩单至全球绝大多数院校及政府机构</div>
+      <div class="cmp-dim">送分<br>范围</div>
+      <div class="cmp-cell">支持寄送给个人及国内外院校，灵活性略高</div>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>选择建议：</strong>如果所在城市只有一家机构有考点，直接选择该机构即可；如果两者都有，可优先考虑<strong>考位是否充足、口语安排是否方便</strong>（IDP当天考完压力较小，BC可能需要两天往返）。题目难度和评分标准没有差异，不要因为"听说哪个机构容易出分"而盲目选择——这类说法缺乏官方依据。
+  </div>
+</div>
+</section>
+
+<footer style="background:var(--ink);color:rgba(255,255,255,.35);text-align:center;padding:36px 24px;font-size:.75rem;letter-spacing:1px;line-height:1.8;">
+  本文档整理自 British Council、IDP、剑桥英语考评部官方公告及公开资料<br>
+  雅思纸笔考预计 <span style="color:var(--gold);">2026年年中</span> 起逐步退出 · IDP于 <span style="color:var(--gold);">2024年11月</span> 进入中国大陆市场<br>
+  具体要求以目标院校及考试机构官网为准
+</footer>
+
+<script>
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+}
+const ids=['overview','sections','scores','compare'];
+window.addEventListener('scroll',()=>{
+  let cur=ids[0];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)cur=id;});
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>{b.classList.toggle('on',ids[i]===cur);});
+});
+</script>
+</body>
+</html>
