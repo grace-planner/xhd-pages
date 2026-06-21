@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新版ACT完整指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0D2744;
+  --paper:  #f5f2eb;
+  --white:  #ffffff;
+  --gold:   #c9982a;
+  --gold-lt:#f0d98a;
+  --red:    #b5301f;
+  --muted:  #7a7a8a;
+  --border: #ddd8cc;
+  --E:  #1a6fa8;   /* 英语 蓝 */
+  --M:  #145a32;   /* 数学 绿 */
+  --R:  #6c3483;   /* 阅读 紫 */
+  --S:  #b7950b;   /* 科学 金棕 */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:17px;scroll-behavior:smooth;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--ink);line-height:1.85;}
+
+.hero{background:var(--ink);color:#fff;padding:90px 56px 72px;position:relative;overflow:hidden;}
+.hero::after{content:'ACT';position:absolute;right:-20px;top:-10px;font-family:'Noto Serif SC',serif;font-size:min(34vw,360px);font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-20px;pointer-events:none;line-height:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold-lt);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(32px,5.5vw,62px);font-weight:900;line-height:1.15;margin-bottom:20px;letter-spacing:-1px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:560px;margin-bottom:48px;line-height:1.8;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(255,255,255,.1);}
+.stat-n{font-family:'Noto Serif SC',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-n sup{font-size:.85rem;}
+.stat-l{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:1.5px;margin-top:6px;}
+.stat-note{font-size:.65rem;color:rgba(255,255,255,.28);margin-top:3px;}
+
+.nav-bar{position:sticky;top:0;z-index:200;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.07);}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-btn{padding:16px 26px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;user-select:none;}
+.nav-btn:hover{color:rgba(255,255,255,.75);}
+.nav-btn.on{color:var(--gold);border-bottom-color:var(--gold);}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+section{padding:80px 0;border-bottom:1px solid var(--border);}
+section:last-of-type{border-bottom:none;}
+.sec-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sec-title{font-family:'Noto Serif SC',serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;margin-bottom:14px;line-height:1.25;}
+.sec-sub{font-size:.95rem;color:var(--muted);max-width:640px;margin-bottom:48px;line-height:1.8;}
+
+.ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);margin-bottom:28px;}
+.ov-card{padding:28px 24px;border-right:1px solid var(--border);position:relative;overflow:hidden;background:var(--white);transition:background .2s;}
+.ov-card:last-child{border-right:none;}
+.ov-card:hover{background:#fdfcf8;}
+.ov-stripe{position:absolute;top:0;left:0;right:0;height:4px;}
+.ov-card.E .ov-stripe{background:var(--E);}
+.ov-card.M .ov-stripe{background:var(--M);}
+.ov-card.R .ov-stripe{background:var(--R);}
+.ov-card.S .ov-stripe{background:var(--S);}
+.ov-emoji{font-size:1.8rem;margin-bottom:14px;display:block;}
+.ov-card h3{font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:700;margin-bottom:10px;}
+.ov-meta{font-size:.8rem;color:var(--muted);line-height:1.75;}
+.ov-meta b{color:var(--ink);}
+.ov-optional{position:absolute;top:10px;right:10px;font-size:.6rem;font-weight:700;background:#fff3cd;color:#7a5800;padding:2px 8px;border-radius:10px;}
+
+.info-box{background:var(--white);border:1px solid var(--border);margin-bottom:28px;}
+.info-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+.info-cell{padding:26px 28px;border-right:1px solid var(--border);}
+.info-cell:last-child{border-right:none;}
+.info-lbl{font-size:.7rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.info-cell p{font-size:.9rem;color:#444;line-height:1.8;}
+
+.alert-bar{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;margin-bottom:28px;font-size:.88rem;color:#555;line-height:1.85;}
+.alert-bar strong{color:#8a6200;}
+
+.subj{margin-bottom:72px;}
+.subj-head{display:flex;align-items:center;gap:20px;padding:20px 28px;margin-bottom:28px;}
+.subj-head.E{background:#e8f0f8;border-left:5px solid var(--E);}
+.subj-head.M{background:#eaf5ee;border-left:5px solid var(--M);}
+.subj-head.R{background:#f5eef8;border-left:5px solid var(--R);}
+.subj-head.S{background:#fdf6e3;border-left:5px solid var(--S);}
+.subj-icon{font-size:2rem;line-height:1;}
+.subj-title{font-family:'Noto Serif SC',serif;font-size:1.35rem;font-weight:700;}
+.subj-meta{font-size:.82rem;color:var(--muted);margin-top:3px;}
+
+.type-stack{display:flex;flex-direction:column;gap:24px;}
+.tc{background:var(--white);border:1px solid var(--border);}
+.tc-top{display:flex;justify-content:space-between;align-items:flex-start;padding:26px 28px 20px;gap:12px;flex-wrap:wrap;}
+.tc-name{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;}
+.badge{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.b-e{background:#e8f0f8;color:#1a6fa8;}
+.b-m{background:#eaf5ee;color:#145a32;}
+.b-r{background:#f5eef8;color:#6c3483;}
+.b-s{background:#fdf6e3;color:#7a5800;}
+.tc-desc{padding:0 28px 24px;font-size:.92rem;color:#444;line-height:1.85;}
+
+.eg{margin:0 28px 28px;border:1px solid #e8e2d4;background:#faf8f2;}
+.eg-lbl{padding:10px 18px;background:var(--ink);color:var(--gold);font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.eg-body{padding:22px 22px 20px;}
+.eg-passage{font-size:.88rem;color:#333;line-height:1.85;background:white;border:1px solid #e0dbd0;padding:16px 20px;margin-bottom:18px;font-style:italic;}
+.eg-q{font-size:.95rem;font-weight:500;color:var(--ink);margin-bottom:14px;}
+.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:16px;}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;background:white;border:1px solid #e0dbd0;font-size:.88rem;color:#444;cursor:pointer;transition:background .15s;}
+.opt:hover{background:#f0ede7;}
+.opt.ok{background:#eaf5ee;border-color:var(--M);color:#145a32;font-weight:500;}
+.opt.ok .ol{background:var(--M);color:white;}
+.ol{width:24px;height:24px;flex-shrink:0;background:#e8e3da;color:#555;font-size:.72rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.eg-ans{font-size:.82rem;color:var(--muted);line-height:1.7;border-top:1px dashed var(--border);padding-top:13px;}
+.eg-ans strong{color:var(--red);}
+.fill-box{font-size:.9rem;color:#333;line-height:2.2;background:white;border:1px solid #e0dbd0;padding:18px 22px;margin-bottom:16px;}
+.blank{display:inline-block;min-width:90px;border-bottom:2.5px solid var(--gold);text-align:center;font-weight:700;color:var(--gold);margin:0 4px;}
+.stem{display:inline-block;background:#fff3cd;color:#7a5800;font-size:.78rem;font-weight:700;padding:1px 8px;margin-bottom:8px;}
+
+.score-banner{background:var(--ink);color:white;padding:40px 44px;margin-bottom:32px;position:relative;overflow:hidden;}
+.score-banner::after{content:'36';position:absolute;right:20px;bottom:-30px;font-family:'Noto Serif SC',serif;font-size:180px;font-weight:900;color:rgba(255,255,255,.04);line-height:1;pointer-events:none;}
+.score-banner h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;margin-bottom:10px;}
+.score-banner p{font-size:.9rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:600px;}
+
+.score-tbl{width:100%;border-collapse:collapse;background:var(--white);}
+.score-tbl th{background:var(--ink);color:white;padding:14px 20px;text-align:left;font-size:.72rem;letter-spacing:1.5px;font-weight:700;}
+.score-tbl td{padding:18px 20px;border-bottom:1px solid var(--border);vertical-align:top;}
+.score-tbl tr:hover td{background:#faf8f3;}
+.slv{font-family:'Noto Serif SC',serif;font-size:1rem;font-weight:700;}
+.smeta{font-size:.78rem;color:var(--muted);margin-top:4px;}
+.srange{display:inline-block;background:var(--ink);color:var(--gold);font-size:.78rem;font-weight:700;padding:3px 12px;margin-bottom:4px;}
+.stag{display:inline-block;font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:2px;}
+.st-hi{background:#fdecea;color:#b5301f;}
+.st-ok{background:#eaf5ee;color:#145a32;}
+.st-lo{background:#fff3cd;color:#7a5800;}
+
+.cmp-wrap{border:1px solid var(--border);overflow:hidden;margin-bottom:32px;}
+.cmp-heads{display:grid;grid-template-columns:1fr 1fr;}
+.cmp-h{padding:24px 32px;text-align:center;}
+.cmp-h.a{background:var(--ink);color:white;}
+.cmp-h.s{background:#1c2a3a;color:white;}
+.cmp-h h3{font-family:'Noto Serif SC',serif;font-size:1.4rem;font-weight:700;}
+.cmp-h p{font-size:.78rem;opacity:.55;margin-top:4px;}
+.cmp-row{display:grid;grid-template-columns:1fr 88px 1fr;border-top:1px solid var(--border);background:var(--white);}
+.cmp-row:hover{background:#fdfcf9;}
+.cmp-cell{padding:18px 24px;font-size:.9rem;color:#3a3a3a;line-height:1.8;}
+.cmp-cell:first-child{text-align:right;border-right:1px solid var(--border);}
+.cmp-cell:last-child{border-left:1px solid var(--border);}
+.cmp-dim{display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-align:center;background:#f7f4ed;padding:8px 4px;border-left:1px solid var(--border);border-right:1px solid var(--border);}
+
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
+.who-card{padding:28px 32px;border:1px solid var(--border);}
+.who-card.wa{background:#edf2f9;border-left:5px solid var(--E);}
+.who-card.ws{background:#f3edf7;border-left:5px solid var(--R);}
+.who-card h4{font-family:'Noto Serif SC',serif;font-size:1.05rem;font-weight:700;margin-bottom:18px;}
+.who-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.who-list li{font-size:.9rem;color:#3a3a3a;padding-left:22px;position:relative;line-height:1.7;}
+.who-list li::before{content:'✓';position:absolute;left:0;font-weight:700;font-size:.8rem;}
+.who-card.wa .who-list li::before{color:var(--E);}
+.who-card.ws .who-list li::before{color:var(--R);}
+
+.warn-box{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;font-size:.9rem;color:#555;line-height:1.8;}
+.warn-box strong{color:#8a6200;}
+
+@media(max-width:860px){
+  .hero{padding:60px 24px 48px;}
+  .wrap{padding:0 20px;}
+  .ov-grid{grid-template-columns:1fr 1fr;}
+  .ov-card{border-right:none;border-bottom:1px solid var(--border);}
+  .info-row{grid-template-columns:1fr;}
+  .info-cell{border-right:none;border-bottom:1px solid var(--border);}
+  .cmp-heads{grid-template-columns:1fr;}
+  .cmp-row{grid-template-columns:1fr;}
+  .cmp-cell:first-child{text-align:left;border-right:none;border-bottom:1px solid var(--border);}
+  .cmp-cell:last-child{border-left:none;}
+  .cmp-dim{border:none;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .who-grid{grid-template-columns:1fr;}
+  .hero-stats{gap:24px;}
+  section{padding:44px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">2025 重大改革版</div>
+  <h1>ACT <em>完整入门指南</em></h1>
+  <p class="hero-desc">从零了解 ACT — 考试结构 · 各科目题型详解 · 目标分数规划 · ACT vs SAT 对比选择</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">36</div>
+      <div class="stat-l">总分满分</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">3<sup>+2选</sup></div>
+      <div class="stat-l">必考+选考科目</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">125<sup>min</sup></div>
+      <div class="stat-l">核心三科时长（新版）</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2<sup>周</sup></div>
+      <div class="stat-l">出分速度</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-btn on"  onclick="go('overview')">考试概览</div>
+    <div class="nav-btn"     onclick="go('sections')">各科目题型</div>
+    <div class="nav-btn"     onclick="go('scores')">分数规划</div>
+    <div class="nav-btn"     onclick="go('compare')">ACT vs SAT</div>
+    <div class="nav-btn"     onclick="go('strategy')">中国考生须知</div>
+  </div>
+</nav>
+
+<!-- §1 概览 -->
+<section id="overview">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 01</div>
+  <h2 class="sec-title">考试概览</h2>
+  <p class="sec-sub">ACT（American College Testing）由 ACT 机构主办，与 SAT 同为美国本科申请最主流的标准化考试，俗称"美国高考"。美国本土线上考试自<strong>2025年4月</strong>、纸笔考及国际考场自<strong>2025年9月</strong>起，全面实施改革后的新版ACT。</p>
+
+  <div class="ov-grid">
+    <div class="ov-card E"><div class="ov-stripe"></div>
+      <span class="ov-emoji">✏️</span>
+      <h3>英语 English</h3>
+      <div class="ov-meta"><b>50题</b> · 35分钟<br>必考<br>6篇文章，语法+语义题</div>
+    </div>
+    <div class="ov-card M"><div class="ov-stripe"></div>
+      <span class="ov-emoji">🔢</span>
+      <h3>数学 Math</h3>
+      <div class="ov-meta"><b>45题</b> · 50分钟<br>必考<br>选项由5个减至4个</div>
+    </div>
+    <div class="ov-card R"><div class="ov-stripe"></div>
+      <span class="ov-emoji">📖</span>
+      <h3>阅读 Reading</h3>
+      <div class="ov-meta"><b>36题</b> · 40分钟<br>必考<br>4篇文章，每篇9题</div>
+    </div>
+    <div class="ov-card S"><div class="ov-stripe"></div>
+      <span class="ov-emoji">🔬</span>
+      <h3>科学 Science</h3>
+      <div class="ov-meta"><b>40题</b> · 40分钟<br><strong style="color:#7a5800;">选考</strong><br>含工程设计主题文章</div>
+      <div class="ov-optional">2025年起可选</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">2025年改革核心变化</div>
+        <p>科学部分从<strong>必考变为选考</strong>，总分计算方式调整为只看英语、数学、阅读三科（<strong>EMR</strong>），不再强制包含科学。总题量从244题减至<strong>200题</strong>，少了44题。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">考试时长大幅缩短</div>
+        <p>核心三科（英语+数学+阅读）总时长从195分钟压缩至<strong>125分钟</strong>，缩短约三分之一。每道题的平均作答时间则<strong>明显增加</strong>，目的是降低应试速度压力。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">评分体系保持不变</div>
+        <p>1–36分计分系统<strong>没有变化</strong>。改革前考的成绩单依旧有效，无需重新换算；改革后的考试才使用新的EMR综合分数报告方式。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-bar">
+    📌 <strong>四种科目组合可自由选择：</strong>英语+数学+阅读（125分钟，纯EMR成绩）/ 英语+数学+阅读+科学（170分钟，附加STEM分数）/ 英语+数学+阅读+写作（165分钟，附加ELA分数）/ 全部五科（210分钟，STEM+ELA分数齐全）。<strong>理工科申请方向建议选考科学</strong>，文科方向可以只考核心三科。
+  </div>
+
+  <div class="info-box" style="margin-bottom:0;">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">成绩有效期 / 拼分</div>
+        <p>成绩<strong>有效期2年</strong>，比SAT的5年更短。支持拼分（Superscore），<strong>改革后采用新的EMR拼分计算方式</strong>，三科分别取多次考试的最高分再平均。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">出分速度优势</div>
+        <p>ACT 出分速度明显快于SAT，机考通常<strong>考后一周左右</strong>即可查询成绩，适合时间紧张、需要快速拿到分数冲刺申请季的考生。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">不扣分机制</div>
+        <p>ACT 答错<strong>不扣分</strong>，与SAT一致。这意味着所有题目都应该作答，不留空白，蒙猜也比空着分数期望值更高。</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- §2 各科目题型 -->
+<section id="sections">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 02</div>
+  <h2 class="sec-title">各科目题型详解 + 例题</h2>
+  <p class="sec-sub">每个科目附有示范题，帮助零基础考生快速建立直观认知。</p>
+
+  <!-- 英语 -->
+  <div class="subj">
+    <div class="subj-head E">
+      <span class="subj-icon">✏️</span>
+      <div>
+        <div class="subj-title">英语（English）</div>
+        <div class="subj-meta">50题 · 35分钟 · 6篇文章 · 必考 · 语法题约20题，语义题约30题</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 语法类题（Grammar）</div>
+          <span class="badge b-e">核心题型</span>
+        </div>
+        <div class="tc-desc">考查标点符号、主谓一致、句子结构、时态等基础语法规则。改革后所有语法题<strong>都添加了明确题干</strong>，例如"Which choice makes the sentence most grammatically acceptable?"，原文提问处会用黄色高亮标出，定位更快。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 语法题</div>
+          <div class="eg-body">
+            <span class="stem">题干：Which choice makes the sentence most grammatically acceptable?</span>
+            <div class="eg-passage">The committee, along with several local volunteers, <u>were planning</u> to organize a fundraiser next month.</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>NO CHANGE</div>
+              <div class="opt ok"><div class="ol">B</div>was planning ✓</div>
+              <div class="opt"><div class="ol">C</div>have been planning</div>
+              <div class="opt"><div class="ol">D</div>are planning</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — 主语是 "The committee"（单数），"along with..."是插入语不影响主谓一致，所以谓语应该用单数 "was planning"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 语义类题（Rhetorical Skills）</div>
+          <span class="badge b-e">核心题型</span>
+        </div>
+        <div class="tc-desc">考查文章组织逻辑、语句衔接、删改是否得当，以及作者意图判断。改革后<strong>新增一篇议论文题材</strong>，平衡了考查的文体类别，更接近真实写作场景。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 语义题</div>
+          <div class="eg-body">
+            <span class="stem">题干：The writer is considering deleting the underlined sentence. Should this sentence be kept or deleted?</span>
+            <div class="eg-passage">The new recycling program has reduced landfill waste by 30% in its first year. <u>Many residents have also reported feeling more environmentally conscious in their daily routines.</u> City officials plan to expand the program citywide next year.</div>
+            <div class="opts">
+              <div class="opt ok"><div class="ol">A</div>Kept, because it adds relevant context about the program's broader impact ✓</div>
+              <div class="opt"><div class="ol">B</div>Kept, because it provides statistical evidence</div>
+              <div class="opt"><div class="ol">C</div>Deleted, because it contradicts the previous sentence</div>
+              <div class="opt"><div class="ol">D</div>Deleted, because it is irrelevant to the topic</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>A</strong> — 这句话补充了项目的"软性影响"（居民环保意识），与主题相关且丰富了论证，应该保留</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 数学 -->
+  <div class="subj">
+    <div class="subj-head M">
+      <span class="subj-icon">🔢</span>
+      <div>
+        <div class="subj-title">数学（Math）</div>
+        <div class="subj-meta">45题 · 50分钟 · 必考 · 全程允许计算器 · 选项从5个减至4个</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 基本技能题（Integrating Essential Skills）</div>
+          <span class="badge b-m">核心板块</span>
+        </div>
+        <div class="tc-desc">代数、比例、百分比等基础数学应用，是数学部分占比最大的板块。改革后<strong>需要参考上下文得出答案的题目数量减少</strong>，纯计算类题目占比相对提升，对中国考生更友好。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 基本技能题</div>
+          <div class="eg-body">
+            <div class="eg-passage" style="font-style:normal;">A recipe calls for 3 cups of flour to make 12 cookies. How many cups of flour are needed to make 20 cookies?</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>4</div>
+              <div class="opt ok"><div class="ol">B</div>5 ✓</div>
+              <div class="opt"><div class="ol">C</div>6</div>
+              <div class="opt"><div class="ol">D</div>7</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — 比例关系 3/12 = x/20 → x = 60/12 = <strong>5</strong>。注意ACT数学改革后选项变为4个，比SAT/旧版ACT更快定位答案</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 高阶题型（Higher-Order）</div>
+          <span class="badge b-m">速度型题目</span>
+        </div>
+        <div class="tc-desc">涉及函数、几何、三角函数等更复杂的知识点，相比SAT，<strong>ACT数学的知识覆盖面更广，但留给每道题的思考时间更短</strong>，更考验做题速度和熟练度而非深度分析。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 三角函数题</div>
+          <div class="eg-body">
+            <div class="eg-passage" style="font-style:normal;">In a right triangle, one angle measures 30°, and the side opposite this angle has length 5. What is the length of the hypotenuse?</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>5</div>
+              <div class="opt"><div class="ol">B</div>5√3</div>
+              <div class="opt ok"><div class="ol">C</div>10 ✓</div>
+              <div class="opt"><div class="ol">D</div>10√3</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>C</strong> — sin(30°) = 对边/斜边 = 0.5，所以斜边 = 5/0.5 = <strong>10</strong>。ACT对三角函数基础公式的直接考查比SAT更常见</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 阅读 -->
+  <div class="subj">
+    <div class="subj-head R">
+      <span class="subj-icon">📖</span>
+      <div>
+        <div class="subj-title">阅读（Reading）</div>
+        <div class="subj-meta">36题 · 40分钟 · 必考 · 4篇文章，每篇9题 · 对阅读速度要求极高</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 知识与观点整合（Integration of Knowledge and Ideas）</div>
+          <span class="badge b-r">改革后占比上升</span>
+        </div>
+        <div class="tc-desc">要求综合文章中多处信息得出结论，而非单纯定位某一句话。改革后这类题型占比明显提升，同时<strong>重新定义了文学叙事文本</strong>，新增"文学性回忆录"题材，文章类型更丰富。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 知识与观点整合</div>
+          <div class="eg-body">
+            <div class="eg-passage">[文章节选] The author describes her childhood home in vivid detail in the opening paragraphs, then shifts to discuss how the house was eventually demolished. Throughout the passage, she returns repeatedly to the image of a particular oak tree in the backyard.</div>
+            <div class="eg-q">Q：根据全文，那棵橡树最可能象征着什么？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>作者对自然环境的科学兴趣</div>
+              <div class="opt ok"><div class="ol">B</div>作者对逝去童年和家庭记忆的眷恋 ✓</div>
+              <div class="opt"><div class="ol">C</div>房屋被拆除的具体原因</div>
+              <div class="opt"><div class="ol">D</div>作者对建筑设计的专业评价</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — 需要整合开头的"详细描述老宅"和反复出现的"橡树意象"两处信息，推断出其象征意义，而非依赖单一句子</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 速度型细节题（Detail / Speed-Reading）</div>
+          <span class="badge b-r">ACT特色</span>
+        </div>
+        <div class="tc-desc">考查对文章具体细节的快速定位能力。ACT阅读对速度要求是四个考试中最严苛的——平均每篇800多词的文章只有<strong>约8-10分钟</strong>完成阅读和9道题作答，留给每道题的时间不到1分钟。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 细节定位题</div>
+          <div class="eg-body">
+            <div class="eg-passage">The expedition departed from the base camp at dawn, carrying supplies for what they estimated would be a five-day journey through the mountain pass. By the third day, however, unexpected snowfall had already reduced their pace by nearly half.</div>
+            <div class="eg-q">Q：根据文章，团队最初预计这趟旅程需要多少天？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>三天</div>
+              <div class="opt ok"><div class="ol">B</div>五天 ✓</div>
+              <div class="opt"><div class="ol">C</div>一周</div>
+              <div class="opt"><div class="ol">D</div>文中未提及</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>B</strong> — "estimated would be a five-day journey" 直接给出答案。这类题考验的是<strong>在有限时间内准确定位</strong>的能力，而非深度推理</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 科学 -->
+  <div class="subj" style="margin-bottom:0;">
+    <div class="subj-head S">
+      <span class="subj-icon">🔬</span>
+      <div>
+        <div class="subj-title">科学（Science）— 选考</div>
+        <div class="subj-meta">40题 · 40分钟 · 选考，获得独立STEM分数 · 数据解读为主，非纯学科知识</div>
+      </div>
+    </div>
+
+    <div class="type-stack">
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">① 数据解读题（Data Representation）</div>
+          <span class="badge b-s">核心题型</span>
+        </div>
+        <div class="tc-desc">给出图表、表格或实验数据，要求读取并分析信息。<strong>不需要专业学科背景知识</strong>，核心是图表阅读和逻辑推理能力，这也是为什么ACT科学被称为"阅读图表的考试"而非"科学知识考试"。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 数据解读题</div>
+          <div class="eg-body">
+            <div class="eg-passage" style="font-style:normal;">
+              [实验数据] 研究人员测量了不同温度下某化学反应的速率：<br>
+              20°C → 反应速率 2.1 mol/min<br>
+              30°C → 反应速率 4.3 mol/min<br>
+              40°C → 反应速率 8.5 mol/min
+            </div>
+            <div class="eg-q">Q：根据数据趋势，50°C时反应速率最可能接近多少？</div>
+            <div class="opts">
+              <div class="opt"><div class="ol">A</div>9 mol/min</div>
+              <div class="opt"><div class="ol">B</div>12 mol/min</div>
+              <div class="opt ok"><div class="ol">C</div>16-17 mol/min ✓</div>
+              <div class="opt"><div class="ol">D</div>25 mol/min</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>C</strong> — 数据呈现近似倍增趋势（2.1→4.3→8.5，每次约×2），延续该趋势50°C约为16-17 mol/min。无需化学知识，只需识别数列规律</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">② 工程设计题（Engineering and Design）</div>
+          <span class="badge b-s">2025年新增</span>
+        </div>
+        <div class="tc-desc">2025年改革新增的必考文章类型，要求考生分析工程设计方案的优劣、权衡取舍。同时<strong>增加了物理、化学等学科背景知识</strong>题型数量，相比改革前更接近真实学术场景。</div>
+        <div class="eg">
+          <div class="eg-lbl">例题示范 · 工程设计题</div>
+          <div class="eg-body">
+            <div class="eg-passage">[设计方案节选] Two bridge designs were proposed: Design A uses a truss structure with more material but higher load capacity; Design B uses a suspension structure with less material but requires more frequent maintenance.</div>
+            <div class="eg-q">Q：如果该地区频繁发生重型货车通行，哪种设计更合适？</div>
+            <div class="opts">
+              <div class="opt ok"><div class="ol">A</div>Design A，因为承重能力更高 ✓</div>
+              <div class="opt"><div class="ol">B</div>Design B，因为材料更少更经济</div>
+              <div class="opt"><div class="ol">C</div>两种设计承重能力相同</div>
+              <div class="opt"><div class="ol">D</div>无法根据信息判断</div>
+            </div>
+            <div class="eg-ans">正确答案：<strong>A</strong> — 题目强调"重型货车频繁通行"，对应需求是高承重能力，Design A 更符合这一实际场景</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- §3 分数规划 -->
+<section id="scores">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 03</div>
+  <h2 class="sec-title">目标分数规划</h2>
+  <p class="sec-sub">ACT 满分36分，由各科目分数取平均得出（四舍五入到整数）。改革后总分只计算英语、数学、阅读三科（EMR）。</p>
+
+  <div class="score-banner">
+    <h3>如何理解 ACT 分数？</h3>
+    <p>每科满分均为 <strong style="color:var(--gold-lt)">36分</strong>，总分是各科平均分。<strong style="color:var(--gold-lt)">34分是公认的分水岭</strong>——能达到34分，基本等同于SAT 1500分的竞争力。满分36分极为罕见，全球不到0.2%的考生能拿到。</p>
+  </div>
+
+  <table class="score-tbl" style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th>申请目标</th>
+        <th>建议ACT分数</th>
+        <th>对应SAT分数</th>
+        <th>说明</th>
+        <th>标签</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="slv">美国藤校 / Top 10</div><div class="smeta">哈佛、MIT、哥大等</div></td>
+        <td><span class="srange">34–36</span></td>
+        <td style="font-size:.82rem;">1530–1600</td>
+        <td style="font-size:.82rem;color:#444;">35分是冲刺大藤的合理目标</td>
+        <td><span class="stag st-hi">顶尖竞争</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">美国 Top 11–20</div><div class="smeta">芝加哥大学、范德堡等</div></td>
+        <td><span class="srange">31–34</span></td>
+        <td style="font-size:.82rem;">1480–1530</td>
+        <td style="font-size:.82rem;color:#444;">34分以上明显增加竞争力</td>
+        <td><span class="stag st-hi">强竞争</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">美国 Top 21–30</div><div class="smeta">UC伯克利、密歇根安娜堡等</div></td>
+        <td><span class="srange">29–33</span></td>
+        <td style="font-size:.82rem;">1420–1500</td>
+        <td style="font-size:.82rem;color:#444;">32分以上为安全区间</td>
+        <td><span class="stag st-ok">主流目标</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">美国 Top 31–50</div><div class="smeta">波士顿大学、东北大学等</div></td>
+        <td><span class="srange">27–31</span></td>
+        <td style="font-size:.82rem;">1300–1420</td>
+        <td style="font-size:.82rem;color:#444;">28分以上较有竞争力</td>
+        <td><span class="stag st-ok">主流目标</span></td>
+      </tr>
+      <tr>
+        <td><div class="slv">美国一般院校</div><div class="smeta">满足基本申请要求</div></td>
+        <td><span class="srange">24–27</span></td>
+        <td style="font-size:.82rem;">1150–1300</td>
+        <td style="font-size:.82rem;color:#444;">首考目标，后续可继续冲刺</td>
+        <td><span class="stag st-lo">基础门槛</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box" style="margin-bottom:20px;">
+    ⚠️ <strong>科学是否要考？</strong>如果申请方向明确是STEM专业（工程、计算机、物理等），建议加考科学科目，获得独立的STEM分数作为辅助证明；如果是人文社科方向，可以只考英语+数学+阅读三科核心组合，专注把EMR分数提到最高。
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>标化政策提醒：</strong>2024–2025年起，MIT、达特茅斯、耶鲁等多所名校已恢复"标化必交"（Test-Required）政策。申请前务必查询每所学校当年的最新标化政策，不要默认按"可选"来准备。
+  </div>
+</div>
+</section>
+
+<!-- §4 ACT vs SAT -->
+<section id="compare">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 04</div>
+  <h2 class="sec-title">ACT vs SAT</h2>
+  <p class="sec-sub">两个考试被美国大学同等认可，没有明显偏好，关键是找到更适合自己的那一个。</p>
+
+  <div class="cmp-wrap">
+    <div class="cmp-heads">
+      <div class="cmp-h a"><h3>ACT</h3><p>ACT机构主办 · 2025年9月已完成全球改革</p></div>
+      <div class="cmp-h s"><h3>SAT</h3><p>College Board主办 · 2024年已全面数字化</p></div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cmp-cell">英语+数学+阅读必考，科学+写作选考</div>
+      <div class="cmp-dim">科目<br>设置</div>
+      <div class="cmp-cell">阅读写作+数学两大模块，无科学科目</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">每道题作答时间更短，对阅读速度要求极高</div>
+      <div class="cmp-dim">做题<br>节奏</div>
+      <div class="cmp-cell">改革后节奏放缓，更接近"深度理解"而非"速度竞赛"</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">涉及更广的数学知识点，含三角函数，但题目偏直接计算</div>
+      <div class="cmp-dim">数学<br>风格</div>
+      <div class="cmp-cell">偏应用题和现实场景包装，需要先读懂情境再建模</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">阅读侧重速度和细节定位，文章篇幅较长</div>
+      <div class="cmp-dim">阅读<br>风格</div>
+      <div class="cmp-cell">阅读侧重深度理解，词汇难度更高，文章为短篇形式</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">1–36分，1分递增，分数区间相对集中</div>
+      <div class="cmp-dim">计分<br>方式</div>
+      <div class="cmp-cell">400–1600分，10分递增，分数区间跨度更大</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">考后约1周出分，速度更快</div>
+      <div class="cmp-dim">出分<br>速度</div>
+      <div class="cmp-cell">约2周出分，相对较慢</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">成绩有效期2年</div>
+      <div class="cmp-dim">有效期</div>
+      <div class="cmp-cell">成绩有效期5年</div>
+    </div>
+    <div class="cmp-row">
+      <div class="cmp-cell">可单独选考科学科目，理工科申请可附加STEM分数</div>
+      <div class="cmp-dim">特色<br>功能</div>
+      <div class="cmp-cell">阅读写作板块包含跨文本关联题型，综合分析要求更高</div>
+    </div>
+  </div>
+
+  <div class="who-grid">
+    <div class="who-card wa">
+      <h4>📝 这些人更适合选ACT</h4>
+      <ul class="who-list">
+        <li>数学知识覆盖面广、三角函数基础扎实</li>
+        <li>做题速度快，能在压力下保持稳定输出</li>
+        <li>申请方向是STEM专业，希望提交科学/STEM分数</li>
+        <li>需要更快出分（如截止日期较紧）</li>
+        <li>阅读速度快，能快速定位细节信息</li>
+      </ul>
+    </div>
+    <div class="who-card ws">
+      <h4>📖 这些人更适合选SAT</h4>
+      <ul class="who-list">
+        <li>词汇量大，擅长深度阅读和文本分析</li>
+        <li>做题节奏偏稳健，不喜欢高强度时间压力</li>
+        <li>申请方向是人文社科，不需要额外科学成绩</li>
+        <li>希望成绩有效期更长（5年 vs 2年）</li>
+        <li>数学应用题理解能力强，擅长读懂复杂情境</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>重要提醒：</strong>两个考试不建议同时备考，思维模式和做题节奏差异较大。建议通过一次正式的ACT和SAT模拟测试（官方免费样题）来判断哪个考试更适合自己的特质，再专注备考一个，效率远高于"两头都准备"。
+  </div>
+</div>
+</section>
+
+<!-- §5 中国考生须知 -->
+<section id="strategy">
+<div class="wrap">
+  <div class="sec-eyebrow">Section 05</div>
+  <h2 class="sec-title">中国考生须知</h2>
+  <p class="sec-sub">基于改革后ACT的特点和中国考生的实际情况，给出最关键的几个备考认知。</p>
+
+  <div class="info-box" style="margin-bottom:32px;">
+    <div class="info-row">
+      <div class="info-cell">
+        <div class="info-lbl">与托福的关系</div>
+        <p>ACT 英语和阅读对英语能力要求显著高于托福，尤其阅读速度要求极高。<strong>建议先有托福95+基础再启动ACT备考</strong>，否则容易出现"读得懂但做不完"的情况，时间管理会成为最大瓶颈。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">大陆考点情况</div>
+        <p>由于大陆没有官方考点，中国考生通常需要前往<strong>中国香港、新加坡、韩国</strong>等亚太考区参加机考。亚太考区为机考形式，<strong>出分稳定性不如北美纸笔考</strong>，建议预留二刷、三刷的时间和预算。</p>
+      </div>
+      <div class="info-cell">
+        <div class="info-lbl">数学是中国考生的相对优势</div>
+        <p>ACT 数学知识覆盖面比SAT更广（含三角函数），但难度对中国考生而言整体不高，<strong>提分速度通常快于英语和阅读</strong>。建议把更多备考时间倾斜到英语语法规则和阅读速度训练上。</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;">
+    <div style="background:var(--white);border:1px solid var(--border);border-left:5px solid var(--E);padding:28px 30px;">
+      <div class="info-lbl" style="margin-bottom:12px;">英语部分的提分关键</div>
+      <p style="font-size:.9rem;color:#444;line-height:1.85;">语法题考点相对固定（标点、主谓一致、句子结构等10个左右核心规则），<strong>熟练掌握规则后提分效率很高</strong>。语义题则需要培养"作者意图判断"的语感，建议精读真题中的语义题，总结"保留/删除""衔接词选择"的判断逻辑，而非单纯刷题量。</p>
+    </div>
+    <div style="background:var(--white);border:1px solid var(--border);border-left:5px solid var(--R);padding:28px 30px;">
+      <div class="info-lbl" style="margin-bottom:12px;">阅读部分的真实挑战</div>
+      <p style="font-size:.9rem;color:#444;line-height:1.85;">ACT阅读<strong>不是"读不懂"，而是"读不完"</strong>——800多词的文章要求几分钟内读完并答题，平均每题不到1分钟。建议大量练习<strong>限时精读+快速定位</strong>的组合训练，而非传统的"逐字精读"习惯，培养跳读和扫读结合的阅读节奏。</p>
+    </div>
+  </div>
+
+  <div class="warn-box">
+    ⚠️ <strong>2025年改革后的备考提醒：</strong>题量减少、时长缩短意味着<strong>每道题的容错空间相对变小</strong>，过去依赖"蒙混过关"的速度型答题策略效果会下降。同时，改革后阅读部分"知识与观点整合"题型占比上升，单纯的关键词定位技巧已经不够用，需要加强对文章整体逻辑和深层含义的理解训练。
+  </div>
+</div>
+</section>
+
+<footer style="background:var(--ink);color:rgba(255,255,255,.35);text-align:center;padding:36px 24px;font-size:.75rem;letter-spacing:1px;line-height:1.8;">
+  本文档整理自 ACT 官方公告及公开资料 · 新版ACT已于<span style="color:var(--gold);">2025年9月</span>起在全球范围内全面实施<br>
+  具体要求以目标院校官网及 ACT 官网为准 · 标化政策随申请年份变化，请实时核查
+</footer>
+
+<script>
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+}
+const ids=['overview','sections','scores','compare','strategy'];
+window.addEventListener('scroll',()=>{
+  let cur=ids[0];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)cur=id;});
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>{b.classList.toggle('on',ids[i]===cur);});
+});
+</script>
+</body>
+</html>
