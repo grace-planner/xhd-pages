@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A-Level 音乐考试局深度指南 · Edexcel vs Cambridge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D2744;
+    --navy-deep:#081a30;
+    --navy-tint:#eef2f6;
+    --gold:#c9982a;
+    --gold-deep:#a67a1c;
+    --gold-tint:#faf3e2;
+    --ink:#1c2833;
+    --ink-soft:#5a6472;
+    --line:#e2e6ec;
+    --paper:#ffffff;
+    --bg:#f6f7f9;
+    --serif:'Noto Serif SC', serif;
+    --sans:'Noto Sans SC', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; scroll-padding-top:88px;}
+  body{
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------------- Sticky Nav ---------------- */
+  .navbar{
+    position:sticky; top:0; z-index:100;
+    background:var(--navy);
+    box-shadow:0 2px 12px rgba(13,39,68,0.18);
+  }
+  .nav-inner{
+    max-width:1160px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 28px; height:64px;
+  }
+  .nav-brand{
+    font-family:var(--serif); font-weight:700;
+    color:#fff; font-size:16.5px; letter-spacing:.02em;
+    display:flex; align-items:center; gap:10px;
+    white-space:nowrap;
+  }
+  .nav-brand .dot{width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block;}
+  .nav-links{
+    display:flex; gap:2px; list-style:none;
+    overflow-x:auto;
+  }
+  .nav-links a{
+    display:block;
+    color:rgba(255,255,255,0.68);
+    text-decoration:none;
+    font-size:13.5px; font-weight:500;
+    padding:10px 14px;
+    border-radius:6px;
+    white-space:nowrap;
+    transition:color .2s, background .2s;
+  }
+  .nav-links a:hover{color:#fff; background:rgba(255,255,255,0.06);}
+  .nav-links a.active{color:#fff; background:rgba(201,152,42,0.22);}
+
+  /* ---------------- Hero ---------------- */
+  .hero{
+    background:linear-gradient(155deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff;
+    padding:76px 28px 64px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; right:-120px; top:-120px;
+    width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(201,152,42,0.16), transparent 70%);
+  }
+  .hero-inner{max-width:1160px; margin:0 auto; position:relative; z-index:1;}
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; letter-spacing:.08em;
+    color:var(--gold);
+    background:rgba(201,152,42,0.12);
+    border:1px solid rgba(201,152,42,0.35);
+    padding:6px 14px; border-radius:999px;
+    margin-bottom:24px;
+  }
+  h1.hero-title{
+    font-family:var(--serif); font-weight:900;
+    font-size:clamp(28px, 4.2vw, 44px);
+    line-height:1.3;
+    max-width:840px;
+    margin-bottom:18px;
+  }
+  h1.hero-title em{font-style:normal; color:var(--gold);}
+  .hero-desc{
+    font-size:16px;
+    color:rgba(255,255,255,0.78);
+    max-width:none;
+    margin-bottom:40px;
+  }
+  .hero-stats{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1px;
+    background:rgba(255,255,255,0.14);
+    border:1px solid rgba(255,255,255,0.14);
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .stat{background:rgba(255,255,255,0.04); padding:20px 18px;}
+  .stat .num{font-family:var(--serif); font-weight:700; font-size:24px; color:var(--gold); margin-bottom:4px;}
+  .stat .label{font-size:12px; color:rgba(255,255,255,0.65);}
+
+  /* ---------------- Layout ---------------- */
+  .container{max-width:1160px; margin:0 auto; padding:0 28px;}
+  section.block{padding:68px 0 12px;}
+  .section-tag{
+    display:inline-block;
+    font-family:var(--serif); font-weight:700;
+    font-size:13px; letter-spacing:.1em;
+    color:var(--gold-deep);
+    margin-bottom:10px;
+  }
+  h2.section-title{
+    font-family:var(--serif); font-weight:700;
+    font-size:27px; color:var(--navy);
+    margin-bottom:14px;
+  }
+  .section-lead{
+    font-size:15px; color:var(--ink-soft);
+    max-width:800px;
+    margin-bottom:36px;
+  }
+  h3.sub-title{
+    font-family:var(--serif); font-weight:700;
+    font-size:19px; color:var(--navy);
+    margin:30px 0 14px;
+    display:flex; align-items:center; gap:10px;
+  }
+  h3.sub-title .bar{width:4px; height:18px; background:var(--gold); border-radius:2px; display:inline-block;}
+  p.body-text{font-size:14.5px; color:var(--ink-soft); margin-bottom:14px;}
+  p.body-text strong{color:var(--ink); font-weight:600;}
+
+  /* ---------------- Grading table ---------------- */
+  .table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:24px;
+    box-shadow:0 1px 3px rgba(13,39,68,0.04);
+  }
+  table{width:100%; border-collapse:collapse; background:var(--paper); font-size:14px;}
+  thead th{
+    background:var(--navy); color:#fff;
+    text-align:left; font-weight:600; font-size:13px;
+    padding:13px 16px; white-space:nowrap;
+  }
+  tbody td{padding:13px 16px; border-top:1px solid var(--line); color:var(--ink); vertical-align:top;}
+  tbody td:first-child strong{display:block; line-height:1.4;}
+  table.centered th, table.centered td{text-align:center;}
+  .nowrap-col{white-space:nowrap;}
+  tbody tr:nth-child(even){background:#fafbfc;}
+  tbody tr:hover{background:var(--navy-tint);}
+  .grade-a{color:var(--gold-deep); font-weight:700; white-space:nowrap;}
+
+  /* ---------------- Component boxes ---------------- */
+  .component-box{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:26px;
+    margin-bottom:18px;
+    box-shadow:0 1px 3px rgba(13,39,68,0.04);
+  }
+  .component-head{display:flex; align-items:center; gap:14px; margin-bottom:6px; flex-wrap:wrap;}
+  .component-icon{
+    width:40px; height:40px; border-radius:9px;
+    background:var(--navy-tint);
+    display:flex; align-items:center; justify-content:center;
+    font-size:19px; flex-shrink:0;
+  }
+  .component-head h4{font-family:var(--serif); font-size:16.5px; font-weight:700; color:var(--navy);}
+  .component-head .code{
+    font-size:11.5px; color:var(--ink-soft); font-weight:500;
+    background:var(--navy-tint); padding:2px 8px; border-radius:5px;
+  }
+  .component-head .pct{
+    margin-left:auto;
+    font-family:var(--serif); font-weight:700;
+    color:var(--gold-deep); font-size:15px;
+    white-space:nowrap;
+  }
+  .component-meta{
+    display:flex; gap:16px; flex-wrap:wrap;
+    font-size:12.5px; color:var(--ink-soft);
+    margin:10px 0 14px; padding-bottom:14px;
+    border-bottom:1px dashed var(--line);
+  }
+  .component-meta b{color:var(--ink);}
+  .component-box ul{margin:0 0 4px 20px; font-size:14px; color:var(--ink-soft);}
+  .component-box ul li{margin-bottom:7px;}
+  .component-box ul li strong{color:var(--ink);}
+  .component-box ul.nested{margin-top:6px; margin-bottom:10px;}
+  .component-box ul.nested li{margin-bottom:4px; font-size:13.5px;}
+
+  /* AO grid */
+  .ao-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:14px; margin-top:6px; margin-bottom:8px;
+  }
+  .ao-card{
+    background:var(--gold-tint);
+    border:1px solid rgba(201,152,42,0.3);
+    border-radius:8px;
+    padding:16px 18px;
+  }
+  .ao-card .tag{font-family:var(--serif); font-weight:700; color:var(--gold-deep); font-size:14px; margin-bottom:6px;}
+  .ao-card p{font-size:13px; color:var(--ink-soft); margin:0;}
+
+  /* Cambridge focus cards */
+  .focus-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-left:4px solid var(--navy);
+    border-radius:8px;
+    padding:20px 22px;
+    margin-bottom:14px;
+    box-shadow:0 1px 3px rgba(13,39,68,0.04);
+  }
+  .focus-head{display:flex; align-items:baseline; gap:12px; margin-bottom:8px; flex-wrap:wrap;}
+  .focus-head h4{font-family:var(--serif); font-size:16px; font-weight:700; color:var(--navy);}
+  .focus-head .pct{font-family:var(--serif); font-weight:700; color:var(--gold-deep); font-size:14px;}
+  .focus-card p{font-size:13.5px; color:var(--ink-soft);}
+
+  .note-box{
+    background:var(--gold-tint);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:14px 18px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    margin-bottom:24px;
+  }
+  .note-box strong{color:var(--gold-deep);}
+
+  /* Comparison table highlight columns (body rows only — header stays navy) */
+  tbody td.col-edexcel{background:rgba(13,39,68,0.05);}
+  tbody td.col-cambridge{background:rgba(201,152,42,0.09);}
+  thead th.col-edexcel, thead th.col-cambridge{background:var(--navy); color:#fff;}
+
+  /* Suitability list */
+  .fit-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-bottom:24px;}
+  .fit-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:10px;
+    padding:22px; box-shadow:0 1px 3px rgba(13,39,68,0.04);
+  }
+  .fit-card .num-badge{
+    width:30px; height:30px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--serif); font-weight:700; font-size:14px;
+    margin-bottom:12px;
+  }
+  .fit-card p{font-size:13.5px; color:var(--ink-soft);}
+
+  /* Strategy cards */
+  .strategy-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:16px; margin-bottom:8px;}
+  .strategy-card{
+    background:var(--navy-tint); border-radius:10px; padding:22px;
+  }
+  .strategy-card h4{font-family:var(--serif); font-size:15.5px; font-weight:700; color:var(--navy); margin-bottom:8px;}
+  .strategy-card p{font-size:13.5px; color:var(--ink-soft);}
+
+  /* Verdict box (highlighted conclusion) */
+  .verdict-box{
+    background:linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color:#fff;
+    border-radius:12px;
+    padding:28px 30px;
+    margin:28px 0 32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .verdict-box::before{
+    content:"";
+    position:absolute; right:-60px; top:-60px;
+    width:200px; height:200px; border-radius:50%;
+    background:radial-gradient(circle, rgba(201,152,42,0.18), transparent 70%);
+  }
+  .verdict-head{display:flex; align-items:center; gap:12px; margin-bottom:14px; position:relative; z-index:1;}
+  .verdict-badge{
+    font-family:var(--serif); font-weight:700; font-size:13px;
+    color:var(--navy); background:var(--gold);
+    padding:5px 13px; border-radius:999px; white-space:nowrap;
+  }
+  .verdict-head h4{font-family:var(--serif); font-weight:700; font-size:19px; color:#fff;}
+  .verdict-box ul{position:relative; z-index:1; margin:0 0 0 20px;}
+  .verdict-box ul li{font-size:14px; color:rgba(255,255,255,0.85); margin-bottom:10px; line-height:1.65;}
+  .verdict-box ul li strong{color:var(--gold);}
+  .verdict-box ul li:last-child{margin-bottom:0;}
+
+  /* Card grid (GCSE/IGCSE subject cards) */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:16px; margin-bottom:8px;
+  }
+  .subject-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-top:3px solid var(--navy);
+    border-radius:10px;
+    padding:22px 22px;
+    box-shadow:0 1px 3px rgba(13,39,68,0.04);
+  }
+  .subject-card h4{font-family:var(--serif); font-size:16px; font-weight:700; color:var(--navy); margin-bottom:6px;}
+  .subject-card .code{
+    display:inline-block;
+    font-size:11.5px; font-weight:600;
+    background:var(--gold-tint); color:var(--gold-deep);
+    padding:2px 9px; border-radius:5px;
+    margin-bottom:12px;
+  }
+  .subject-card .row{
+    display:flex; justify-content:space-between; gap:10px;
+    font-size:13px; padding:7px 0;
+    border-top:1px dashed var(--line);
+    color:var(--ink-soft);
+  }
+  .subject-card .row:first-of-type{border-top:none;}
+  .subject-card .row b{color:var(--ink); font-weight:600; text-align:right;}
+
+  /* BTEC rows */
+  .btec-list{display:flex; flex-direction:column; gap:14px; margin-bottom:8px;}
+  .btec-row{
+    display:grid; grid-template-columns:110px 1fr;
+    gap:20px;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px;
+    box-shadow:0 1px 3px rgba(13,39,68,0.04);
+  }
+  .btec-glh{text-align:center; border-right:1px dashed var(--line); padding-right:18px;}
+  .btec-glh .n{font-family:var(--serif); font-weight:700; font-size:24px; color:var(--navy);}
+  .btec-glh .u{font-size:10.5px; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.04em;}
+  .btec-glh .eq{font-size:11px; color:var(--gold-deep); margin-top:6px; font-weight:600;}
+  .btec-body h4{font-family:var(--serif); font-size:15.5px; font-weight:700; color:var(--navy); margin-bottom:6px;}
+  .btec-body p{font-size:13.5px; color:var(--ink-soft);}
+
+  footer{
+    margin-top:60px;
+    background:var(--navy-deep);
+    color:rgba(255,255,255,0.55);
+    padding:32px 28px;
+    text-align:center;
+    font-size:12.5px;
+  }
+  footer strong{color:rgba(255,255,255,0.85);}
+
+  @media (max-width:900px){
+    .fit-grid{grid-template-columns:repeat(2, 1fr);}
+  }
+
+  @media (max-width:640px){
+    .hero{padding:56px 20px 44px;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+    section.block{padding:48px 0 8px;}
+    .container{padding:0 20px;}
+    .btec-row{grid-template-columns:1fr;}
+    .btec-glh{border-right:none; border-bottom:1px dashed var(--line); padding-right:0; padding-bottom:14px;}
+    .fit-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="dot"></span>A-Level 音乐考试局指南</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#basics" data-target="basics">课程基础</a></li>
+      <li><a href="#gcse" data-target="gcse">GCSE/IGCSE</a></li>
+      <li><a href="#edexcel" data-target="edexcel">Edexcel 详解</a></li>
+      <li><a href="#cambridge" data-target="cambridge">Cambridge 详解</a></li>
+      <li><a href="#compare" data-target="compare">考试局对比</a></li>
+      <li><a href="#btec" data-target="btec">BTEC 体系</a></li>
+      <li><a href="#fit" data-target="fit">适合人群</a></li>
+      <li><a href="#strategy" data-target="strategy">备考策略</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-title">A-Level 音乐<em>考试局深度指南</em><br>Pearson Edexcel vs Cambridge</h1>
+    <p class="hero-desc">整理 A-Level Music 的课程本质、评分体系，Pearson Edexcel（9MU0）与 Cambridge International（CIE）两大考试局的具体考核结构差异与难度对比，并延伸至 GCSE/IGCSE 前置阶段与 BTEC 职业资格体系，供选课规划与备考指导参考。</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">7</div><div class="label">A-Level 等级档位</div></div>
+      <div class="stat"><div class="num">3</div><div class="label">Edexcel 考核模块</div></div>
+      <div class="stat"><div class="num">5</div><div class="label">Cambridge 考核板块</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">AO 评估维度</div></div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- 课程基础 -->
+  <section class="block" id="basics">
+    <span class="section-tag">SECTION 01</span>
+    <h2 class="section-title">A-Level 音乐是什么</h2>
+
+    <p class="body-text">A-Level 全称 <strong>General Certificate of Education Advanced Level</strong>，是英国高中课程，也是英国学生的大学入学考试课程，相当于中国的高考。除了英国本土认可度外，全球160多个国家、1万多所大学都将 A-Level 成绩作为招生标准之一，几乎所有英语授课的大学都认可。A-Level 成绩不仅可以作为国际性高中文凭证书，持有 A-Level 成绩的学生，相当于获得了可直接申请知名院校的入场券。</p>
+
+    <p class="body-text">A-Level 成绩通过等级划分，共有 <strong>A*、A、B、C、D、E、U</strong> 七个等级：</p>
+
+    <div class="table-wrap">
+      <table class="centered">
+        <thead><tr><th>A-Level 等级</th><th>UMS 范围（百分比换算分数）</th><th>备注</th></tr></thead>
+        <tbody>
+          <tr><td class="grade-a">A*</td><td>90–100</td><td>最优</td></tr>
+          <tr><td>A</td><td>80–89</td><td>优秀</td></tr>
+          <tr><td>B</td><td>70–79</td><td>良好</td></tr>
+          <tr><td>C</td><td>60–69</td><td>中等</td></tr>
+          <tr><td>D</td><td>50–59</td><td>偏弱</td></tr>
+          <tr><td>E</td><td>40–49</td><td>及格</td></tr>
+          <tr><td>U</td><td>≤39</td><td>不及格</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-box"><strong>划分逻辑：</strong>A* 需达到总分 90% 以上；A 为优秀，需达到总分 80% 以上；E 为及格线，需超过总分的 40%；最低一档为 U，即不及格。</div>
+
+    <p class="body-text"><strong>A-Level Music 作为 A-Level 课程系列中的音乐学科</strong>，是音乐专业方向高中生的必修科目之一。对申请国外音乐专业本科帮助很大，成绩优秀的学生甚至可以免修不少大一课程；同时它也是一门难度不小的学科，对学生的综合音乐素养要求很高——涉及范围从巴洛克时期、古典主义、浪漫主义一路延伸到 20 世纪的现代音乐，需要真正热爱音乐、愿意持续投入的学生才能拿到理想的 A*。</p>
+
+    <p class="body-text">课程最典型的发展方向是申请各类音乐类本科，为未来成为音乐家、音乐技术人员、音乐治疗师、音乐教师、音乐管理等职业铺路；同时它也能与其他非创意类课程结合（比如科学、数学），用于申请传媒、交互、影音类专业。</p>
+  </section>
+
+  <!-- GCSE / IGCSE -->
+  <section class="block" id="gcse">
+    <span class="section-tag">SECTION 02</span>
+    <h2 class="section-title">GCSE / IGCSE 音乐科目速览</h2>
+    <p class="section-lead">A-Level 之前的前置阶段，两大考试局同样各自开设了对应的音乐科目。</p>
+
+    <div class="card-grid">
+      <div class="subject-card">
+        <h4>Pearson Edexcel GCSE Music</h4>
+        <span class="code">1MU0</span>
+        <div class="row"><span>阶段/评分</span><b>GCSE，9–1</b></div>
+        <div class="row"><span>考试结构</span><b>表演30%+作曲30%+聆听40%</b></div>
+      </div>
+      <div class="subject-card">
+        <h4>Cambridge IGCSE Music</h4>
+        <span class="code">0410 / 0978</span>
+        <div class="row"><span>阶段/评分</span><b>0410为A*–G；0978为9–1</b></div>
+        <div class="row"><span>考试结构</span><b>聆听40%+表演30%+作曲30%</b></div>
+      </div>
+    </div>
+
+    <div class="note-box"><strong>注：</strong>0410 与 0978 两个 Cambridge IGCSE 代码评分标准一致，只是两种成绩报告版本，学校可任选其一进行报读。Edexcel GCSE Music 与 Cambridge IGCSE Music 结构非常相似，都是"表演+作曲+聆听"三大板块，只是聆听与表演/作曲的权重顺序略有不同，可视为 A-Level 阶段两家考试局风格的前置延伸。</div>
+
+    <h3 class="sub-title"><span class="bar"></span>Edexcel GCSE Music（1MU0）官方考核细则</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>考点</th><th>代码</th><th>内容</th><th>要求</th><th>比重</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>演奏<br>Performing</strong></td>
+            <td>1MU0/01</td>
+            <td>一首独奏 + 一首合奏</td>
+            <td>每项至少 1 分钟，总时长至少 4 分钟<br>须为<strong>现场、未经剪辑</strong>的录音/录像</td>
+            <td class="grade-a">30% · 60分</td>
+          </tr>
+          <tr>
+            <td><strong>作曲<br>Composing</strong></td>
+            <td>1MU0/02</td>
+            <td>两首原创作品</td>
+            <td>一首从 Pearson 当年 <strong>set brief</strong> 中选题，另一首<strong>自由作曲</strong><br>各至少 1 分钟，合计至少 3 分钟<br>创作阶段通常需至少 <strong>5 小时</strong>受控完成时间</td>
+            <td class="grade-a">30% · 60分</td>
+          </tr>
+          <tr>
+            <td><strong>聆听评析<br>Appraising</strong></td>
+            <td>1MU0/03</td>
+            <td>笔试，<strong>1 小时 45 分钟</strong></td>
+            <td>考查固定作品的<strong>听辨与分析、听写</strong><br>考查<strong>陌生作品</strong>，以及固定作品与相关陌生作品的比较</td>
+            <td class="grade-a">40% · 80分</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-title"><span class="bar"></span>Cambridge IGCSE Music（0410/0978）官方考核细则</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>考点</th><th class="nowrap-col">Component</th><th>内容</th><th>要求</th><th>比重</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>聆听<br>Listening</strong></td>
+            <td class="nowrap-col">Component 1</td>
+            <td>笔试，约 1 小时 15 分钟</td>
+            <td>考查对西方古典音乐主要历史时期与风格的<strong>听辨感知与鉴别能力</strong><br>识别并评述来自不同国家文化的音乐作品<br>需掌握<strong>一个"世界聚焦"非西方文化研究课题</strong> + <strong>一部西方指定作品</strong>的深入学习</td>
+            <td class="grade-a">约40% · 70分</td>
+          </tr>
+          <tr>
+            <td><strong>演奏<br>Performing</strong></td>
+            <td class="nowrap-col">Component 2</td>
+            <td>个人演奏 + 合奏演奏</td>
+            <td>各为<strong>一首曲目，或两首同一乐器的对比小品</strong><br>两项演奏<strong>各计 25 分</strong>，按五项评分标准逐项打分（每项满分 5 分）</td>
+            <td class="grade-a">约30% · 50分</td>
+          </tr>
+          <tr>
+            <td><strong>作曲<br>Composing</strong></td>
+            <td class="nowrap-col">Component 3</td>
+            <td>自由创作，两首对比作品</td>
+            <td>考查<strong>原创性与想象力</strong><br>须使用<strong>五线谱</strong>记谱，或视情况使用其他合适的记谱系统<br>原始满分 100 分，<strong>按比例折算为 50 分</strong>计入总分</td>
+            <td class="grade-a">约30% · 50分</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Edexcel 详解 -->
+  <section class="block" id="edexcel">
+    <span class="section-tag">SECTION 03</span>
+    <h2 class="section-title">Pearson Edexcel A-Level Music（9MU0）详解</h2>
+    <p class="section-lead">考核分为演奏、作曲、聆听评估三大模块，权重分别为 30% / 30% / 40%。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>考点</th><th>代码</th><th>内容</th><th>要求</th><th>比重</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>演奏<br>Performing</strong></td>
+            <td>9MU0/01</td>
+            <td>音乐会形式的<strong>公开表演</strong>（一首或多首曲目）</td>
+            <td>形式不限：独奏、重奏、即兴演奏，或用音乐科技手段完成<br>总时长<strong>不少于 8 分钟</strong><br>须在认证年 3 月 1 日后录制，所有材料须在 <strong>5 月 15 日前</strong>提交</td>
+            <td class="grade-a">30% · 60分</td>
+          </tr>
+          <tr>
+            <td><strong>作曲<br>Composing</strong></td>
+            <td>9MU0/02</td>
+            <td>两首原创作品</td>
+            <td>一首须响应 Pearson 官方设定的题目，与"学习领域"相关，<strong>至少 4 分钟</strong><br>另一首响应考查作曲技法的题目清单（占 20 分），<strong>至少 1 分钟</strong><br>两首<strong>合计不少于 6 分钟</strong></td>
+            <td class="grade-a">30% · 60分</td>
+          </tr>
+          <tr>
+            <td><strong>音乐分析<br>Appraising</strong></td>
+            <td>9MU0/03</td>
+            <td>笔试，<strong>2 小时 10 分钟</strong></td>
+            <td>知识运用覆盖<strong>六大学习领域</strong>（声乐 / 器乐 / 电影音乐 / 流行与爵士 / 音乐融合 / 新方向），每领域对应 2–3 部指定作品<br>同时考查将已学知识应用于<strong>陌生作品</strong>分析的能力</td>
+            <td class="grade-a">40% · 100分</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-title"><span class="bar"></span>三大模块官方考核细则</h3>
+
+    <div class="component-box">
+      <div class="component-head">
+        <div class="component-icon">🎹</div>
+        <h4>Component 1 · 演奏 Performing</h4>
+        <span class="code">9MU0/01</span>
+        <span class="pct">30% · 60分</span>
+      </div>
+      <div class="component-meta"><span>非笔试考核 · 校外统一评估</span><span>内容方向：<b>演奏方法与呈现</b></span></div>
+      <ul>
+        <li>以音乐会形式呈现的<strong>公开表演</strong>，可以是一首或多首曲目</li>
+        <li>形式不限：可以是独奏、重奏、即兴演奏，也可以用音乐科技手段完成演奏</li>
+        <li>全部曲目的演奏总时长需<strong>不少于 8 分钟</strong></li>
+        <li>录制须在认证年 3 月 1 日之后进行，所有评估材料须在认证年 <strong>5 月 15 日前</strong>提交</li>
+      </ul>
+    </div>
+
+    <div class="component-box">
+      <div class="component-head">
+        <div class="component-icon">🎼</div>
+        <h4>Component 2 · 作曲 Composing</h4>
+        <span class="code">9MU0/02</span>
+        <span class="pct">30% · 60分</span>
+      </div>
+      <div class="component-meta"><span>非笔试考核 · 校外统一评估</span><span>内容方向：<b>作曲方法与呈现</b></span></div>
+      <ul>
+        <li>共提交<strong>两首作品</strong>：一首须响应 Pearson 官方设定的题目，另一首可自由创作，也可继续响应题目</li>
+        <li>响应题目 / 自由创作的这一首，须与"学习领域"相关，<strong>时长至少 4 分钟</strong></li>
+        <li>另一首须响应考查作曲技法的题目清单，占本模块 20 分，<strong>时长至少 1 分钟</strong>（除非题目要求更长）</li>
+        <li>两首作品<strong>合计时长不少于 6 分钟</strong></li>
+      </ul>
+    </div>
+
+    <div class="component-box">
+      <div class="component-head">
+        <div class="component-icon">🎧</div>
+        <h4>Component 3 · 聆听评估 Appraising</h4>
+        <span class="code">9MU0/03</span>
+        <span class="pct">40% · 100分</span>
+      </div>
+      <div class="component-meta"><span>笔试考核 · <b>2 小时 10 分钟</b></span><span>内容方向：<b>音乐元素、语境与语言的知识运用</b></span></div>
+      <ul>
+        <li>考查对音乐元素、创作语境与音乐语言的知识与理解</li>
+        <li>知识运用覆盖<strong>六大学习领域</strong>，每个领域各对应两部指定作品（"Popular Music and Jazz"领域为三部）：
+          <ul class="nested">
+            <li>声乐作品 Vocal Music</li>
+            <li>器乐作品 Instrumental Music</li>
+            <li>电影音乐 Music for Film</li>
+            <li>流行音乐与爵士乐 Popular Music and Jazz</li>
+            <li>音乐融合 Fusions</li>
+            <li>新方向 New Directions</li>
+          </ul>
+        </li>
+        <li>同时考查将已学知识应用于<strong>陌生作品</strong>分析的能力</li>
+      </ul>
+    </div>
+
+    <h3 class="sub-title"><span class="bar"></span>四大评估维度（AO1–AO4）</h3>
+    <p class="body-text">评分标准与 A-Level 艺术设计类课程逻辑一致，分为四个维度，同时对应上述三大考核模块：</p>
+    <div class="ao-grid">
+      <div class="ao-card"><div class="tag">AO1 · 30%</div><p>通过表演诠释音乐理念，具备技术和表达控制力，并理解风格与背景</p></div>
+      <div class="ao-card"><div class="tag">AO2 · 30%</div><p>通过作曲技法、音乐创作表达方式与连贯性来创作和发展音乐理念</p></div>
+      <div class="ao-card"><div class="tag">AO3 · 10%</div><p>音乐理论知识在作品创作中的运用</p></div>
+      <div class="ao-card"><div class="tag">AO4 · 30%</div><p>运用音乐理论知识对音乐作品进行分析及评价</p></div>
+    </div>
+
+    <div class="note-box"><strong>申请提示：</strong>若目标是英国音乐本科（如英国皇家音乐学院），通常要求 A-Level Music 成绩达到 <strong>B 以上</strong>（外加 audition）；若申请牛津、剑桥等综合性大学的音乐系，则通常需要 <strong>A 及以上</strong>的成绩，同时另外两门科目成绩也需达标。</div>
+  </section>
+
+  <!-- Cambridge 详解 -->
+  <section class="block" id="cambridge">
+    <span class="section-tag">SECTION 04</span>
+    <h2 class="section-title">Cambridge International A-Level Music（9483）详解</h2>
+    <p class="section-lead">全体考生必修 Paper 1 + Component 2；完整 A-Level 考生还需从 Component 3/4/5 中<strong>任选两项</strong>。三个可选项各占 A-Level 的 25%。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>考点</th><th>代码</th><th>内容</th><th>要求</th><th>比重</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>聆听<br>Listening</strong></td>
+            <td class="nowrap-col">Paper 1</td>
+            <td>三部分：<strong>A. 作曲技法与表演实践</strong>——针对巴洛克时期指定作品与陌生作品的听辨分析<br><strong>B. 理解音乐</strong>——音乐要素、语汇的知识运用<br><strong>C. 音乐关联</strong>——超出指定作品范围的体裁风格综合运用（三选一作答）</td>
+            <td>笔试 <strong>2 小时</strong>，满分 100 分（Section A 35分、Section C 30分等）<br>外部评估</td>
+            <td class="grade-a">AS的60%<br>A-Level的30%</td>
+          </tr>
+          <tr>
+            <td><strong>演奏与作曲<br>Practical Music</strong></td>
+            <td class="nowrap-col">Component 2</td>
+            <td><strong>演奏</strong>：自选风格曲目组成 6–10 分钟节目单，独奏或合奏<br><strong>作曲</strong>：两首风格对比的原创作品，任何音乐传统（西方/非西方）均可</td>
+            <td>Coursework，满分 100 分（演奏 60 分 + 作曲 40 分）<br>教师评估，Cambridge 复核</td>
+            <td class="grade-a">AS的40%<br>A-Level的20%</td>
+          </tr>
+          <tr>
+            <td><strong>延伸演奏<br>Extended Performance</strong></td>
+            <td class="nowrap-col">Component 3</td>
+            <td>围绕<strong>单一乐器或声乐方向</strong>展开的演奏，可以是一首完整作品，或由主题/风格/用途关联起来的多首作品</td>
+            <td>Coursework，<strong>15–20分钟</strong>演奏 + <strong>1000–1500字</strong>研究报告，满分100分<br>外部评估</td>
+            <td class="grade-a">A-Level的25%<br>（三选二）</td>
+          </tr>
+          <tr>
+            <td><strong>延伸作曲<br>Extended Composition</strong></td>
+            <td class="nowrap-col">Component 4</td>
+            <td>任何音乐传统下的<strong>单一原创作品</strong>创作，可包含多个部分/乐章</td>
+            <td>Coursework，<strong>6–8分钟</strong>作品（记谱或详细创作说明）+ <strong>1000–1500字</strong>研究报告，满分100分<br>外部评估</td>
+            <td class="grade-a">A-Level的25%<br>（三选二）</td>
+          </tr>
+          <tr>
+            <td><strong>音乐研究<br>Investigating Music</strong></td>
+            <td class="nowrap-col">Component 5</td>
+            <td>针对<strong>情境化聆听内容</strong>展开的独立学术研究，选题须提前提交 proposal 交由 Cambridge 审核后方可开展</td>
+            <td>Coursework，<strong>2500–3000字</strong>论文（题目须以问题形式呈现）+ 最多<strong>500字</strong>反思陈述，满分100分<br>外部评估</td>
+            <td class="grade-a">A-Level的25%<br>（三选二）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note-box"><strong>报考路径：</strong>AS Level 只需完成 Paper 1 + Component 2（即可获得 a–e 等级）；完整 A-Level 在此基础上，从 Component 3、4、5 中任选两项完成（等级 A*–E）。也可先考 AS，第二年再补齐两项延伸课程升级为完整 A-Level。</div>
+
+    <h3 class="sub-title"><span class="bar"></span>各板块备考知识点提示</h3>
+
+    <div class="focus-card">
+      <div class="focus-head"><h4>Paper 1 · 乐理语汇基础</h4><span class="pct">对应 Listening</span></div>
+      <p>Section A、B 都需要扎实的乐理基础作支撑：音程、和弦、节奏节拍、调性分析、常见音乐术语符号，是听辨与分析作答的通用语言，建议每天安排固定时间做专项练习，配合真题巩固知识点。</p>
+    </div>
+
+    <div class="focus-card">
+      <div class="focus-head"><h4>Paper 1 · 作品听辨与分析积累</h4><span class="pct">对应 Listening</span></div>
+      <p>Section A 聚焦当年指定的历史时期作品（如巴洛克），Section C 则要求超出指定作品范围的体裁风格综合运用——建议按官方每年公布的 Set Works 精读，同时广泛涉猎不同时期、不同风格的作品，训练结合曲式结构、配器手法分析作品如何为情感表达服务，而不是停留在表面描述。</p>
+    </div>
+
+    <div class="focus-card">
+      <div class="focus-head"><h4>Paper 1 · 听觉训练</h4><span class="pct">对应 Listening</span></div>
+      <p>和声音程、柱式和弦（尤其大小三和弦的原位及转位）、节奏与旋律听写，是 Section A 听辨作答的基本功，需要长期积累、无法临时抱佛脚，建议每天固定安排听辨训练时间，从简单节奏开始逐步提升难度。</p>
+    </div>
+
+    <div class="focus-card">
+      <div class="focus-head"><h4>Component 2 / 3 · 演奏曲目准备</h4><span class="pct">对应 Practical Music / Extended Performance</span></div>
+      <p>选曲需发挥自身优势，是提分关键——例如声乐方向可搭配歌剧咏叹调和艺术歌曲；风格上建议准备有一定对比度的曲目组合。评审更看重音准、节奏与音乐表现力，情感饱满、音色干净的演奏，通常比追求"零失误"但缺乏感情的炫技表演得分更高。</p>
+    </div>
+  </section>
+
+  <!-- 对比 -->
+  <section class="block" id="compare">
+    <span class="section-tag">SECTION 05</span>
+    <h2 class="section-title">两大考试局核心差异对比</h2>
+    <p class="section-lead">同样考核演奏、作曲、评估三大方向，但具体的权重分配与呈现形式有明显区别。</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>维度</th><th class="col-edexcel">Pearson Edexcel（9MU0）</th><th class="col-cambridge">Cambridge International（9483）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>课程结构</td><td class="col-edexcel">三个模块均必修，无选择空间</td><td class="col-cambridge">Paper1+Component2必修，Component3/4/5<strong>三选二</strong></td></tr>
+          <tr><td>考核形式占比</td><td class="col-edexcel">Coursework 60% + 笔试 40%</td><td class="col-cambridge">Coursework 70%（20%+50%）+ 笔试 30%</td></tr>
+          <tr><td>笔试比重与时长</td><td class="col-edexcel">40%，2小时10分钟</td><td class="col-cambridge">30%，2小时</td></tr>
+          <tr><td>书面研究报告要求</td><td class="col-edexcel">无独立研究报告要求</td><td class="col-cambridge">视选课而定：最多需完成一篇<strong>2500–3000字</strong>论文 + 两篇<strong>1000–1500字</strong>报告</td></tr>
+          <tr><td>核心难点</td><td class="col-edexcel">六大学习领域、18部指定作品的记忆与分析</td><td class="col-cambridge">独立选题的学术研究写作能力（尤其 Investigating Music）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="body-text">演奏和作曲部分两家考试局都是通过 coursework（平时作业式考核）来评估的：表演考查对作品的理解、技术和表现力的控制、诠释书面音乐的能力，以及表演的整体质量；作曲考查原创性、流畅性与连贯性、伴奏质量和所用音乐元素的多样性。Edexcel 的笔试统一在课程结束时完成，考查对固定作品与陌生作品的分析理解；Cambridge 的 Paper 1 笔试同样在课程结束时进行，但权重更低，更多考核分散在两年制的 coursework 中逐步累积完成。</p>
+
+    <div class="verdict-box">
+      <div class="verdict-head">
+        <span class="verdict-badge">结论</span>
+        <h4>综合来看，Cambridge（9483）的备考难度更高</h4>
+      </div>
+      <ul>
+        <li><strong>学术写作负担明显更重。</strong>即使选择偏实践的 Extended Performance / Extended Composition，也必须各自搭配 1000–1500 字研究报告；若选择 Investigating Music，还需独立完成一篇 2500–3000 字研究论文。两年制课程里持续的高强度学术写作，是 Edexcel 演奏、作曲模块完全没有的要求。</li>
+        <li><strong>Coursework 占比更高、周期更长，难以临阵突击。</strong>Cambridge 仅 30% 来自单场笔试，其余 70% 分散在两年 coursework 中逐步完成，对学生的自我管理和持续投入要求更高；Edexcel 笔试占比更高（40%），备考策略上更容易通过考前集中复习拿分。</li>
+        <li><strong>选题独立性带来更高不确定性。</strong>尤其 Investigating Music 要求学生自主提出研究选题（需提交 proposal 交由 Cambridge 审核），没有像 Edexcel 那样固定的 18 部指定作品可依托，研究深度完全取决于学生自身的音乐视野与独立研究能力。</li>
+        <li><strong>三选二的灵活性也是双刃剑。</strong>虽然可以扬长避短，但 Component 3/4/5 三者的难度、评分标准、篇幅要求各不相同，选课决策本身也需要更审慎的判断；Edexcel 三个模块内容和形式逐年基本稳定，备考路径更明确。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BTEC -->
+  <section class="block" id="btec">
+    <span class="section-tag">SECTION 06</span>
+    <h2 class="section-title">Pearson BTEC International Level 3 音乐资格体系</h2>
+    <p class="section-lead">除了 A-Level 这条学术路线，Pearson 还提供面向职业方向的音乐 / 音乐制作资格，按学习时长（GLH）分为四档，可单独或与其他 A-Level / BTEC 科目组合修读。</p>
+
+    <div class="btec-list">
+      <div class="btec-row">
+        <div class="btec-glh"><div class="n">360</div><div class="u">GLH</div><div class="eq">≈ 1门国际A Level</div></div>
+        <div class="btec-body">
+          <h4>Subsidiary Diploma in Music or Music Production</h4>
+          <p>面向希望在其他学科方向之外，兼修了解音乐产业的学习者；可与其他 BTEC L3 或国际 A Level 组合，服务于不限于音乐方向的升学。</p>
+        </div>
+      </div>
+      <div class="btec-row">
+        <div class="btec-glh"><div class="n">510</div><div class="u">GLH</div><div class="eq">≈ 1.5门国际A Level</div></div>
+        <div class="btec-body">
+          <h4>Foundation Diploma in Music or Music Production</h4>
+          <p>可作为一年全日制课程独立修读，也可与另一互补或对照学科组成两年全日制学习计划；作为组合的一部分时支持升学。</p>
+        </div>
+      </div>
+      <div class="btec-row">
+        <div class="btec-glh"><div class="n">720</div><div class="u">GLH</div><div class="eq">≈ 2门国际A Level</div></div>
+        <div class="btec-body">
+          <h4>Diploma in Music or Music Production</h4>
+          <p>作为两年全日制学习计划中的主修部分，与另一互补或对照学科搭配；作为组合的一部分时支持升学。</p>
+        </div>
+      </div>
+      <div class="btec-row">
+        <div class="btec-glh"><div class="n">1080</div><div class="u">GLH</div><div class="eq">≈ 3门国际A Level</div></div>
+        <div class="btec-body">
+          <h4>Extended Diploma in Music or Music Production</h4>
+          <p>作为两年全日制学习的主体课程，独立支持升学，无需搭配其他学科。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 适合人群 -->
+  <section class="block" id="fit">
+    <span class="section-tag">SECTION 07</span>
+    <h2 class="section-title">A-Level Music 适合什么样的学生</h2>
+    <p class="section-lead">这门课学术性强、投入要求高，判断是否适合比盲目跟风更重要。</p>
+
+    <div class="fit-grid">
+      <div class="fit-card">
+        <div class="num-badge">1</div>
+        <p>有志于申请欧美大学音乐专业本科的学生。A-Level Music 不仅是申请时的加分项，也能提前熟悉国外音乐学院的教学风格，无缝衔接到更专业的音乐学习中去。</p>
+      </div>
+      <div class="fit-card">
+        <div class="num-badge">2</div>
+        <p>不光热衷于演奏乐器，同时也对音乐背后的理论、历史充满好奇心的学生——这门课的学术深度会是很大的加分项，而非负担。</p>
+      </div>
+      <div class="fit-card">
+        <div class="num-badge">3</div>
+        <p>音乐涉猎广泛、热衷于探索不同时代/地域/风格音乐作品，未来想成为具备广阔视野的音乐学者的学生。</p>
+      </div>
+    </div>
+
+    <div class="note-box">音乐学科兼具数理与人文、艺术与心理等内容。即便目标不是音乐专业，选择一门高专业度的音乐课，仍会对未来的学术素养提供很大帮助。</div>
+  </section>
+
+  <!-- 备考策略 -->
+  <section class="block" id="strategy">
+    <span class="section-tag">SECTION 08</span>
+    <h2 class="section-title">备考策略与资源建议</h2>
+    <p class="section-lead">理论与实践缺一不可，方法比刷题量更重要。</p>
+
+    <div class="strategy-grid">
+      <div class="strategy-card">
+        <h4>理论实践两手抓</h4>
+        <p>不要只重视演奏而忽略理论分析，这两部分都是提分关键。A-Level 音乐是一门学术性很强的科目，扎实的理论是理解作品、进行创作和演奏的基础。</p>
+      </div>
+      <div class="strategy-card">
+        <h4>高效利用真题</h4>
+        <p>Cambridge Paper 1 Listening 真题重复率不高，不建议盲目刷题。更有效的方法是总结不同题型的答题规律，建立错题本，每周复盘，效率会明显更高。</p>
+      </div>
+      <div class="strategy-card">
+        <h4>听辨与作品分析长期积累</h4>
+        <p>Paper 1 考查的听辨能力和对指定作品的深入理解无法临时抱佛脚，需要长期坚持训练：定期精听指定作品、练习旋律与和声听写，逐步提升对陌生作品的分析迁移能力。</p>
+      </div>
+      <div class="strategy-card">
+        <h4>提前规划三选二与研究写作</h4>
+        <p>Component 3/4/5 的研究报告（1000–1500字或2500–3000字）不是考前能速成的任务，建议尽早确定选课组合、提前规划选题和研究进度，避免堆积到截止日期前突击赶工。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>新航道成都</strong> · 国际课程资料整理 · Pearson Edexcel 官方大纲要点摘录，Cambridge 备考结构综合整理
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section.block');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  function onScroll(){
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 100;
+      if(window.scrollY >= top){ current = sec.getAttribute('id'); }
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.target === current);
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+</script>
+
+</body>
+</html>
