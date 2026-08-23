@@ -28,7 +28,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--i
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 .hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(30px,5vw,52px);font-weight:900;line-height:1.2;margin-bottom:18px;letter-spacing:-1px;}
 .hero h1 em{color:var(--gold);font-style:normal;}
-.hero-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:min(700px,90%);line-height:1.8;}
+.hero-desc{font-size:clamp(.75rem,1.15vw,1rem);color:rgba(255,255,255,.55);white-space:nowrap;line-height:1.8;}
 
 /* ── LAYOUT ── */
 .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
@@ -117,7 +117,7 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--i
 .ketpet .gc-tag{color:#fff;}
 .alevel-music .gc-stripe, .alevel-music .gc-tag{background:#0f766e;}
 .alevel-music .gc-tag{color:#fff;}
-.apbio .gc-stripe, .apbio .gc-tag{background:#2e7d32;}
+.apbio .gc-stripe, .apbio .gc-tag{background:#c2661a;}
 .apbio .gc-tag{color:#fff;}
 
 /* ── FOOTER ── */
@@ -138,6 +138,7 @@ footer span{color:var(--gold);}
 }
 @media(max-width:600px){
   .hero{padding:56px 24px 44px;}
+  .hero-desc{white-space:normal;}
   .wrap{padding:0 20px;}
   .card-grid{grid-template-columns:1fr;}
   .grid-section{padding:44px 0 56px;}
