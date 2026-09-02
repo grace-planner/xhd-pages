@@ -204,7 +204,7 @@ input[type=number].md { width: 110px; }
           <div><label>课时数（小时）</label><input type="number" class="md" id="c11-hours" value="60" min="1" max="2000" step="5" oninput="updateSuppTotals()"></div>
           <div><label>折扣 %</label><input type="number" class="sm" id="c11-disc" value="80" min="70" max="100" step="0.5" oninput="updateSuppTotals()"></div>
         </div>
-        <div class="note">680元/小时原价（IG与A-Level统一价格）。折扣规则参考：低于100h最低8折；100-150h最低78折；高于150h最低75折。</div>
+        <div class="note">680元/小时原价（IG与A-Level统一价格）。折扣规则参考：低于100h最低8折；100-150h最低78折；150-200h最低75折；高于200小时最低8折。</div>
       </div>
     </div>
   </div>
@@ -396,7 +396,7 @@ document.querySelectorAll('[data-g="classtype"]').forEach(el => el.addEventListe
     const rates = {'AL1对2':520,'AL1对3':460,'AL3-6人班':420};
     const r = rates[selectedClassType];
     document.getElementById('norm-head').textContent = `② ${selectedClassType} 课时与折扣`;
-    document.getElementById('norm-hint').textContent = `原价${r}元/小时。折扣规则：低于100h最低8折；100-150h最低78折；高于150h最低75折。`;
+    document.getElementById('norm-hint').textContent = `原价${r}元/小时。折扣规则：低于100h最低8折；100-150h最低78折；150-200h最低75折；高于200小时最低8折。`;
   }
   clearResult();
 }));
