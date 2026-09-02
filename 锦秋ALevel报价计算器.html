@@ -105,7 +105,7 @@ input[type=number].md { width: 110px; }
   </div>
   <div class="mode-tab" id="tab-custom" onclick="switchMode('custom')">
     <div class="mt-title">🔧 定制课时</div>
-    <div class="mt-sub">1对1 / 一站式 / 其他班型</div>
+    <div class="mt-sub">1对1 / 其他班型</div>
   </div>
 </div>
 
@@ -188,7 +188,6 @@ input[type=number].md { width: 110px; }
     <div class="card-body">
       <div class="opts cols2" id="grp-classtype">
         <div class="opt" data-g="classtype" data-v="AL1对1">1对1（IG/A-Level）<small>680元/小时</small></div>
-        <div class="opt" data-g="classtype" data-v="一站式">一站式<small>满200h起8折</small></div>
         <div class="opt" data-g="classtype" data-v="AL1对2">AL 1对2<small>520元/小时</small></div>
         <div class="opt" data-g="classtype" data-v="AL1对3">AL 1对3<small>460元/小时</small></div>
         <div class="opt" data-g="classtype" data-v="AL3-6人班">AL 3-6人班<small>420元/小时</small></div>
@@ -206,20 +205,6 @@ input[type=number].md { width: 110px; }
           <div><label>折扣 %</label><input type="number" class="sm" id="c11-disc" value="80" min="70" max="100" step="0.5" oninput="updateSuppTotals()"></div>
         </div>
         <div class="note">680元/小时原价（IG与A-Level统一价格）。折扣规则参考：低于100h最低8折；100-150h最低78折；高于150h最低75折。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 一站式 -->
-  <div id="section-yzs" class="hidden">
-    <div class="card">
-      <div class="card-head">② 一站式课时配置</div>
-      <div class="card-body">
-        <div class="note" style="margin-top:0;margin-bottom:14px">A-Level 1对1原价680元/小时，满200小时起统一8折，额外赠送A-level中文班课。</div>
-        <div class="inp-row">
-          <div><label>总课时数（小时，最低200h）</label><input type="number" class="md" id="yzs-h" value="200" min="0" max="2000" step="10" oninput="updateSuppTotals()"></div>
-        </div>
-        <div class="note" id="yzs-hint">备注：锦秋一站式必须分期付款（大于25万分三期进行，小于25万分2期进行）。</div>
       </div>
     </div>
   </div>
@@ -329,15 +314,15 @@ input[type=number].md { width: 110px; }
     <!-- 留学预备班课 -->
     <div class="supp-item">
       <div class="supp-head" onclick="toggleSupp('s-lxclass')">
-        <div><div class="supp-title">留学预备班课</div><div class="supp-price-hint">二级/三级各10,500元</div></div>
+        <div><div class="supp-title">留学预备班课</div><div class="supp-price-hint">二级/三级各12,800元</div></div>
         <button class="toggle-btn" id="btn-s-lxclass">＋</button>
       </div>
       <div class="supp-body" id="s-lxclass">
         <div style="margin-bottom:8px">
           <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">选择级别（可多选）</label>
           <div class="opts cols2" id="grp-lxclass">
-            <div class="opt" data-g="lxclass" data-v="二级" data-price="10500" onclick="toggleClassOpt(this)">留学预备二级<small>10,500元</small></div>
-            <div class="opt" data-g="lxclass" data-v="三级" data-price="10500" onclick="toggleClassOpt(this)">留学预备三级<small>10,500元</small></div>
+            <div class="opt" data-g="lxclass" data-v="二级" data-price="12800" onclick="toggleClassOpt(this)">留学预备二级<small>12,800元</small></div>
+            <div class="opt" data-g="lxclass" data-v="三级" data-price="12800" onclick="toggleClassOpt(this)">留学预备三级<small>12,800元</small></div>
           </div>
         </div>
         <div class="inp-row" style="margin-top:8px;margin-bottom:0">
@@ -377,7 +362,7 @@ function switchMode(mode) {
     pkgs = [];
   }
   if (mode === 'pkg') {
-    ['section-11','section-yzs','section-norm'].forEach(id => document.getElementById(id).classList.add('hidden'));
+    ['section-11','section-norm'].forEach(id => document.getElementById(id).classList.add('hidden'));
     document.querySelectorAll('[data-g="classtype"]').forEach(o => o.classList.remove('selected'));
     selectedClassType = '';
   }
@@ -405,7 +390,6 @@ document.querySelectorAll('[data-g="classtype"]').forEach(el => el.addEventListe
   el.classList.add('selected');
   selectedClassType = el.dataset.v;
   document.getElementById('section-11').classList.toggle('hidden', selectedClassType!=='AL1对1');
-  document.getElementById('section-yzs').classList.toggle('hidden', selectedClassType!=='一站式');
   const isNorm = ['AL1对2','AL1对3','AL3-6人班'].includes(selectedClassType);
   document.getElementById('section-norm').classList.toggle('hidden', !isNorm);
   if (isNorm) {
@@ -543,16 +527,6 @@ function calculate() {
       mainPrice = mainOrig * d / 100;
       mainLines.push({label:`1对1（${h}h × 680元，${d}%）`, val:mainPrice});
 
-    } else if (selectedClassType === '一站式') {
-      const h = Math.max(0, parseFloat(document.getElementById('yzs-h').value)||0);
-      const discRate = 80;
-      mainOrig = h * 680;
-      mainPrice = mainOrig * discRate / 100;
-      mainLines.push({label:`一站式 1对1 ${h}h × 680元（${discRate}%）`, val:mainPrice});
-      if (h < 200) extraNotes.push('⚠️ 一站式最低200小时起，请核实课时数');
-      extraNotes.push('🎁 额外优惠：赠送A-level中文班课');
-      extraNotes.push('备注：锦秋一站式必须分期付款（大于25万分三期进行，小于25万分2期进行）');
-
     } else {
       const rates = {'AL1对2':520,'AL1对3':460,'AL3-6人班':420};
       const r = rates[selectedClassType];
@@ -640,7 +614,7 @@ function resetAll() {
   pkgs = [];
   selectedClassType = '';
   document.querySelectorAll('.opt,.pkg-card').forEach(o => o.classList.remove('selected'));
-  ['section-11','section-yzs','section-norm'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  ['section-11','section-norm'].forEach(id => document.getElementById(id).classList.add('hidden'));
   ['s-ielts11','s-ielts12','s-ieltsclass','s-lx11','s-lx12','s-lxclass'].forEach(id => {
     document.getElementById(id).classList.remove('open');
     document.getElementById('btn-'+id).textContent = '＋';
