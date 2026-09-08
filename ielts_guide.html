@@ -44,6 +44,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--i
 .nav-btn{padding:16px 26px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;user-select:none;}
 .nav-btn:hover{color:rgba(255,255,255,.75);}
 .nav-btn.on{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-tool{color:var(--gold);text-decoration:none;background:rgba(201,152,42,.12);}
+.nav-tool:hover{color:var(--gold-lt);background:rgba(201,152,42,.2);}
 
 .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
 section{padding:80px 0;border-bottom:1px solid var(--border);}
@@ -198,6 +200,7 @@ section:last-of-type{border-bottom:none;}
     <div class="nav-btn"     onclick="go('sections')">各科题型</div>
     <div class="nav-btn"     onclick="go('scores')">分数规划</div>
     <div class="nav-btn"     onclick="go('compare')">BC vs IDP</div>
+    <a class="nav-btn nav-tool" href="ielts_score_diagnosis.html">分数段技能诊断 →</a>
   </div>
 </nav>
 

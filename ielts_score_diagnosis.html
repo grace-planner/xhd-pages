@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雅思分数段技能诊断</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0D2744;
+  --paper:  #f5f2eb;
+  --white:  #ffffff;
+  --gold:   #c9982a;
+  --gold-lt:#f0d98a;
+  --red:    #b5301f;
+  --muted:  #7a7a8a;
+  --border: #ddd8cc;
+  --L:  #1a6fa8;   /* 听力 蓝 */
+  --R:  #145a32;   /* 阅读 绿 */
+  --W:  #6c3483;   /* 写作 紫 */
+  --S:  #b7950b;   /* 口语 金棕 */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:17px;scroll-behavior:smooth;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--ink);line-height:1.85;}
+
+.hero{background:var(--ink);color:#fff;padding:90px 56px 72px;position:relative;overflow:hidden;}
+.hero::after{content:'4R';position:absolute;right:-20px;top:-10px;font-family:'Noto Serif SC',serif;font-size:min(26vw,280px);font-weight:900;color:rgba(255,255,255,.04);letter-spacing:-14px;pointer-events:none;line-height:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--red);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:5px 14px;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold-lt);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero h1{font-family:'Noto Serif SC',serif;font-size:clamp(32px,5.5vw,58px);font-weight:900;line-height:1.18;margin-bottom:20px;letter-spacing:-1px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,.55);max-width:min(700px,90%);margin-bottom:48px;line-height:1.8;}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:36px;border-top:1px solid rgba(255,255,255,.1);}
+.stat-n{font-family:'Noto Serif SC',serif;font-size:2.4rem;font-weight:700;color:var(--gold);line-height:1;}
+.stat-l{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:1.5px;margin-top:6px;}
+
+.nav-bar{position:sticky;top:0;z-index:200;background:var(--ink);border-bottom:1px solid rgba(255,255,255,.07);}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;overflow-x:auto;scrollbar-width:none;}
+.nav-inner::-webkit-scrollbar{display:none;}
+.nav-left{display:flex;}
+.nav-btn{padding:16px 26px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap;cursor:pointer;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;user-select:none;}
+.nav-btn:hover{color:rgba(255,255,255,.75);}
+.nav-btn.on{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-back{padding:16px 26px;font-size:.7rem;color:rgba(255,255,255,.45);text-decoration:none;white-space:nowrap;border-left:1px solid rgba(255,255,255,.1);}
+.nav-back:hover{color:var(--gold-lt);}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+section{padding:80px 0;border-bottom:1px solid var(--border);}
+section:last-of-type{border-bottom:none;}
+.sec-eyebrow{font-size:.7rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.sec-title{font-family:'Noto Serif SC',serif;font-size:clamp(24px,3.5vw,40px);font-weight:700;margin-bottom:14px;line-height:1.25;}
+.sec-sub{font-size:.95rem;color:var(--muted);max-width:680px;margin-bottom:48px;line-height:1.8;}
+
+.alert-bar{background:#fff8e6;border:1px solid #e8c84a;border-left:5px solid #c9982a;padding:18px 24px;margin-bottom:28px;font-size:.88rem;color:#555;line-height:1.85;}
+.alert-bar strong{color:#8a6200;}
+
+.subj{margin-bottom:56px;}
+.subj-head{display:flex;align-items:center;gap:20px;padding:20px 28px;margin-bottom:28px;}
+.subj-head.L{background:#e8f0f8;border-left:5px solid var(--L);}
+.subj-head.R{background:#eaf5ee;border-left:5px solid var(--R);}
+.subj-head.W{background:#f5eef8;border-left:5px solid var(--W);}
+.subj-head.S{background:#fdf6e3;border-left:5px solid var(--S);}
+.subj-icon{font-size:2rem;line-height:1;}
+.subj-title{font-family:'Noto Serif SC',serif;font-size:1.35rem;font-weight:700;}
+.subj-meta{font-size:.82rem;color:var(--muted);margin-top:3px;}
+
+.tc{background:var(--white);border:1px solid var(--border);}
+.tc-top{display:flex;justify-content:space-between;align-items:flex-start;padding:26px 28px 4px;gap:12px;flex-wrap:wrap;}
+.tc-name{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:700;}
+.badge{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;}
+.b-l{background:#e8f0f8;color:#1a6fa8;}
+.b-r{background:#eaf5ee;color:#145a32;}
+.b-w{background:#f5eef8;color:#6c3483;}
+.b-s{background:#fdf6e3;color:#7a5800;}
+
+.diag-block{padding:20px 28px 4px;}
+.diag-label{font-size:.78rem;font-weight:700;letter-spacing:.5px;color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.diag-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:6px;counter-reset:item;}
+.diag-list li{position:relative;padding-left:30px;font-size:.9rem;color:#444;line-height:1.75;}
+.diag-list li::before{counter-increment:item;content:counter(item);position:absolute;left:0;top:1px;width:19px;height:19px;font-size:.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;border-radius:50%;}
+.diag-list.problem li::before{background:#fdecea;color:#b5301f;}
+.diag-list.target li::before{background:#eaf5ee;color:#145a32;}
+
+.mini-tbl-wrap{margin:20px 28px 22px;}
+.mini-tbl{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border);}
+.mini-tbl th{background:var(--ink);color:white;padding:11px 18px;text-align:left;font-size:.7rem;letter-spacing:1px;font-weight:700;}
+.mini-tbl td{padding:12px 18px;border-bottom:1px solid var(--border);font-size:.85rem;color:#444;}
+.mini-tbl tr:last-child td{border-bottom:none;}
+.mini-tbl td b{color:var(--gold);}
+
+.sol-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:22px 28px;border:1px solid var(--border);}
+.sol-col{padding:20px 22px;background:#faf8f2;}
+.sol-col.teacher{border-right:1px solid var(--border);}
+.sol-head{font-size:.78rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;color:var(--ink);}
+.sol-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.sol-col li{font-size:.85rem;color:#444;line-height:1.75;padding-left:17px;position:relative;}
+.sol-col li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-weight:700;}
+
+.strategy-wrap{margin:0 28px 26px;border:1px solid var(--border);background:#faf8f2;padding:20px 22px;}
+.strategy-wrap .sol-head{margin-bottom:12px;}
+.strategy-wrap ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.strategy-wrap li{font-size:.88rem;color:#444;line-height:1.8;padding-left:17px;position:relative;}
+.strategy-wrap li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-weight:700;}
+
+.summary-box{margin:0 28px 28px;background:var(--ink);color:rgba(255,255,255,.85);padding:22px 26px;font-size:.88rem;line-height:1.85;}
+.summary-box .sum-title{font-family:'Noto Serif SC',serif;font-weight:700;color:var(--gold);font-size:.95rem;margin-bottom:10px;}
+.summary-box ul{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:8px;}
+.summary-box li{padding-left:16px;position:relative;font-size:.85rem;color:rgba(255,255,255,.72);}
+.summary-box li::before{content:'—';position:absolute;left:0;color:var(--gold);}
+
+.type-stack{display:flex;flex-direction:column;gap:24px;}
+
+.cta-box{background:var(--white);border:1px solid var(--border);border-left:5px solid var(--gold);padding:26px 30px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.cta-box p{font-size:.9rem;color:#444;max-width:640px;line-height:1.8;}
+.cta-box strong{color:var(--ink);}
+.cta-btn{background:var(--ink);color:var(--gold);padding:12px 26px;font-size:.8rem;font-weight:700;letter-spacing:1px;text-decoration:none;white-space:nowrap;transition:background .2s;}
+.cta-btn:hover{background:#16385e;}
+
+footer a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:860px){
+  .hero{padding:60px 24px 48px;}
+  .wrap{padding:0 20px;}
+  .sol-grid{grid-template-columns:1fr;}
+  .sol-col.teacher{border-right:none;border-bottom:1px solid var(--border);}
+  .hero-stats{gap:24px;}
+  section{padding:44px 0;}
+  .nav-back{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">顾问咨询专用 · 4R个性化标准化手册</div>
+  <h1>雅思分数段 <em>技能诊断</em></h1>
+  <p class="hero-desc">问题出在哪、目标是什么、我们怎么帮你提升</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-n">2</div>
+      <div class="stat-l">核心分数段区间</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">8</div>
+      <div class="stat-l">听说读写诊断模块</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">2</div>
+      <div class="stat-l">教学角色协同（老师+助教）</div>
+    </div>
+    <div class="stat">
+      <div class="stat-n">1</div>
+      <div class="stat-l">页面讲清问题与方案</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <div class="nav-btn on" onclick="go('band56')">5–6分段诊断</div>
+      <div class="nav-btn" onclick="go('band65')">6–6.5分段诊断</div>
+    </div>
+    <a class="nav-back" href="ielts_guide.html">← 返回雅思考试介绍</a>
+  </div>
+</nav>
+
+<!-- §1 5-6分段 -->
+<section id="band56">
+<div class="wrap">
+  <div class="sec-eyebrow">Score Band 01</div>
+  <h2 class="sec-title">雅思 5 分 → 6 分技能障碍点诊断</h2>
+  <p class="sec-sub">这个分数段的学员往往"卡"在同一批问题上：思路不足、词汇单一、语法不稳、速度不够。下面按听说读写拆解典型问题、6分目标，以及我们老师和助教各自会做什么来帮学员突破。</p>
+
+  <div class="alert-bar">
+    💡 这个分数段的核心不是"学员不努力"，而是"没有正确的方法+没有足够的反馈"。老师负责搭思路、给方法、纠语法；助教负责陪练、监督、重复巩固——两者配合，才能让学员在有限课时内真正提分。
+  </div>
+
+  <!-- 口语 -->
+  <div class="subj">
+    <div class="subj-head S">
+      <span class="subj-icon">🎤</span>
+      <div>
+        <div class="subj-title">口语（Speaking）</div>
+        <div class="subj-meta">目标：5分 → 6分</div>
+      </div>
+    </div>
+    <div class="type-stack">
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">诊断与提升方案</div>
+          <span class="badge b-s">5分学员典型问题</span>
+        </div>
+        <div class="diag-block">
+          <ul class="diag-list problem">
+            <li>过多的停顿、重复、自我纠正；表达没有逻辑衔接，句子之间过渡很不自然</li>
+            <li>用词太简单，而且单一，没有变化</li>
+            <li>基本没有复杂句型，都是简单句；表达中错误较多，而且容易引起误解</li>
+            <li>对于很多话题没有思路，回答内容过短</li>
+          </ul>
+        </div>
+        <div class="diag-block">
+          <div class="diag-label">🎯 6分目标</div>
+          <ul class="diag-list target">
+            <li>提升流利度，且在句子之间学会衔接词</li>
+            <li>学会同义转换，用词有变换</li>
+            <li>能表达简单的复杂句，且不出错</li>
+            <li>对于常规话题能有思路，知道如何扩展答案</li>
+          </ul>
+        </div>
+        <div class="sol-grid">
+          <div class="sol-col teacher">
+            <div class="sol-head">👨‍🏫 老师课堂重点</div>
+            <ul>
+              <li>课上教授Part1、Part2话题，提供思路和参考答案，学员只需参考老师答案就有内容可说，课下配合助教多练习即可提升流利度</li>
+              <li>提供两项词汇库：话题词汇（6分版/6.5～7分版）用于描述人物、地点、事件；同义替换词汇用于表达批评、表扬、目标、利弊等概念，课上讲解、课下巩固</li>
+              <li>语法6分核心是"准确度"和"复杂度"：老师看到问题就纠错，同时补充6分表达和句式，让学员句型更复杂</li>
+              <li>发音要求"准确""清晰"（6分），有口音概念即可；6.5～7分需具备连读、弱读等Native Speaker特点</li>
+            </ul>
+          </div>
+          <div class="sol-col ta">
+            <div class="sol-head">🧑‍🎓 助教辅导重点</div>
+            <ul>
+              <li>针对Part1-Part2话题和学员对练，帮助多开口，提升流利度</li>
+              <li>参照《话题词汇表》《同义替换词汇表》，提醒学员运用高级词汇</li>
+              <li>及时纠正发音和语法问题，通过反复练习尽力减少错误</li>
+            </ul>
+          </div>
+        </div>
+        <div class="summary-box">
+          <div class="sum-title">总结：口语5分→6分，重点扣住评分标准</div>
+          <ul>
+            <li>流利度：减少停顿、重复和自我纠正，靠助教反复练习</li>
+            <li>词汇量：一定要有复杂词汇和同义替换，需要刻意练习+及时反馈</li>
+            <li>语法：基本不出错，能用少量复杂句型即可</li>
+            <li>答案长度：学会拓展答案长度，满足评分要求</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 听力 -->
+  <div class="subj">
+    <div class="subj-head L">
+      <span class="subj-icon">🎧</span>
+      <div>
+        <div class="subj-title">听力（Listening）</div>
+        <div class="subj-meta">目标：5分 → 6分</div>
+      </div>
+    </div>
+    <div class="type-stack">
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">诊断与提升方案</div>
+          <span class="badge b-l">5分学员典型问题</span>
+        </div>
+        <div class="diag-block">
+          <ul class="diag-list problem">
+            <li>单词听得懂，不会拼写，提笔就错</li>
+            <li>单词看得懂，但听不懂，没法做题</li>
+            <li>裸考学员，有词汇量，但不熟悉听力考察规律，屡屡犯错</li>
+            <li>英中学员基础较好但从不背单词，选择题正确率90%、填空题全错；在校大学生有一定单词量但不熟悉发音，无法做题；基础较好的学员在单复数、大小写等扣分点上屡屡犯错，分数起不来</li>
+          </ul>
+        </div>
+        <div class="diag-block">
+          <div class="diag-label">🎯 6分目标</div>
+          <ul class="diag-list target">
+            <li>保证做对23～26道题（6分），确保Section1、2正确率，尤其单词拼写不出错，做对15题以上</li>
+            <li>Section3-Section4做对8-10题以上</li>
+          </ul>
+        </div>
+        <div class="mini-tbl-wrap">
+          <table class="mini-tbl">
+            <thead><tr><th>听力评分标准</th><th>做对题目数量</th></tr></thead>
+            <tbody>
+              <tr><td>5分</td><td>做对16-19题</td></tr>
+              <tr><td>5.5分</td><td>做对20-22题</td></tr>
+              <tr><td><b>6分</b></td><td><b>做对23-26题</b></td></tr>
+              <tr><td>6.5分</td><td>做对27-29题</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sol-grid">
+          <div class="sol-col teacher">
+            <div class="sol-head">👨‍🏫 老师课堂重点</div>
+            <ul>
+              <li>针对"听得懂但拼写差"的学员，用已知拼写规律讲解未知规律（如用contact讲解intact），效果显著，多名学员听力从5.5提升到7.5</li>
+              <li>针对"看得懂但听不懂"的学员，做雅思真题录音精听写，逐词写出，训练后耳朵也能识别并拼写正确</li>
+              <li>重点讲解Section1-2常见题型（个人信息表格填空、地图题、单选、表格填空），保证前两个Section正确率；少量讲解Section3-4的笔记式填空、多选题</li>
+            </ul>
+          </div>
+          <div class="sol-col ta">
+            <div class="sol-head">🧑‍🎓 助教辅导重点</div>
+            <ul>
+              <li>雅思听力场景词汇的背诵、拼写</li>
+              <li>数字练习、名词单复数等专项练习的监督与任务安排</li>
+              <li>精听听写的监督指导</li>
+            </ul>
+          </div>
+        </div>
+        <div class="summary-box">
+          <div class="sum-title">总结：5分→6分，教学核心是前两个Section</div>
+          <ul>
+            <li>确保学员听得懂题目、写得对单词，尽量不出错</li>
+            <li>对后两个Section讲解场景题型，帮学员尽力多拿分</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 阅读 -->
+  <div class="subj">
+    <div class="subj-head R">
+      <span class="subj-icon">📖</span>
+      <div>
+        <div class="subj-title">阅读（Reading）</div>
+        <div class="subj-meta">目标：5分 → 6分</div>
+      </div>
+    </div>
+    <div class="type-stack">
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">诊断与提升方案</div>
+          <span class="badge b-r">5分学员典型问题</span>
+        </div>
+        <div class="diag-block">
+          <ul class="diag-list problem">
+            <li>单词量太小，题目读不懂</li>
+            <li>速度太慢，题目做不完</li>
+            <li>对于题型特点不熟悉，按传统思维去思考题型</li>
+            <li>根本原因是词汇量小导致题干单词不认识、看不懂题目；语法基础太弱，不清楚填空处在句中的成分，不知道去哪找答案，浪费时间做不完题目</li>
+          </ul>
+        </div>
+        <div class="diag-block">
+          <div class="diag-label">🎯 6分目标</div>
+          <ul class="diag-list target">
+            <li>能在考试时间内完成3篇文章，40个题是重点</li>
+            <li>平时练习中优先解决基础的填空题和必考的判断题，保证这两个题型正确率达到75%以上</li>
+          </ul>
+        </div>
+        <div class="mini-tbl-wrap">
+          <table class="mini-tbl">
+            <thead><tr><th>阅读评分标准</th><th>做对题目数量</th></tr></thead>
+            <tbody>
+              <tr><td>5分</td><td>做对16-19题</td></tr>
+              <tr><td>5.5分</td><td>做对20-22题</td></tr>
+              <tr><td><b>6分</b></td><td><b>做对23-26题</b></td></tr>
+              <tr><td>6.5分</td><td>做对27-29题</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="sol-grid">
+          <div class="sol-col teacher">
+            <div class="sol-head">👨‍🏫 老师课堂重点</div>
+            <ul>
+              <li>讲解长难句型及重点词汇在题干/原文中的成分（主谓宾），补充场景词汇，帮助学员理解复杂题干、选项及对应原文，这是解题的基础</li>
+              <li>讲解各类常规题型的解题步骤与技巧：不同题型先看题还是先看文章；根据不同定位词找到题目在原文中的位置</li>
+              <li>根据学员基础布置课后词汇作业：基础好的用AWL学术词汇表+真词汇，每次课2个list；基础弱的用高中词汇或四级词汇，每次课后背诵30-40面</li>
+            </ul>
+          </div>
+          <div class="sol-col ta">
+            <div class="sol-head">🧑‍🎓 助教辅导重点</div>
+            <ul>
+              <li>词汇辅导，帮助学员记住学术词汇或四级词汇的拼写和意义</li>
+              <li>长难句分析，帮助学员理解作业和练习中的长难句，理解题干和原文</li>
+              <li>通过做题技巧练习，逐步提升做题速度</li>
+            </ul>
+          </div>
+        </div>
+        <div class="summary-box">
+          <div class="sum-title">总结：5分→6分，短期最佳策略是提升词汇量和语法</div>
+          <ul>
+            <li>先保证理解题目和原文，从而保证2篇文章的正确率</li>
+            <li>阅读速度很难短期提升，需要在助教监督下做大量"限时训练"，才有可能提升整体做题速度</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 写作 -->
+  <div class="subj" style="margin-bottom:0;">
+    <div class="subj-head W">
+      <span class="subj-icon">✍️</span>
+      <div>
+        <div class="subj-title">写作（Writing）</div>
+        <div class="subj-meta">目标：5分 → 6分</div>
+      </div>
+    </div>
+    <div class="type-stack">
+      <div class="tc">
+        <div class="tc-top">
+          <div class="tc-name">诊断与提升方案</div>
+          <span class="badge b-w">5分学员典型问题</span>
+        </div>
+        <div class="diag-block">
+          <ul class="diag-list problem">
+            <li>基础弱，词汇量小，用词太简单</li>
+            <li>名词单复数、可数不可数用错、时态错误、双谓语等语法错误</li>
+            <li>没有长难句，且短句子也有错误</li>
+            <li>基础好但对雅思话题不熟悉、考题陌生，也没有专业话题词汇积累：小作文不知道怎么分析数据，或分析无重点、有遗漏；大作文没有话写，或写跑题</li>
+            <li>文章结构不清晰，观点论证不得力，或缺乏案例支撑，无病呻吟</li>
+          </ul>
+        </div>
+        <div class="diag-block">
+          <div class="diag-label">🎯 6分目标</div>
+          <ul class="diag-list target">
+            <li>词汇与句子正确，短句子全对，复杂句子有少量细节问题但不影响理解</li>
+            <li>文章结构清晰，每一段说明一个重点</li>
+          </ul>
+        </div>
+        <div class="sol-grid">
+          <div class="sol-col teacher">
+            <div class="sol-head">👨‍🏫 老师课堂重点</div>
+            <ul>
+              <li>小作文：告诉学员文章分类（线饼柱表）及各类文章抓什么信息，同时补充专业词汇和表达（如顶点的静图表达、趋势的动图表达），每节课讲1～2个点并用作业验证掌握情况</li>
+              <li>大作文：告诉学员议论文结构（如总分总——提出问题-对立观点-反驳-总结），保证每段功能清晰，同时补充不同话题词汇（如教育、环保类）</li>
+              <li>作文6分的关键是语法：针对不同学员的语法错误，通过不断改作文把知道和不知道的问题都纠正过来，不重复犯错，分数就会提升</li>
+            </ul>
+          </div>
+          <div class="sol-col ta">
+            <div class="sol-head">🧑‍🎓 助教辅导重点</div>
+            <ul>
+              <li>督促学员背单词，保证拼写正确</li>
+              <li>辅导学员做翻译，并讲解翻译中学员不理解的语法规则</li>
+            </ul>
+          </div>
+        </div>
+        <div class="summary-box">
+          <div class="sum-title">总结：写作5分→6分，最大的问题是语法</div>
+          <ul>
+            <li>单词不用很难，四级词汇+少量话题词汇即可</li>
+            <li>语法问题唯一的解决办法是不断练习——把学员意识到和没意识到的问题都发掘出来、及时纠正、反复练习</li>
+            <li>老师的指导很重要，但助教大量练习、及时反馈和辅导更重要</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- §2 6-6.5分段 -->
+<section id="band65">
+<div class="wrap">
+  <div class="sec-eyebrow">Score Band 02</div>
+  <h2 class="sec-title">雅思 6 分 → 6.5 分技能障碍点诊断</h2>
+  <p class="sec-sub">这个分数段的学员基础已经不错，问题更多是"细节"和"意识"层面——学术场景词、替换意识、话题深度、语法多样性。下面按听说读写拆解普遍问题和针对性备考策略。</p>
+
+  <div class="alert-bar">
+    💡 6分段学员最容易出现"平台期"——基础错误不多，但也提不上去。这个阶段拼的是精细化打磨：学术词汇的深度、替换的敏感度、话题的广度、语法的复杂度，需要老师针对性纠偏+高强度刻意练习。
+  </div>
+
+  <!-- 听力 -->
+  <div class="subj">
+    <div class="subj-head L">
+      <span class="subj-icon">🎧</span>
+      <div>
+        <div class="subj-title">听力（Listening）</div>
+        <div class="subj-meta">目标：6分 → 6.5分</div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-top">
+        <div class="tc-name">诊断与提升方案</div>
+        <span class="badge b-l">学员普遍问题</span>
+      </div>
+      <div class="diag-block">
+        <ul class="diag-list problem">
+          <li>相较于5分段学员，6分段学员基础场景词掌握更好，而需要的是对学术场景词的记忆</li>
+          <li>听力中部分题型不光要能听懂细节，还需要有一定能力对听力内容进行总结，但这个分数段的学员普遍缺乏这一能力</li>
+        </ul>
+      </div>
+      <div class="strategy-wrap">
+        <div class="sol-head">🎯 备考策略</div>
+        <ul>
+          <li>在保证填空题正确率的基础上，选择题是需要重点解决的题型</li>
+          <li>选择题重点考察定位和替换两项能力</li>
+          <li>平时练习需注意替换的积累以提高正确率，同时养成边听边做笔记的习惯，去练习课上的技巧</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 阅读 -->
+  <div class="subj">
+    <div class="subj-head R">
+      <span class="subj-icon">📖</span>
+      <div>
+        <div class="subj-title">阅读（Reading）</div>
+        <div class="subj-meta">目标：6分 → 6.5分</div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-top">
+        <div class="tc-name">诊断与提升方案</div>
+        <span class="badge b-r">学员普遍问题</span>
+      </div>
+      <div class="diag-block">
+        <ul class="diag-list problem">
+          <li>相较于5分学员，6分学员词汇量表现更好，但对部分一词多义以及学术单词的掌握依然不够</li>
+          <li>6分学员已有分辨替换的能力，但对稍有难度的替换又会识别不出，且缺乏主动寻找替换的意识</li>
+        </ul>
+      </div>
+      <div class="strategy-wrap">
+        <div class="sol-head">🎯 备考策略</div>
+        <ul>
+          <li>关注常见词的学术含义，日常积累单词时要将词典上该单词的所有含义都进行记忆</li>
+          <li>刷题过程中注重替换表达的整理和记录——替换是阅读的核心考点之一，每道题都会考到</li>
+          <li>除基础的填空和判断题之外，必考的配对题题型特点也要掌握好，力争将正确率提升到70%左右</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 口语 -->
+  <div class="subj">
+    <div class="subj-head S">
+      <span class="subj-icon">🎤</span>
+      <div>
+        <div class="subj-title">口语（Speaking）</div>
+        <div class="subj-meta">目标：6分 → 6.5分</div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-top">
+        <div class="tc-name">诊断与提升方案</div>
+        <span class="badge b-s">学员普遍问题</span>
+      </div>
+      <div class="diag-block">
+        <ul class="diag-list problem">
+          <li>流利度这一评分项都能做到不错水准，面对基础或熟悉的话题词汇多样性也不错，但面对较难的话题（如描述mirror、sunglasses等）词汇多样性难以保证</li>
+          <li>基本的语法错误几乎不存在，但句式多样性表现不理想，表达长句子时依然会出现语法错误</li>
+          <li>较难或新话题的熟悉程度不够</li>
+        </ul>
+      </div>
+      <div class="strategy-wrap">
+        <div class="sol-head">🎯 备考策略</div>
+        <ul>
+          <li>针对不熟悉的话题加大练习</li>
+          <li>多和老师进行对话练习，并有意识地使用老师教授的更地道、更多样性的表达</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 写作 -->
+  <div class="subj" style="margin-bottom:0;">
+    <div class="subj-head W">
+      <span class="subj-icon">✍️</span>
+      <div>
+        <div class="subj-title">写作（Writing）</div>
+        <div class="subj-meta">目标：6分 → 6.5分</div>
+      </div>
+    </div>
+    <div class="tc">
+      <div class="tc-top">
+        <div class="tc-name">诊断与提升方案</div>
+        <span class="badge b-w">学员普遍问题</span>
+      </div>
+      <div class="diag-block">
+        <ul class="diag-list problem">
+          <li>相较于5分段学员，6分学员在词汇上能基本做到常规词汇的多样性，但面对更高级的词汇表达时，还是会出现重点单词的重复</li>
+          <li>语法上并无太多时态、单复数等基础错误，但涉及复杂句式结构时还是会出错</li>
+          <li>面对较难或不熟悉的话题时，文章通常显得较为空泛</li>
+        </ul>
+      </div>
+      <div class="strategy-wrap">
+        <div class="sol-head">🎯 备考策略</div>
+        <ul>
+          <li>练习时可以采取先自己写、再看考官范文的方式，对比分析提炼表达方式</li>
+          <li>从老师的批改中提升表达和结构的合理性</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-box">
+    <p><strong>咨询建议：</strong>把学员当前的模考/真实分数对照上面的诊断讲给他听，再翻回<strong>「雅思考试介绍」</strong>页面讲清考试结构和目标分数规划，问题和方案一次讲透。</p>
+    <a class="cta-btn" href="ielts_guide.html">查看雅思考试介绍 →</a>
+  </div>
+
+</div>
+</section>
+
+<footer style="background:var(--ink);color:rgba(255,255,255,.35);text-align:center;padding:36px 24px;font-size:.75rem;letter-spacing:1px;line-height:1.8;">
+  内容整理自《新航道国际教育集团4R个性化标准化手册》附录一：雅思4R技能障碍点（顾问背诵版）<br>
+  仅供内部顾问咨询讲解使用 · 具体教学安排以任课老师及教务实际排课为准 · <a href="ielts_guide.html">← 返回雅思考试介绍</a>
+</footer>
+
+<script>
+function go(id){
+  document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  event.currentTarget.classList.add('on');
+}
+const ids=['band56','band65'];
+window.addEventListener('scroll',()=>{
+  let cur=ids[0];
+  ids.forEach(id=>{const el=document.getElementById(id);if(el&&window.scrollY>=el.offsetTop-120)cur=id;});
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>{b.classList.toggle('on',ids[i]===cur);});
+});
+</script>
+</body>
+</html>
