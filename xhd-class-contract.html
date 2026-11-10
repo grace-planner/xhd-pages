@@ -6415,7 +6415,7 @@ function generateDoc() {
     const out = doc.getZip().generate({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(out);
-    a.download = `班课协议_${data.乙方姓名}_${data.签约年}${String(data.签约月).padStart(2,'0')}${String(data.签约日).padStart(2,'0')}.docx`;
+    a.download = `${data.乙方姓名}_班课协议_${data.签约年}${String(data.签约月).padStart(2,'0')}${String(data.签约日).padStart(2,'0')}.docx`;
     a.click();
     const msg = document.getElementById('msg');
     msg.textContent = '✅ 合同已生成！请查看下载文件夹';
