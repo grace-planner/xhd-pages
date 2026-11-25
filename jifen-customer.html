@@ -264,7 +264,7 @@
     btn.disabled = true;
     btn.textContent = '提交中...';
 
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Shanghai' }).format(new Date());
 
     const customerData = {
       申请日期: today,
