@@ -172,9 +172,22 @@
   // ============================================================
   // 页面渲染
   // ============================================================
+  function calculateClaimDate(applicationDate) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(applicationDate)) return '';
+    const date = new Date(applicationDate + 'T00:00:00Z');
+    if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== applicationDate) return '';
+
+    const day = date.getUTCDate();
+    date.setUTCDate(1);
+    date.setUTCMonth(date.getUTCMonth() + (day > 9 ? 4 : 3));
+    if (day <= 9) date.setUTCDate(day);
+    return date.toISOString().slice(0, 10);
+  }
+
+  const claimDate = calculateClaimDate(customerData?.申请日期);
   const mainBody = document.getElementById('mainBody');
 
-  if (!customerData) {
+  if (!claimDate) {
     // 没有数据时显示提示
     mainBody.innerHTML = `
       <div class="error-page">
@@ -280,7 +293,7 @@
       <!-- 自动计算：可领积分日期 -->
       <div class="calc-block" id="calcBlock">
         <span class="calc-label">📅 可领积分日期（自动计算）</span>
-        <span class="calc-val empty" id="calcDate">填写报名时间后自动显示</span>
+        <span class="calc-val">${claimDate}（申请满3个月，遇10日及以后顺延至次月1日）</span>
       </div>
 
       <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">✅ 提交，写入多维表格</button>
@@ -299,32 +312,8 @@
         renewInput.disabled = true; renewInput.style.opacity = '0.5'; renewInput.value = '';
         typeSelect.value = '推荐';
       }
-      recalcDate();
     }
     renewSwitch.addEventListener('change', updateSwitch);
-    document.getElementById('firstJoin').addEventListener('change', recalcDate);
-    renewInput.addEventListener('change', recalcDate);
-    typeSelect.addEventListener('change', recalcDate);
-
-    // 自动计算可领积分日期
-    function recalcDate() {
-      const type      = typeSelect.value;
-      const firstJoin = document.getElementById('firstJoin').value;
-      const renewTime = renewInput.value;
-      const refDate   = (type === '续费' && renewTime) ? renewTime : firstJoin;
-
-      const el = document.getElementById('calcDate');
-      if (!refDate) {
-        el.textContent = '填写报名时间后自动显示';
-        el.className = 'calc-val empty';
-        return;
-      }
-      const d = new Date(refDate);
-      d.setMonth(d.getMonth() + 3);
-      const result = d.toISOString().split('T')[0];
-      el.textContent = result + '（报名后满3个月）';
-      el.className = 'calc-val';
-    }
   }
 
   // ============================================================
@@ -344,16 +333,6 @@
     if (!studentName || !studentPhone || !firstJoin || !courseName || !payAmount || !pointsUsed || !winnerCampus) {
       showToast('❌ 请填写所有必填项', '#c0392b'); return;
     }
-
-    // 计算可领积分日期
-    const refDate = (type === '续费' && renewTime) ? renewTime : firstJoin;
-    const d = new Date(refDate);
-    d.setMonth(d.getMonth() + 3);
-    d.setHours(0, 0, 0, 0);
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, '0');
-    const dd = String(d.getDate()).padStart(2, '0');
-    const calcDate = y + '-' + m + '-' + dd;
 
     const btn = document.getElementById('submitBtn');
     btn.disabled = true; btn.textContent = '提交中...';
@@ -375,7 +354,7 @@
       "兑换礼品名称":     customerData.兑换礼品名称,
       "兑换礼品数量":     customerData.兑换礼品数量,
       "备注":           customerData.备注,
-      "可领积分日期":     calcDate
+      "可领积分日期":     claimDate
     };
 
     try {
